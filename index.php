@@ -1,3 +1,4 @@
+<?php include 'session.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,6 +91,7 @@
                         $('#loading').show();
                         setTimeout(function() {
                             $('#loading').hide();
+                            $('#login_btn').show();
                             window.location.href = '/divineMemorialGarden/admin/dashboard';
                         }, 3000);
                     } else {

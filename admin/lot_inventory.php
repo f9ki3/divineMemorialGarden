@@ -5,7 +5,7 @@
 <?php include 'navbar.php'?>
 <div class="bg-light w-100 p-3">
     <div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
-        <h4 class="fw-bolder ">Area List</h4>
+        <h4 class="fw-bolder ">Lot Inventory</h4>
         <button class="btn btn-sm btn-success">+ New Area</button>
     </div>
     <div class="border p-3 rounded mb-3" style="background: white;">
