@@ -22,11 +22,12 @@
 <body style="overflow: hidden">
     <div style=" display:flex;  justify-content: center; align-items: center" class="pt-3">
         <input type="text" id="searchInput" class="w-25 form-control mt-2 me-2" placeholder="Enter search term">
-        <button onclick="highlightBlock()" class="btn btn-primary mt-2 ">Search</button>
+        <button onclick="highlightBlock()" class="btn btn-success mt-2 ">Search</button>
+        <a href="#" class="btn btn-primary mt-2 ms-2 btn-success" onclick="history.back(); return false;">Exit</a>
     </div>
 
     <!-- lawn 1 map -->
-    <div style="display: flex; flex-direction: row; justify-content: center; height: 100vh; width: 100%;">
+    <div style="display: flex; flex-direction: row; justify-content: center; height: 90vh; width: 100%; overflow: auto;">
         <div style="display: flex; flex-direction:column; justify-content: center; align-items: end;">
             <!-- 52-59 -->
             <div  style="display: flex; flex-direction: row;">
