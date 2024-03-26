@@ -1,12 +1,12 @@
 <html lang="en">
 <?php include 'header.php'?>
 <body>
-<div style="display: flex; flex-direction: row">
+<div >
 <?php include 'navbar.php'?>
 
 <!-- start inventory-->
 
-<div style="width: 100%" class="content p-3">
+<div style="width: 100%" class="content container p-3">
     <div>
         <div style="background-color: white;" class="rounded border p-3 mb-3 w-100">
             <div class="row">

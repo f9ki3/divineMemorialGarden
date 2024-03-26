@@ -1,13 +1,9 @@
 <html lang="en">
 <?php include 'header.php'?>
 <body>
-<div style="display: flex; flex-direction: row">
+<div >
 <?php include 'navbar.php'?>
-<div class="bg-light w-100 p-3">
-    <div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
-        <h4 class="fw-bolder ">Area List</h4>
-        <button class="btn btn-sm btn-success">+ New Area</button>
-    </div>
+<div class=" container w-100 p-3">
     <div class="border p-3 rounded mb-3" style="background: white; height: auto">
         <div class="row">
             <?php
