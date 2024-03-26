@@ -16,1623 +16,406 @@
         .letter-highlight {
             border: 1px solid green;
         }
+        .btn_select:hover{
+            background-color: red;
+        }
+        .btn_select{
+            background-color: green;
+        }
+
     </style>
     
 </head>
-<body style="overflow: hidden">
+<body >
     <div style=" display:flex;  justify-content: center; align-items: center" class="pt-3">
         <input type="text" id="searchInput" class="w-25 form-control mt-2 me-2" placeholder="Enter search term">
-        <button onclick="highlightBlock()" class="btn btn-success mt-2 ">Search</button>
+        <button onclick="highlightBlock()" class="btn btn-success mt-2">Search</button>
         <a href="#" class="btn btn-primary mt-2 ms-2 btn-success" onclick="history.back(); return false;">Exit</a>
     </div>
-
-    <!-- lawn 1 map -->
-    <div style="display: flex; flex-direction: row; justify-content: center; height: 90vh; width: 100%; overflow: auto;">
-        <div style="display: flex; flex-direction:column; justify-content: center; align-items: end;">
-            <!-- 52-59 -->
-            <div  style="display: flex; flex-direction: row;">
-            
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid white; height: 9px; width: 100%; font-size: 5px; text-align: center"></div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">52</div>
-                </div>
-                <div id="container" style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div class="letter-highlight" style="height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div id="highlighted" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">53</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">54</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">55</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">56</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">57</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">58</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">59</div>
-                </div>
-                
-                <div style="border: 1px solid white; background-color: white; height: 95px; width: 50px;"></div>
-            </div>
-            <!-- 43-48 -->
-            <div style="display: flex; flex-direction: row;">
-            
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">44</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">45</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">46</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">47</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div> -->
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">48</div>
-                </div>
-                <div style="border: 1px solid green; background-color: green; height: 95px; width: 205.5px; display: flex; justify-content: center; align-items: center;">
-                    Multipurpose Area
-                </div>
-
-                
-            </div>
-            <!-- 38-43 -->
-            <div style="display: flex; flex-direction: row;">
-            <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div> -->
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">38</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">39</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">40</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">41</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">42</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div> -->
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">43</div>
-                </div>
-                <div style="border: 1px solid green; background-color: green; height: 95px; width: 205.5px;">
-                </div>
-            </div>
-            
-            <!-- 21 to 28 -->
-            <div style="display: flex; flex-direction: row;">
-            <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div> -->
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">29</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">30</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">31</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">32</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">33</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">34</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">35</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">36</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">37</div>
-                </div>
-                
-            </div>
-            <!-- 21 to 28 -->
-            <div style="display: flex; flex-direction: row;">
-            <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div> -->
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">21</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">22</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">23</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">24</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">25</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">26</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">27</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">28</div>
-                </div>
-                
-            </div>
-            <!-- 14 to 20 -->
-            <div style="display: flex; flex-direction: row;">
-            <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">14</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">15</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">16</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">17</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">18</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">19</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">20</div>
-                </div>
-                
-            </div>
-            <!-- 7 to 13 -->
-            <div style="display: flex; flex-direction: row;">
-            <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <!-- <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div> -->
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">7</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">8</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">9</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">10</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">11</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">12</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">13</div>
-                </div>
-            </div>
-            <!-- 1 to 6 -->
-            <div style="display: flex; flex-direction: row;">
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                        <div style="width: 49%">
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
+<div id="zoom-container">
+    
+        
+<!-- lawn 1 map -->
+<div style="display: flex; flex-direction: row; justify-content: center; height: 80%; width: 100%; overflow-x: scroll; overflow-y: scroll; ">
+    <div id="zoom-content">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; ">
+            <div style="height: 300px; width: 100px; display: flex; flex-direction: column; margin: 320px 100px 100px 150px;">
+                        <div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1A" class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1B" class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1C" class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1D" class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1E" class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1K" class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1L" class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1M" class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1N" class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1O" class=" p-1 btn_select me-1" style="font-size: 8px">0</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a> -->
+                            </div>
                         </div>
-                        <div style="width: 49%">
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                            <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
+                        <div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2A" class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2B" class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2C" class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2D" class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2E" class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2K" class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2L" class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2M" class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2N" class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2O" class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2P" class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a> -->
+                            </div>
                         </div>
-                        <!-- Overlay div -->
-                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">1</div>
-                    </div>
-                    <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">2</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">3</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;  z-index: 1; font-size: 20; color: red">4</div>
-                </div>
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row;  position: relative">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">5</div>
-                </div>
-                
-                <div style="border: 1px solid red; height: 95px; width: 50px; display: flex; flex-direction: row; position: relative;">
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">A</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">B</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">C</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">D</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">E</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">F</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">G</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">H</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">I</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">J</div>
-                    </div>
-                    <div style="width: 49%">
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">K</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">L</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">M</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">N</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">O</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">P</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">Q</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">R</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">S</div>
-                        <div style="border: 1px solid green; height: 9px; width: 100%; font-size: 5px; text-align: center">T</div>
-                    </div>
-                    <!-- Overlay div -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; font-size: 20; color: red">6</div>
-                </div>
+                        <div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2A" class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2B" class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2C" class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2D" class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2E" class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="2F" class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                            </div>
+                        </div>
+                        <div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                            </div>
+                        </div>
+                        <div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                            </div>
+                        </div>
+                        <div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                            </div>
+                        </div>
 
+                        
+                </div>
+                <div style="height: 300px; width: 100px; display: flex; flex-direction: column; margin: -428px 100px 100px 330px;">
+                <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a>
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a>
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a>
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a>
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a>
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">A</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">B</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">C</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">D</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">E</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">F</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">G</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a>
+                                
+                            </div>
+                            <div style="display: flex; flex-direction: row-reverse; width: 160px">
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">K</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">L</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">M</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">N</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">O</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">P</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">Q</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">R</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">S</div></a>
+                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">T</div></a>
+                            </div>
+                        </div>
+
+                        
+                </div>
+            </div>
+            <div style="margin: 10px 100px 100px 100px;">
+                <img src="../assets/map_css/MAP.png" alt="ff" style="height: 100%; width: auto;">
             </div>
         </div>
-
-
+</div>
     </div>
-    <script>
-    // Highlight function
-    function highlightBlock() {
-        var searchInput = document.getElementById("searchInput").value;
-        var container = document.getElementById("container");
-        var highlighted = document.getElementById("highlighted");
-        
-        // Reset previous highlights
-        container.classList.remove("highlight");
-        highlighted.innerHTML = "";
-        
-        // Highlight block containing search term
-        if (searchInput === "53") {
-            container.classList.add("highlight");
-            highlighted.innerHTML = "<span style='color: green;'>53</span>";
-        }
-    }
-</script>
+</div>
+
+<div style=" justify-content: center; display: flex" >    
+    <div id="zoom-controls" class="mt-3">
+    <button id="zoom-in" class="rounded rounded-5 btn border-success text-success">Zoom +</button>
+    <button id="zoom-out" class="rounded rounded-5 btn border-success text-success">Zoom -</button>
+    </div>
+</div>
+
+<script src="../jquery/zoom.js"></script>
+<script src="../jquery/search_map.js"></script>
 </body>
 </html>

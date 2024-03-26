@@ -1,0 +1,155 @@
+.x{
+    display: flex;
+position: absolute;
+    gap: 3px;
+    margin-top: 10px;
+    margin-left: 164px;
+    
+}
+.xa{
+width: 72px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 153px;
+border: 1px solid black;
+background-color: red;
+}
+.xb{
+width: 72px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 144px;
+margin-left: -2.5px;
+border: 1px solid black;
+background-color: red;
+}
+.xc{
+width: 72px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 135px;
+border: 1px solid black;
+background-color: red;
+margin-left: -1.9px;
+}
+.xd{
+width: 72px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 126.6px;
+border: 1px solid black;
+background-color: red;
+margin-left: -1.9px;
+}
+.xe{
+width: 72px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 117.7px;
+border: 1px solid black;
+background-color: red;
+margin-left: -2.5px;
+}
+.xf{
+width: 72px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 109px;
+border: 1px solid black;
+background-color: red;
+margin-left: -2.5px;
+}
+.xg{
+width: 73px;
+height: 61px;
+/* background-color: red; */
+transform: rotate(-7deg);
+margin-top: 100px;
+border: 1px solid black;
+background-color: red;
+margin-left: -2.5px;
+}
+.xh{
+width: 58px;
+height: 73px;
+/* background-color: red; */
+transform: rotate(-43deg);
+margin: 63px 0 0 27px;
+
+border: 1px solid black;
+background-color: red;
+}
+.xi{
+width: 58px;
+height: 73px;
+/* background-color: red; */
+transform: rotate(-43deg);
+margin-top: 22.5px;
+margin-left: -17.5px;
+border: 1px solid black;
+background-color: red;
+}
+.xj{
+width: 57px;
+height: 60px;
+/* background-color: red; */
+transform:rotate(9.8deg);
+margin: 12.5px 0 0 46.5px;
+border: 1px solid black;
+background-color: red;
+}
+.xk{
+width: 57px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(10deg);
+margin-top: 23px;
+margin-left: -2.5px;
+border: 1px solid black;
+background-color: red;
+}
+.xl{
+width: 57px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(10deg);
+margin-top: 34px;
+margin-left: -2px;
+border: 1px solid black;
+background-color: red;
+}
+.xm{
+width: 57px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(9.5deg);
+margin-top: 44px;
+margin-left: -2px;
+border: 1px solid black;
+background-color: red;
+}
+.xn{
+width: 57px;
+height: 60px;
+/* background-color: red; */
+transform: rotate(9.8deg);
+margin-top: 54px;
+margin-left: -2px;
+border: 1px solid black;
+background-color: red;
+}
+.xo{
+width: 57px;
+height: 59px;
+transform: rotate(10deg);
+margin-top: 64.5px;
+margin-left: -2px;
+border: 1px solid black;
+background-color: red;
+}

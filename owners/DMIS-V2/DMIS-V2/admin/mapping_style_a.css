@@ -1,0 +1,45 @@
+.a{
+    display: flex;     
+    gap:1px;  
+    width: 85px;
+    height: 20px;
+    gap: 2px;
+    margin-left: 763.5px; 
+}
+.aa{
+    background-color: red;
+    height: 20px;
+    width: 12.2px;
+    border: 1px solid black;
+}
+
+.ab{
+    background-color: red;
+    height: 20px;
+    width: 12.2px;
+    border: 0.5px solid black;       
+}
+.ac{
+    background-color: red;
+    height: 20px;
+    width: 12.2px;
+    border: 0.5px solid black;       
+}
+.ad{
+    background-color: red;
+    height: 20px;
+    width: 12.2px;
+    border: 0.5px solid black;       
+}
+.ae{
+    background-color: red;
+    height: 20px;
+    width: 12.2px;
+    border: 0.5px solid black;       
+}
+.af{
+    background-color: red;
+    height: 20px;
+    width: 12.2px;
+    border: 0.5px solid black;       
+}
