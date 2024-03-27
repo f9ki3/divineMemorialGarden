@@ -5,28 +5,61 @@
 <?php include 'navbar.php'; ?>
 <div class="container w-100 p-3">
     
-            <div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
-            <h3 class="fw-bolder ">Accounts</h3>
-                <div>
-                    <a href="create_account" class="btn btn-sm btn-success me-2">Create Account</a>
-                    
+    <div class=" mb-3" style="background: white; height: auto">
+        <div>
+            <h3 class="fw-bolder my-3 ">Create Owner Account</h3>
+        </div>
+        <div>
+            <div class="d-flex flex-row mb-3 mt-5">
+                <div class="form-floating px-1" style="width: 48%;">
+                    <input type="text" id="fname" class="form-control" placeholder="">
+                    <label for="fname">First Name</label>
+                </div>
+                <div class="form-floating px-1" style="width: 48%;">
+                    <input type="text" id="fname" class="form-control" placeholder="">
+                    <label for="fname">Last Name</label>
                 </div>
             </div>
-    <div class="border p-3 rounded mb-3" style="background: white; height: auto">
-        <div>
-            <table id="property_table" class="display">
-            <thead>
-                <tr>
-                    <th width="20%">Area</th>
-                    <th width="20%">Block Number</th>
-                    <th width="20%">Lot Number</th>
-                    <th width="20%">Classification</th>
-                    <th width="20%">Lot Owner</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+            <div class="d-flex flex-row mb-3">
+                <div class="form-floating px-1" style="width: 32%;">
+                    <input type="text" id="fname" class="form-control" placeholder="">
+                    <label for="fname">Contact Number</label>
+                </div>
+                <div class="form-floating px-1" style="width: 32%;">
+                    <input type="text" id="fname" class="form-control" placeholder="">
+                    <label for="fname">Email Address</label>
+                </div>
+                <div class="form-floating px-1" style="width: 32%;">
+                    <select name="" id="gender" class="form-control" placeholder="">
+                        <option value="">Male</option>
+                        <option value="">Female</option>
+                    </select>
+                    <label for="gender">Gender</label>
+                </div>
+            </div>
+            <div class="d-flex flex-row mb-3">
+                <div class="form-floating px-1" style="width: 96%;">
+                    <input type="text" id="address" class="form-control" placeholder="">
+                    <label for="address">Address</label>
+                </div>
+                
+            </div>
+            <div class="d-flex flex-row mb-3">
+                <div class="form-floating px-1" style="width: 32%;">
+                    <input type="text" id="uname" class="form-control" placeholder="">
+                    <label for="uname">Username</label>
+                </div>
+                <div class="form-floating px-1" style="width: 32%;">
+                    <input type="text" id="password" class="form-control" placeholder="">
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-floating px-1" style="width: 32%;">
+                    <input type="password" id="cpasswword" class="form-control" placeholder="">
+                    <label for="cpasswword">Confirm Password</label>
+                </div>
+            </div>
+            
+
         </div>
     </div>
 </div>
