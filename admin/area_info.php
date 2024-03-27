@@ -4,29 +4,18 @@
 <div>
 <?php include 'navbar.php'; ?>
 <div class="container w-100 p-3">
-    <?php
-    // Check if lawn_name is set in the GET parameters
-    if(isset($_GET['lawn_name']) && !empty($_GET['lawn_name'])) {
-        // Retrieve lawn_name from GET parameters
-        $lawn_name = htmlspecialchars($_GET['lawn_name']);
+    
+            <div class="mt-2 mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
+                <div>
+                    <a href="area">Area</a> ><a href="area_info">Owner List</a> >
+                </div>
+                <div>
+                    <a href="area_info?lawn_name=Lawn+1" class="btn btn-sm btn-success me-2">Refresh</a>
+                    <a href="lawn 1" class="btn btn-sm btn-success me-2">View Map</a>
+                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOwner">+ Add Owner</button>
+                </div>
+            </div>
         
-        // Check if $lawn_name is set and not empty before displaying
-        if(!empty($lawn_name)) {
-            echo '<div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">';
-            echo '<h4 class="fw-bolder ">Area ' . $lawn_name . '</h4>';
-                echo '<div>';
-                    echo '<a href="area_info?lawn_name=Lawn+1" class="btn btn-sm btn-success me-2">Refresh</a>';
-                    echo '<a href="lawn 1" class="btn btn-sm btn-success me-2">View Map</a>';
-                    echo '<button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOwner">+ Add Owner</button>';
-                echo '</div>';
-            echo '</div>';
-        } else {
-            echo '<p>No lawn name available.</p>'; // Display a message if lawn name is empty
-        }
-    } else {
-        echo '<p>No lawn name provided.</p>'; // Display a message if lawn name is not set in the GET parameters
-    }
-    ?>
     <div class="border p-3 rounded mb-3" style="background: white; height: auto">
         <div>
             <table id="property_table" class="display">
