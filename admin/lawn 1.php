@@ -19,11 +19,11 @@
     
         
 <!-- lawn 1 map -->
-<div style="display: flex; flex-direction: row; justify-content: center; height: 80%; width: 100%; overflow-x: scroll; overflow-y: scroll; ">
+<div style="display: flex; flex-direction: row; justify-content: center; height: 80%; width: 100%; overflow-x: scroll; overflow-y: auto; margin-top: 5px; ">
     <div id="zoom-content">
         <div style="position: relative; width: 100%; height: 100%;">
             <div class="content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; ">
-            <div style="height: 300px; width: 100px; display: flex; flex-direction: column; margin: 320px 100px 100px 170px;">
+            <div style="height: 300px; width: 100px; display: flex; flex-direction: column; margin: 303px 100px 100px 170px;">
                         <div>
                             <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div value="1A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>

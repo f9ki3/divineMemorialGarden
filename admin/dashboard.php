@@ -14,41 +14,41 @@
                 <div class="col-12 col-md-6 p-2">
                      <h6 class="fw-bolder">Total Death Sales</h6>
                      <div class="border bg-light border-success rounded p-2" style="height: 200px;">
-                     <h1 class="fw-bolder text-center text-success mt-4" style="font-size: 80px">1290</h1>
+                     <h1 class="fw-bolder text-center text-success mt-5" style="font-size: 50px">1290</h1>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 p-2">
                      <h6 class="fw-bolder">Date and Time</h6>
                      <div class="border bg-light border-success rounded p-2" style="height: 200px;">
                     <div style="display: flex; flex-direction: row; justify-content: center" >
-                       <h1 class="fw-bolder text-center text-success mt-4 realtime-time" style="font-size: 80px">time</h1>
-                       <h1 class="fw-bolder text-center text-success mt-4" style="font-size: 80px">&nbsp|&nbsp</h1>
-                       <h1 class="fw-bolder text-center text-success mt-4 realtime-date" style="font-size: 80px">date</h1>
+                       <h1 class="fw-bolder text-center text-success mt-5 realtime-time" style="font-size: 50px">time</h1>
+                       <h1 class="fw-bolder text-center text-success mt-5" style="font-size: 50px">&nbsp|&nbsp</h1>
+                       <h1 class="fw-bolder text-center text-success mt-5 realtime-date" style="font-size: 50px">date</h1>
                      </div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 p-2">
                      <h6 class="fw-bolder">Sold</h6>
                      <div class="border bg-light border-success rounded p-2" style="height: 200px;">
-                     <h1 class="fw-bolder text-center text-success mt-4" style="font-size: 80px">10</h1>
+                     <h1 class="fw-bolder text-center text-success mt-5" style="font-size: 50px">10</h1>
                      </div>
                 </div>
                 <div class="col-6 col-md-3 p-2">
                      <h6 class="fw-bolder">Removed</h6>
                      <div class="border bg-light border-success rounded p-2" style="height: 200px;">
-                     <h1 class="fw-bolder text-center text-success mt-4" style="font-size: 80px">100</h1>
+                     <h1 class="fw-bolder text-center text-success mt-5" style="font-size: 50px">100</h1>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 p-2">
                      <h6 class="fw-bolder">Available</h6>
                      <div class="border bg-light border-success rounded p-2" style="height: 200px;">
-                     <h1 class="fw-bolder text-center text-success mt-4" style="font-size: 80px">332</h1>
+                     <h1 class="fw-bolder text-center text-success mt-5" style="font-size: 50px">332</h1>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 p-2">
                      <h6 class="fw-bolder">Reserved</h6>
                      <div class="border bg-light border-success rounded p-2" style="height: 200px;">
-                     <h1 class="fw-bolder text-center text-success mt-4" style="font-size: 80px">7</h1>
+                     <h1 class="fw-bolder text-center text-success mt-5" style="font-size: 50px">7</h1>
                     </div>
                 </div>
             </div>

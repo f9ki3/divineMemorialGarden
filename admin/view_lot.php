@@ -24,10 +24,10 @@
             <input type="text" id="address" class="form-control" value="Mike Will" readonly>
         </div> -->
     </div>
-    <h5>Decease Information</h5>
+    <h5>Upper Tier</h5>
     <div class="d-flex mb-3">
         <div class="w-50 m-1">
-            <label for="address">Upper Tier</label>
+            <label for="address">Deceased Name</label>
             <input type="text" id="address" class="form-control" value="Juan Dela Cruz" readonly>
         </div>
         <div class="w-50 m-1">
@@ -45,9 +45,10 @@
             <input type="date" id="address" class="form-control" value="John Doe" readonly>
         </div>
     </div>
+    <h5>Lower Tier</h5>
     <div class="d-flex mb-3">
         <div class="w-50 m-1">
-            <label for="address">Lower Tier</label>
+            <label for="address">Deceased Name</label>
             <input type="text" id="address" class="form-control" value="Juan Dela Cruz" readonly>
         </div>
         <div class="w-50 m-1">
