@@ -18,13 +18,13 @@
             background-color: yellow;
         }
         .letter-highlight {
-            border: 1px solid green;
+            border: 1px solid transparent;
         }
         .btn_select:hover{
             background-color: red;
         }
         .btn_select{
-            background-color: green;
+            background-color: transparent;
         }
 
     </style>
