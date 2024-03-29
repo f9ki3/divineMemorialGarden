@@ -20,12 +20,15 @@
         .letter-highlight {
             border: 1px solid transparent;
         }
-        .btn_select:hover{
-            background-color: red;
+        .btn_select_lot:hover{
+            background-color: darkgray;
         }
-        .btn_select{
+        .btn_select_lot{
             background-color: transparent;
         }
+
+
+
 
     </style>
 </head>

@@ -8,22 +8,21 @@
         <button onclick="highlightBlock()" class="btn btn-success mt-2">Search</button>
         <a href="#" class="btn btn-primary mt-2 ms-2 btn-success" onclick="history.back(); return false;">Exit</a>
     </div>
-<div id="zoom-container">
-    
-        
-<!-- lawn 1 map -->
-<div style="display: flex; flex-direction: row; justify-content: center; height: 80%; width: 100%; overflow-x: scroll; overflow-y: scroll; ">
-    <div id="zoom-content">
-        <div style="position: relative; width: 100%; height: 100%;">
-            <div class="content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; ">
-                <?php include 'dex.html'?>
+    <div id="zoom-container" class="scroll" style="overflow: hidden;">
+        <!-- lawn 1 map -->
+        <div style="display: flex; flex-direction: row; justify-content: center; height: 70%; width: 100%;">
+            <div id="zoom-content">
+                <div style="position: relative; width: 100%; height: 100%;">
+                    <div class="content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin-top: 50px;">
+                        <?php include 'dex.html'?>
+                    </div>
+                </div>
             </div>
         </div>
-</div>
     </div>
-</div>
 
-<div style=" justify-content: center; display: flex" >    
+
+<div class="mt-5" style=" justify-content: center; display: flex" >    
     <div id="zoom-controls">
     <button id="zoom-in" class="rounded rounded-5 btn border-success text-success">Zoom +</button>
     <button id="zoom-out" class="rounded rounded-5 btn border-success text-success">Zoom -</button>
