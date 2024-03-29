@@ -106,25 +106,25 @@
                         </div>
                         <div>
                             <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
-                                <a href="view_lot?id=34" style="text-decoration: none; color: white"><div value="4A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=35" style="text-decoration: none; color: white"><div value="4B" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=36" style="text-decoration: none; color: white"><div value="4C" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=37" style="text-decoration: none; color: white"><div value="4D" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=38" style="text-decoration: none; color: white"><div value="4E" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=39" style="text-decoration: none; color: white"><div value="4F" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=40" style="text-decoration: none; color: white"><div value="4A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=41" style="text-decoration: none; color: white"><div value="4B" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=42" style="text-decoration: none; color: white"><div value="4C" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=43" style="text-decoration: none; color: white"><div value="4D" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=44" style="text-decoration: none; color: white"><div value="4E" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=45" style="text-decoration: none; color: white"><div value="4F" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
                                 
                             </div>
                             <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
-                                <a href="view_lot?id=40" style="text-decoration: none; color: white"><div value="4K" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
-                                <a href="view_lot?id=41" style="text-decoration: none; color: white"><div value="4L" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
-                                <a href="view_lot?id=42" style="text-decoration: none; color: white"><div value="4M" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
-                                <a href="view_lot?id=43" style="text-decoration: none; color: white"><div value="4N" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
-                                <a href="view_lot?id=44" style="text-decoration: none; color: white"><div value="4O" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
-                                <a href="view_lot?id=45" style="text-decoration: none; color: white"><div value="4P" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
-                                <a href="view_lot?id=46" style="text-decoration: none; color: white"><div value="4Q" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
+                                <a href="view_lot?id=46" style="text-decoration: none; color: white"><div value="4K" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
+                                <a href="view_lot?id=47" style="text-decoration: none; color: white"><div value="4L" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
+                                <a href="view_lot?id=48" style="text-decoration: none; color: white"><div value="4M" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
+                                <a href="view_lot?id=49" style="text-decoration: none; color: white"><div value="4N" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
+                                <a href="view_lot?id=50" style="text-decoration: none; color: white"><div value="4O" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
+                                <a href="view_lot?id=51" style="text-decoration: none; color: white"><div value="4P" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
+                                <a href="view_lot?id=52" style="text-decoration: none; color: white"><div value="4Q" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
@@ -132,26 +132,26 @@
                         </div>
                         <div>
                             <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
-                                <a href="view_lot?id=47" style="text-decoration: none; color: white"><div value="5A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=48" style="text-decoration: none; color: white"><div value="5B" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=49" style="text-decoration: none; color: white"><div value="5C" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=50" style="text-decoration: none; color: white"><div value="5D" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=51" style="text-decoration: none; color: white"><div value="5E" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=52" style="text-decoration: none; color: white"><div value="5F" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
-                                <a href="view_lot?id=53" style="text-decoration: none; color: white"><div value="5G" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
+                                <a href="view_lot?id=53" style="text-decoration: none; color: white"><div value="5A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=54" style="text-decoration: none; color: white"><div value="5B" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=55" style="text-decoration: none; color: white"><div value="5C" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=56" style="text-decoration: none; color: white"><div value="5D" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=57" style="text-decoration: none; color: white"><div value="5E" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=58" style="text-decoration: none; color: white"><div value="5F" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=59" style="text-decoration: none; color: white"><div value="5G" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
                                 
                             </div>
                             <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
-                                <a href="view_lot?id=54" style="text-decoration: none; color: white"><div value="5K" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
-                                <a href="view_lot?id=55" style="text-decoration: none; color: white"><div value="5L" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
-                                <a href="view_lot?id=56" style="text-decoration: none; color: white"><div value="5M" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
-                                <a href="view_lot?id=57" style="text-decoration: none; color: white"><div value="5N" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
-                                <a href="view_lot?id=58" style="text-decoration: none; color: white"><div value="5O" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
-                                <a href="view_lot?id=59" style="text-decoration: none; color: white"><div value="5P" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
-                                <a href="view_lot?id=60" style="text-decoration: none; color: white"><div value="5Q" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
+                                <a href="view_lot?id=60" style="text-decoration: none; color: white"><div value="5K" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
+                                <a href="view_lot?id=61" style="text-decoration: none; color: white"><div value="5L" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
+                                <a href="view_lot?id=62" style="text-decoration: none; color: white"><div value="5M" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
+                                <a href="view_lot?id=63" style="text-decoration: none; color: white"><div value="5N" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
+                                <a href="view_lot?id=64" style="text-decoration: none; color: white"><div value="5O" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
+                                <a href="view_lot?id=65" style="text-decoration: none; color: white"><div value="5P" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
+                                <a href="view_lot?id=66" style="text-decoration: none; color: white"><div value="5Q" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
@@ -159,27 +159,27 @@
                         </div>
                         <div>
                             <div id="map" style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
-                                <a href="view_lot?id=61" style="text-decoration: none; color: white"><div value="6A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=62" style="text-decoration: none; color: white"><div value="6B" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=63" style="text-decoration: none; color: white"><div value="6C" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=64" style="text-decoration: none; color: white"><div value="6D" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=65" style="text-decoration: none; color: white"><div value="6E" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=66" style="text-decoration: none; color: white"><div value="6F" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
-                                <a href="view_lot?id=67" style="text-decoration: none; color: white"><div value="6G" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
+                                <a href="view_lot?id=67" style="text-decoration: none; color: white"><div value="6A" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=68" style="text-decoration: none; color: white"><div value="6B" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=69" style="text-decoration: none; color: white"><div value="6C" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=70" style="text-decoration: none; color: white"><div value="6D" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=71" style="text-decoration: none; color: white"><div value="6E" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=72" style="text-decoration: none; color: white"><div value="6F" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=73" style="text-decoration: none; color: white"><div value="6G" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">H</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
                                 
                             </div>
                             <div id="map" style="display: flex; flex-direction: row-reverse; width: 160px">
-                                <a href="view_lot?id=68" style="text-decoration: none; color: white"><div value="6K" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
-                                <a href="view_lot?id=69" style="text-decoration: none; color: white"><div value="6L" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
-                                <a href="view_lot?id=70" style="text-decoration: none; color: white"><div value="6M" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
-                                <a href="view_lot?id=71" style="text-decoration: none; color: white"><div value="6N" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
-                                <a href="view_lot?id=72" style="text-decoration: none; color: white"><div value="6O" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
-                                <a href="view_lot?id=73" style="text-decoration: none; color: white"><div value="6P" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
-                                <a href="view_lot?id=74" style="text-decoration: none; color: white"><div value="6Q" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
-                                <a href="view_lot?id=75" style="text-decoration: none; color: white"><div value="6R" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">R</div></a>
+                                <a href="view_lot?id=74" style="text-decoration: none; color: white"><div value="6K" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
+                                <a href="view_lot?id=75" style="text-decoration: none; color: white"><div value="6L" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
+                                <a href="view_lot?id=76" style="text-decoration: none; color: white"><div value="6M" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
+                                <a href="view_lot?id=77" style="text-decoration: none; color: white"><div value="6N" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
+                                <a href="view_lot?id=78" style="text-decoration: none; color: white"><div value="6O" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
+                                <a href="view_lot?id=79" style="text-decoration: none; color: white"><div value="6P" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
+                                <a href="view_lot?id=80" style="text-decoration: none; color: white"><div value="6Q" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
+                                <a href="view_lot?id=81" style="text-decoration: none; color: white"><div value="6R" class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">R</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">I</div></a>
                                 <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
                             </div>
@@ -203,84 +203,84 @@
                                 
                             </div>
                             <div style="display: flex; flex-direction: row-reverse; width: 160px">
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
+                                <a href="view_lot?id=82" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=83" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=84" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=85" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=86" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=87" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=88" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
+                                <a href="view_lot?id=89" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
+                                <a href="view_lot?id=90" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
                                 <!-- <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px">J</div></a> -->
                             </div>
                         </div>
                         <div>
                             <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">J</div></a>
+                                <a href="view_lot?id=91" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=92" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=93" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=103" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=104" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=105" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=106" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
+                                <a href="view_lot?id=107" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
+                                <a href="view_lot?id=108" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
+                                <a href="view_lot?id=109" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">J</div></a>
                                 
                             </div>
                             <div style="display: flex; flex-direction: row-reverse; width: 160px">
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">R</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">S</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">T</div></a>
+                                <a href="view_lot?id=110" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
+                                <a href="view_lot?id=111" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
+                                <a href="view_lot?id=112" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
+                                <a href="view_lot?id=113" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
+                                <a href="view_lot?id=114" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
+                                <a href="view_lot?id=115" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
+                                <a href="view_lot?id=116" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
+                                <a href="view_lot?id=117" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">R</div></a>
+                                <a href="view_lot?id=118" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">S</div></a>
+                                <a href="view_lot?id=119" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">T</div></a>
                             </div>
                         </div>
                         <div>
                             <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">J</div></a>
+                                <a href="view_lot?id=120" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=121" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=122" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=123" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=124" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=125" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=126" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
+                                <a href="view_lot?id=127" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
+                                <a href="view_lot?id=128" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
+                                <a href="view_lot?id=129" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">J</div></a>
                                 
                             </div>
                             <div style="display: flex; flex-direction: row-reverse; width: 160px">
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">R</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">S</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">T</div></a>
+                                <a href="view_lot?id=130" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">K</div></a>
+                                <a href="view_lot?id=131" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">L</div></a>
+                                <a href="view_lot?id=131" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">M</div></a>
+                                <a href="view_lot?id=133" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">N</div></a>
+                                <a href="view_lot?id=134" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">O</div></a>
+                                <a href="view_lot?id=135" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">P</div></a>
+                                <a href="view_lot?id=136" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">Q</div></a>
+                                <a href="view_lot?id=137" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">R</div></a>
+                                <a href="view_lot?id=138" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">S</div></a>
+                                <a href="view_lot?id=139" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">T</div></a>
                             </div>
                         </div>
                         <div>
                             <div style="display: flex; flex-direction: row-reverse;  width: 160px" class="py-1">
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
-                                <a href="view_lot?id=1" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">J</div></a>
+                                <a href="view_lot?id=140" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">A</div></a>
+                                <a href="view_lot?id=141" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">B</div></a>
+                                <a href="view_lot?id=142" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">C</div></a>
+                                <a href="view_lot?id=143" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">D</div></a>
+                                <a href="view_lot?id=144" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">E</div></a>
+                                <a href="view_lot?id=145" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">F</div></a>
+                                <a href="view_lot?id=146" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">G</div></a>
+                                <a href="view_lot?id=147" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">H</div></a>
+                                <a href="view_lot?id=148" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">I</div></a>
+                                <a href="view_lot?id=149" style="text-decoration: none; color: white"><div class=" p-1 btn_select me-1" style="font-size: 8px; width: 15px; height: 25px">J</div></a>
                                 
                             </div>
                             <div style="display: flex; flex-direction: row-reverse; width: 160px">
