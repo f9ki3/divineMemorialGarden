@@ -1,12 +1,4 @@
 
-.container{
-    width: 1010px; 
-    height: 582px;
-    position: relative;
-    background-color:blue;
-    padding: 0;
-    margin: 0;
-}
 .child{
     width: 975px;  
     height: 560px;
