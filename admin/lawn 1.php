@@ -3,11 +3,19 @@
 <body >
 <?php include 'header.php'; ?>
 <?php include 'navbar.php'; ?>
-    <div style=" display:flex;  justify-content: center; align-items: center" class="pt-3">
-        <input type="text" id="searchInput" class="w-25 form-control mt-2 me-2" placeholder="Enter search term">
-        <button onclick="highlightBlock()" class="btn btn-success mt-2">Search</button>
-        <a href="#" class="btn btn-primary mt-2 ms-2 btn-success" onclick="history.back(); return false;">Exit</a>
+    
+    <div class="pt-3 container d-flex justify-content-between">
+        <div class="w-50">
+            <div class="pt-2"><a href="area">Area</a> ><a href="area_info">Owner List</a> ><a href="lawn 1">Map</a></div>
+        </div>
+        <div class="d-flex flex-row w-100 justify-content-end">
+            <input type="text" id="searchInput" class="w-50 form-control mt-2 me-2" placeholder="Search block and lot">
+            <button onclick="highlightBlock()" class="btn btn-success mt-2">Search</button>
+            <a href="area_info" class="btn btn-primary mt-2 ms-2 btn-success">Exit</a>
+        </div>
+        
     </div>
+
     <div id="zoom-container" class="scroll" style="overflow: hidden;">
         <!-- lawn 1 map -->
         <div style="display: flex; flex-direction: row; justify-content: center; height: 70%; width: 100%;">
@@ -39,6 +47,7 @@
     <div id="zoom-controls">
     <button id="zoom-in" class="rounded rounded-5 btn border-success text-success">Zoom +</button>
     <button id="zoom-out" class="rounded rounded-5 btn border-success text-success">Zoom -</button>
+    <button id="rotate-btn" class="rounded rounded-5 btn border-success text-success">Rotate</button>
     </div>
 </div>
 

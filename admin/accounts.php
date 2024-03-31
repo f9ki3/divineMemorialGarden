@@ -6,9 +6,9 @@
 <div class="container w-100 p-3">
     
             <div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
-            <h4 class="fw-bolder ">Accounts</h4>
+            <h3 class="fw-bolder ">Accounts</h3>
                 <div>
-                    <a href="area_info?lawn_name=Lawn+1" class="btn btn-sm btn-success me-2">Create Account</a>
+                    <a href="create_account" class="btn btn-sm btn-success me-2">Create Account</a>
                     
                 </div>
             </div>

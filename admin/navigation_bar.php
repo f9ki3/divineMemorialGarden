@@ -5,7 +5,7 @@
         </div>
         <div class="d-flex">
             <li><a href="dashboard" class="text-light mx-3" style="text-decoration: none;">Dashboard</a></li>
-            <li><a href="area" class="text-light mx-3" style="text-decoration: none;">Area</a></li>
+            <li><a href="area" class="text-light mx-3" style="text-decoration: none;">Map</a></li>
             <li><a href="transactions" class="text-light mx-3" style="text-decoration: none;">Transaction</a></li>
             <li><a href="accounts" class="text-light mx-3" style="text-decoration: none;">Accounts</a></li>
             <li><a href="accounts" class="text-light mx-3" style="text-decoration: none;">CMS</a></li>
