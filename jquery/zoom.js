@@ -1,72 +1,78 @@
-// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    var zoomLevel = 1; // Start with zoom disabled
-    var maxZoom = 5;
-    var minZoom = 1; // Set the default minimum zoom to 1
-    var step = 0.1;
-    var container = document.getElementById('zoom-container');
-    var content = document.getElementById('zoom-content');
-    var isDragging = false;
-    var startScrollLeft;
-    var startScrollTop;
-    var startX;
-    var startY;
+  var zoomLevel = 1,
+      maxZoom = 5,
+      minZoom = 1,
+      step = 0.1,
+      container = document.getElementById('zoom-container'),
+      content = document.getElementById('zoom-content'),
+      isDragging = false,
+      startScrollLeft, startScrollTop, startX, startY;
 
-    document.getElementById('zoom-in').addEventListener('click', function() {
-      zoomLevel += step;
-      if (zoomLevel > maxZoom) {
-        zoomLevel = maxZoom;
-      }
-      updateZoom();
-    });
+  function updateZoom() {
+    content.style.transform = 'scale(' + zoomLevel + ')';
+    content.style.transformOrigin = '0 0';
+    
+    var scrollXRatio = container.scrollLeft / (content.offsetWidth - container.clientWidth),
+        scrollYRatio = container.scrollTop / (content.offsetHeight - container.clientHeight);
+    
+    container.scrollLeft = scrollXRatio * (content.offsetWidth * zoomLevel - container.clientWidth);
+    container.scrollTop = scrollYRatio * (content.offsetHeight * zoomLevel - container.clientHeight);
+  }
 
-    document.getElementById('zoom-out').addEventListener('click', function() {
-      zoomLevel -= step;
-      if (zoomLevel < minZoom) {
-        zoomLevel = minZoom;
-      }
-      updateZoom();
-    });
+  function startDrag(e) {
+    if (e.type === 'mousedown' && e.button !== 0) return; // Only proceed if left mouse button is pressed
+    isDragging = true;
+    startX = e.clientX || e.touches[0].clientX; // Account for touch events
+    startY = e.clientY || e.touches[0].clientY; // Account for touch events
+    startScrollLeft = container.scrollLeft;
+    startScrollTop = container.scrollTop;
+    content.style.cursor = 'grabbing';
+    // Disable text selection while dragging
+    content.style.userSelect = 'none';
+  }
 
-    function updateZoom() {
-      content.style.transform = 'scale(' + zoomLevel + ')';
-      content.style.transformOrigin = '0 0';
-      
-      // Calculate the new scroll positions based on zoom level
-      var scrollXRatio = container.scrollLeft / (container.scrollWidth - container.clientWidth);
-      var scrollYRatio = container.scrollTop / (container.scrollHeight - container.clientHeight);
-      
-      container.scrollLeft = scrollXRatio * (container.scrollWidth - container.clientWidth);
-      container.scrollTop = scrollYRatio * (container.scrollHeight - container.clientHeight);
-    }
+  function dragContent(e) {
+    if (!isDragging) return;
+    var clientX = e.clientX || e.touches[0].clientX; // Account for touch events
+    var clientY = e.clientY || e.touches[0].clientY; // Account for touch events
+    var deltaX = clientX - startX;
+    var deltaY = clientY - startY;
+    container.scrollLeft = startScrollLeft - deltaX;
+    container.scrollTop = startScrollTop - deltaY;
+  }
 
-    // Function to handle content dragging
-    function startDrag(e) {
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      startScrollLeft = container.scrollLeft;
-      startScrollTop = container.scrollTop;
-      content.style.cursor = 'grabbing';
-    }
+  function endDrag() {
+    isDragging = false;
+    content.style.cursor = 'grab';
+    // Re-enable text selection after dragging ends
+    content.style.userSelect = 'auto';
+  }
 
-    function dragContent(e) {
-      if (isDragging) {
-        var deltaX = e.clientX - startX;
-        var deltaY = e.clientY - startY;
-        container.scrollLeft = startScrollLeft - deltaX;
-        container.scrollTop = startScrollTop - deltaY;
-      }
-    }
+  content.addEventListener('mousedown', startDrag);
+  content.addEventListener('mousemove', dragContent);
+  content.addEventListener('mouseup', endDrag);
+  content.addEventListener('mouseleave', endDrag);
 
-    function endDrag() {
-      isDragging = false;
-      content.style.cursor = 'grab';
-    }
+  // For touch events
+  content.addEventListener('touchstart', startDrag);
+  content.addEventListener('touchmove', dragContent);
+  content.addEventListener('touchend', endDrag);
 
-    // Attach event listeners for dragging
-    content.addEventListener('mousedown', startDrag);
-    content.addEventListener('mousemove', dragContent);
-    content.addEventListener('mouseup', endDrag);
-    content.addEventListener('mouseleave', endDrag);
+  $('#zoom-in').click(function() {
+    zoomLevel = Math.min(zoomLevel + step, maxZoom);
+    updateZoom();
   });
+
+  $('#zoom-out').click(function() {
+    zoomLevel = Math.max(zoomLevel - step, minZoom);
+    updateZoom();
+  });
+
+  $('#zoom-content').scroll(function() {
+    var container = $(this);
+    container.scrollLeft((container.prop('scrollWidth') - container.outerWidth()) / 2);
+  });
+
+  // Center the content horizontally initially
+  $('#zoom-container').scrollLeft(($('#zoom-content').width() - $('#zoom-container').width()) / 2);
+});

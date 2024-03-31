@@ -15,7 +15,7 @@ function searchAndChangeColor() {
         alert('Please enter a search term.');
         var mapDivs = document.querySelectorAll('#map div');
         mapDivs.forEach(function(div) {
-            div.style.backgroundColor = 'green'; // Set background color of each div to green
+            div.style.backgroundColor = 'transparent'; // Set background color of each div to transparent
         });
         return; // Exit function if search term is empty
     }
@@ -28,7 +28,7 @@ function searchAndChangeColor() {
             found = true;
             div.style.backgroundColor = 'red';
         } else {
-            div.style.backgroundColor = 'green';
+            div.style.backgroundColor = 'transparent';
         }
     });
     if (!found) {
