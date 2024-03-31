@@ -9,26 +9,5 @@
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        .highlight {
-            background-color: yellow;
-        }
-        .letter-highlight {
-            border: 1px solid transparent;
-        }
-        .btn_select_lot:hover{
-            background-color: darkgray;
-        }
-        .btn_select_lot{
-            background-color: transparent;
-        }
-
-
-
-
-    </style>
+    <script src="../jquery/sorting_sold.js"></script>
 </head>
