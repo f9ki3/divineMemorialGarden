@@ -56,56 +56,18 @@
             <div class="alert mt-3 alert-danger text-center error" role="alert" style="display: none">
                 Please check your login Credentials
             </div>
+            <div class="alert mt-3 text-center d-flex justify-content-between" >
+                <a href="homepage" style="text-decoration: none; color: white">Home</a>
+                <a href="maps" style="text-decoration: none; color: white">Maps</a>
+                <a href="contact" style="text-decoration: none; color: white">Contacts</a>
+                <a href="about_us" style="text-decoration: none; color: white">About Us</a>
+            </div>
         </form>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function(){
-        $('#username, #password').on('keyup', function(event) {
-            if (event.key === 'Enter') {
-                $('#login_btn').click();
-                
-            }
-        });
-
-        $("#login_form").submit(function(event){
-            event.preventDefault();
-            var $username = $("#username").val();
-            var $password = $("#password").val();
-
-            $('.error').hide();
-            $('#login_btn').hide();
-
-            $.ajax({
-                type: "POST",
-                url: "php/login.php",
-                data: {
-                    uname: $username,
-                    pass: $password
-                },
-                success: function(response){
-                    if(response === "1") {
-                        $('#loading').show();
-                        setTimeout(function() {
-                            $('#loading').hide();
-                            $('#login_btn').show();
-                            window.location.href = '/divineMemorialGarden/admin/dashboard';
-                        }, 3000);
-                    } else {
-                        $('#loading').show();
-                        setTimeout(function() {
-                            $('#loading').hide();
-                            $('.error').show();
-                            $('#login_btn').show();
-                        }, 3000); // Show loading for 3 seconds before hiding
-                    }
-                }
-            });
-        });
-    });
-</script>
+<script src="jquery/login.js"></script>
 </body>
 </html>
