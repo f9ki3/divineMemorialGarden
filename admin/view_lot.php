@@ -65,6 +65,20 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <input type="text" id="address" class="form-control" value="Mike Will" readonly>
         </div> -->
     </div>
+    <div class="d-flex mb-3">
+        <div class="w-50 m-1">
+            <label for="address">Classification</label>
+            <input type="text" id="address" class="form-control" value="<?php echo $property['classification']; ?>" readonly>
+        </div>
+        <div class="w-50 m-1">
+            <label for="address">Lot Status</label>
+            <input type="text" id="address" class="form-control" value="<?php echo $property['lot_status']; ?>" readonly>
+        </div>
+        <!-- <div>
+            <label for="address">Owner Name</label>
+            <input type="text" id="address" class="form-control" value="Mike Will" readonly>
+        </div> -->
+    </div>
     <?php endforeach; ?>
     <h5>Upper Tier</h5>
     <div class="d-flex mb-3">
