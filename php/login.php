@@ -11,7 +11,7 @@ if(isset($_POST['uname'], $_POST['pass'])) {
     $password = $_POST['pass'];
 
     // Prepare a SQL statement to check if the username and password exist
-    $sql = "SELECT * FROM admin WHERE username = ? AND password = ? AND status = ?";
+    $sql = "SELECT * FROM users WHERE user_name = ? AND user_password = ? AND user_status = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
@@ -36,12 +36,13 @@ if(isset($_POST['uname'], $_POST['pass'])) {
 
         // Set session variables
         $_SESSION['id'] = $row['id'];
-        $_SESSION['fname'] = $row['fname'];
-        $_SESSION['lname'] = $row['lname'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['contact'] = $row['contact'];
-        $_SESSION['img'] = $row['img'];
-        $_SESSION['username'] = $username;
+        $_SESSION['user_fname'] = $row['user_fname'];
+        $_SESSION['user_lname'] = $row['user_lname'];
+        $_SESSION['user_email'] = $row['user_email'];
+        $_SESSION['user_contact'] = $row['user_contact'];
+        $_SESSION['user_address'] = $row['user_address'];
+        $_SESSION['user_profile'] = $row['user_profile'];
+        $_SESSION['user_name'] = $username;
         $_SESSION['loggedin'] = true;
 
         // Respond with '1' to indicate successful login
