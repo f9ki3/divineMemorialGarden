@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2024 at 10:56 AM
+-- Generation Time: Apr 04, 2024 at 05:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -304,6 +304,35 @@ INSERT INTO `property` (`id`, `date`, `area`, `block_number`, `lot_number`, `cla
 (209, NULL, 'Lawn 1', '13', 'J', 'Regular', 'JUVILYN EDOSMA', 0),
 (210, NULL, 'Lawn 1', '13', 'K', 'Exterior', 'JOSE SALGADO SR.', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `user_date_added` datetime NOT NULL,
+  `user_fname` varchar(50) DEFAULT NULL,
+  `user_lname` varchar(50) DEFAULT NULL,
+  `user_email` varchar(50) DEFAULT NULL,
+  `user_contact` varchar(11) DEFAULT NULL,
+  `user_address` varchar(255) DEFAULT NULL,
+  `user_profile` varchar(50) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `user_password` varchar(50) NOT NULL,
+  `user_type` int(1) NOT NULL,
+  `user_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `user_date_added`, `user_fname`, `user_lname`, `user_email`, `user_contact`, `user_address`, `user_profile`, `user_name`, `user_password`, `user_type`, `user_status`) VALUES
+(1, '2024-04-03 17:38:47', 'Dave', 'Bergania', 'dave@gmail.com', '09120912098', 'Prenza I, Marilao, Bulacan', 'dave_profile.jpg', 'dave', 'dave', 0, 0),
+(2, '2024-04-03 17:42:24', 'Stephany', 'Gandula', 'steph@gmail.com', '09120912919', 'Karla Ville, Prenza II, Marilao, Bulacan', 'stephany_profile.jpg', 'stephany', 'stephany', 1, 0);
+
 --
 -- Indexes for dumped tables
 --
@@ -334,6 +363,12 @@ ALTER TABLE `property`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -360,6 +395,12 @@ ALTER TABLE `lawn`
 --
 ALTER TABLE `property`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
