@@ -71,7 +71,9 @@
   <div class="row">
     <div class="col-md-4 mb-4">
       <div class="card">
-        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+        <div style="height: 200px;">
+        <img src="uploads/bg1.jpeg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
+        </div>
         <div class="card-body">
           <h5 class="card-title">Honoring Our Heroes</h5>
           <p class="card-text">Explore the significance of memorial sites dedicated to veterans and join us in paying tribute to those who have served.</p>
@@ -81,7 +83,9 @@
     </div>
     <div class="col-md-4 mb-4">
       <div class="card">
-        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+        <div style="height: 200px;">
+        <img src="uploads/bg3.jpg"  style="object-fit: cover; height: 100%; width: 100%"class="card-img-top" alt="...">
+        </div>
         <div class="card-body">
           <h5 class="card-title">Preserving History</h5>
           <p class="card-text">Discover the importance of preserving cemeteries as vital components of our heritage and efforts underway to protect and maintain these sacred spaces.</p>
@@ -91,7 +95,9 @@
     </div>
     <div class="col-md-4 mb-4">
       <div class="card">
-        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+        <div style="height: 200px;">
+        <img src="uploads/g6.jpg" c style="object-fit: cover; height: 100%; width: 100%"lass="card-img-top" alt="...">
+        </div>
         <div class="card-body">
           <h5 class="card-title">Healing Through Remembrance</h5>
           <p class="card-text">Explore the therapeutic benefits of memorial gardens and discover how these beautiful settings help individuals find peace amidst sorrow.</p>

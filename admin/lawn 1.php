@@ -1,7 +1,6 @@
 <html lang="en">
-
-<body >
 <?php include 'header.php'; ?>
+<body >
 <?php include 'navbar.php'; ?>
     
     <div class="pt-3 container d-flex justify-content-between">
@@ -51,6 +50,7 @@
     </div>
 </div>
 
+<?php include 'footer.php'?>
 <script src="../jquery/zoom.js"></script>
 <script src="../jquery/search_map.js"></script>
 </body>
