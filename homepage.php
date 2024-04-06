@@ -1,3 +1,4 @@
+<?php include 'session.php'?>
 <?php include 'navigation_bar.php'?>
 
 <div class="position-relative" style="width: 100%; height: 90%">
@@ -179,7 +180,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6">
-            <a href="map.php">
+            <a href="area">
               <div style="height: 300px; width: auto">
                   <img src="uploads/map_highligh.png" class="rounded w-100 h-100 rounded-4" alt="map">
               </div>
