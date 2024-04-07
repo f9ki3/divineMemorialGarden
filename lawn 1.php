@@ -1,8 +1,8 @@
 <html lang="en">
 <?php include 'header.php'; ?>
 <body >
-<?php include 'navbar.php'; ?>
-    
+<?php include 'navigation_bar.php'; ?>
+
     <div class="pt-3 container d-flex justify-content-between">
         <div class="w-50">
             <div class="pt-2"><a href="area">Area</a> ><a href="area_info">Owner List</a> ><a href="lawn 1">Map</a></div>
@@ -51,7 +51,7 @@
 </div>
 
 <?php include 'footer.php'?>
-<script src="../jquery/zoom.js"></script>
-<script src="../jquery/search_map.js"></script>
+<script src="jquery/zoom.js"></script>
+<script src="jquery/search_map.js"></script>
 </body>
 </html>
