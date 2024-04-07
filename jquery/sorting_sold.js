@@ -5,11 +5,9 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(data) {
             $.each(data, function(index, item) {
-                if (item.status == 0) {
-                    $('div[value="' + item.id + '"]').css('background-color', 'green');
-                } else {
-                    $('div[value="' + item.id + '"]').css('background-color', 'red');
-                }
+                var divSelector = 'div[data-id="' + item.id + '"]'; // Assuming using data-id attribute
+                var color = (item.status == 0) ? 'green' : 'red';
+                $(divSelector).css('background-color', color);
             });
         }
     });
