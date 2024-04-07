@@ -19,7 +19,7 @@ $data = array();
 if (mysqli_num_rows($result) > 0) {
     // Output data of each row
     while ($row = mysqli_fetch_assoc($result)) {
-        $id = $row["block_number"] . $row["lot_number"]; // Concatenate block_number and lot_number
+        $id = $row["id"]; // Concatenate block_number and lot_number
         $status = $row["lot_status"];
         
         // Push data to the array

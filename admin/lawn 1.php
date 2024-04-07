@@ -39,6 +39,10 @@
             <p class="ms-2 me-2">Sell</p>
             <div style="background-color: Red; width: 20px; height: 20px"></div>
         </div>
+        <div class="d-flex">
+            <p class="ms-2 me-2">Search Result</p>
+            <div style="background-color: orange; width: 20px; height: 20px"></div>
+        </div>
     </div>
 </div>
 
