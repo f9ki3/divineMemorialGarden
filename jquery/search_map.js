@@ -26,7 +26,7 @@ function searchAndChangeColor() {
         var divValue = div.getAttribute('value').toUpperCase();
         if (divValue.includes(searchTerm)) {
             found = true;
-            div.style.backgroundColor = 'blue';
+            div.style.backgroundColor = 'orange';
         } else {
             div.style.backgroundColor = 'transparent';
         }
