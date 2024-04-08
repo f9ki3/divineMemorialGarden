@@ -68,7 +68,7 @@
 
   <!-- Blog post news -->
   <div class="container mt-5">
-  <h3 class="fw-bold">News and Articles</h3>
+  <h3 class="fw-bold">News and Events</h3>
   <div class="row">
     <div class="col-md-4 mb-4">
       <div class="card">
