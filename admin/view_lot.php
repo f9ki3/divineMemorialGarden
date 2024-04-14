@@ -12,7 +12,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET['id'];
 
     // Fetch data from the database
-    $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner FROM property WHERE id = ?";
+    $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, lot_status FROM property WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -50,79 +50,140 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <td><?php echo $property['classification']; ?></td>
     </tr> -->
     <hr>
-    <h5 class="mt-5">Lot Information</h5>
-    <div class="d-flex mb-3">
-        <div class="w-50 m-1">
+    <div class="d-flex justify-content-between">
+        <h5 class="mt-5">Lot Information</h5>
+        <a class="mt-5"  style="text-decoration: none; color: gray" onclick="edit_lot()">Edit</a>
+    </div>
+
+    <div class="d-flex ">
+        <div class="w-50 m-2">
             <label for="address">Owner Name</label>
-            <input type="text" id="address" class="form-control" value="<?php echo $property['lot_owner']; ?>" readonly>
+            <input type="text" id="ownerName" class="form-control" value="<?php echo strtoupper($property['lot_owner']); ?>" oninput="this.value = this.value.toUpperCase();" disabled>
         </div>
-        <div class="w-50 m-1">
-            <label for="address">Block & Lot</label>
-            <input type="text" id="address" class="form-control" value="Block <?php echo $property['block_number']; ?> Lot <?php echo $property['lot_number']; ?>" readonly>
+        <div class="w-50 m-2" role="alert">
+            <label for="status">Lot Status</label> 
+            <?php
+                // Assuming $property['lot_status'] holds the status value (0 or 1)
+                $lotStatus = isset($property['lot_status']) ? $property['lot_status'] : 0;
+            ?>
+            <select class="form-select" aria-label="Default select example" name="lotStatus" id="lotStatus" disabled>
+                <option value="0" <?php echo ($lotStatus == 0) ? 'selected' : ''; ?>>Sold</option>
+                <option value="1" <?php echo ($lotStatus == 1) ? 'selected' : ''; ?>>For Sale</option>
+            </select>
         </div>
+
         <!-- <div>
             <label for="address">Owner Name</label>
-            <input type="text" id="address" class="form-control" value="Mike Will" readonly>
+            <input type="text" id="address" class="form-control" value="Mike Will" disabled>
         </div> -->
     </div>
-    <div class="d-flex mb-3">
-        <div class="w-50 m-1">
-            <label for="address">Classification</label>
-            <input type="text" id="address" class="form-control" value="<?php echo $property['classification']; ?>" readonly>
+    <div class="d-flex">
+    <div class="w-50 m-2">
+        <label for="address">Block &amp; Lot</label>
+        <input type="text" id="address" class="form-control" value="Block <?php echo htmlspecialchars($property['block_number']); ?> Lot <?php echo htmlspecialchars($property['lot_number']); ?>" disabled>
+    </div>
+    <div class="w-50 m-2">
+        <label for="classification">Classification</label>
+        <?php
+            // Assuming $classification holds the classification value ('Premium' or 'Regular')
+            $classification = isset($property['classification']) ? $property['classification'] : 'Premium'; // Default to 'Premium' if not set
+        ?>
+        <select class="form-select" aria-label="Default select example" name="classification" id="classification" disabled>
+            <option value="Premium" <?php echo ($classification === 'Premium') ? 'selected' : ''; ?>>Premium</option>
+            <option value="Regular" <?php echo ($classification === 'Regular') ? 'selected' : ''; ?>>Regular</option>
+        </select>
+    </div>
+
+</div>
+
+    <div style="display: none" id="edit_lot_div">
+        <div class="w-50 m-2">
+            
         </div>
-        <div class="w-50 m-1">
-            <label for="address">Lot Status</label>
-            <input type="text" id="address" class="form-control" value="<?php echo $property['lot_status']; ?>" readonly>
+        <div class="w-50 m-2 d-flex justify-content-end">
+            <button class="btn btn-danger w-25 me-2" onclick="cancel()">Cancel</button>
+            <button class="btn btn-success w-25" onclick="submit_lot()">Save</button>
         </div>
-        <!-- <div>
-            <label for="address">Owner Name</label>
-            <input type="text" id="address" class="form-control" value="Mike Will" readonly>
-        </div> -->
     </div>
     <?php endforeach; ?>
-    <h5>Upper Tier</h5>
-    <div class="d-flex mb-3">
-        <div class="w-50 m-1">
+    
+    <div class="d-flex justify-content-between">
+        <h5>Upper Tier</h5>
+        <a href=""   style="text-decoration: none; color: gray" >Edit</a>
+    </div>
+    <div class="d-flex ">
+        <div class="w-50 m-2">
             <label for="address">Deceased Name</label>
-            <input type="text" id="address" class="form-control" value="Juan Dela Cruz" readonly>
+            <input type="text" id="address" class="form-control" value="Juan Dela Cruz" disabled>
         </div>
-        <div class="w-50 m-1">
+        <div class="w-50 m-2">
             <label for="address"> Status</label>
-            <input type="text" id="address" class="form-control" value="John Doe" readonly>
+            <input type="text" id="address" class="form-control" value="John Doe" disabled>
         </div>
     </div>
-    <div class="d-flex mb-3">
-        <div class="w-50 m-1">
+    <div class="d-flex ">
+        <div class="w-50 m-2">
             <label for="address">Date of Birth</label>
-            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" readonly>
+            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" disabled>
         </div>
-        <div class="w-50 m-1">
+        <div class="w-50 m-2">
             <label for="address">Date of Death</label>
-            <input type="date" id="address" class="form-control" value="John Doe" readonly>
+            <input type="date" id="address" class="form-control" value="John Doe" disabled>
         </div>
     </div>
-    <h5>Lower Tier</h5>
-    <div class="d-flex mb-3">
-        <div class="w-50 m-1">
+    <div class="d-flex justify-content-between">
+        <h5>Lower Tier</h5>
+        <a href=""   style="text-decoration: none; color: gray">Edit</a>
+    </div>
+    <div class="d-flex ">
+        <div class="w-50 m-2">
             <label for="address">Deceased Name</label>
-            <input type="text" id="address" class="form-control" value="Juan Dela Cruz" readonly>
+            <input type="text" id="address" class="form-control" value="Juan Dela Cruz" disabled>
         </div>
-        <div class="w-50 m-1">
+        <div class="w-50 m-2">
             <label for="address"> Status</label>
-            <input type="text" id="address" class="form-control" value="John Doe" readonly>
+            <input type="text" id="address" class="form-control" value="John Doe" disabled>
         </div>
     </div>
-    <div class="d-flex mb-3">
-        <div class="w-50 m-1">
+    <div class="d-flex ">
+        <div class="w-50 m-2">
             <label for="address">Date of Birth</label>
-            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" readonly>
+            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" disabled>
         </div>
-        <div class="w-50 m-1">
+        <div class="w-50 m-2">
             <label for="address">Date of Death</label>
-            <input type="date" id="address" class="form-control" value="John Doe" readonly>
+            <input type="date" id="address" class="form-control" value="John Doe" disabled>
         </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <h5>Map Location</h5>
+        <a href=""   style="text-decoration: none; color: gray">Edit</a>
     </div>
 </div>
+
+
+<script>
+function edit_lot() {
+    // Enable input fields
+    document.getElementById('ownerName').disabled = false;
+    document.getElementById('lotStatus').disabled = false;
+    document.getElementById('classification').disabled = false;
+
+    // Display the edit_lot_div
+    document.getElementById('edit_lot_div').style.display = 'flex';
+}
+
+
+
+
+function cancel(){
+    // Display the edit_lot_div
+    document.getElementById('ownerName').disabled = true;
+    document.getElementById('lotStatus').disabled = true;
+    document.getElementById('classification').disabled = true;
+    document.getElementById('edit_lot_div').style.display = 'none';
+}
+</script>
 
 <?php include 'footer.php'?>
 </body>
