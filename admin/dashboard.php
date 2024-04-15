@@ -56,7 +56,7 @@
         </div>
 
 
-        <div style="background-color: white;" class="rounded border p-3 mb-3 w-100">
+        <!-- <div style="background-color: white;" class="rounded border p-3 mb-3 w-100">
             <div class="row">
                 <div class="col-12 col-md-6 p-2">
                      <h6 class="fw-bolder">List of Available</h6>
@@ -247,7 +247,7 @@
 
 
         <!-- Add Modal -->
-        <div class="modal fade mt-5" id="add_DGMuct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!-- <div class="modal fade mt-5" id="add_DGMuct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -265,7 +265,7 @@
             </div>
             </div>
         </div>
-        </div>
+        </div> --> 
     </div>
 </div>
 
