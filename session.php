@@ -11,6 +11,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION[
     // Redirect to the home page
     header("Location: client/");
     exit;
+} else if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['user_type'] == 2) {
+    // Redirect to the home page
+    header("Location: visitor/");
+    exit;
 }
 
 ?> -->

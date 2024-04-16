@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['user_type'] == 1) {
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['user_type'] == 2) {
     // User is logged in, display the landing page content
     $username = $_SESSION['user_name'];
     $id = $_SESSION['id'];
