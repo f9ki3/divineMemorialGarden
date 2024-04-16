@@ -52,7 +52,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <hr>
     <div class="d-flex justify-content-between">
         <h5 class="mt-5">Lot Information</h5>
-        <a class="mt-5"  style="text-decoration: none; color: gray" onclick="edit_lot()">Edit</a>
+        <!-- <a class="mt-5"  style="text-decoration: none; color: gray" onclick="edit_lot()">Edit</a> -->
     </div>
 
     <div class="d-flex ">
@@ -194,7 +194,7 @@ if (!$result || mysqli_num_rows($result) == 0) {
     </div>
     <div class="d-flex justify-content-between">
         <h5>Lower Tier</h5>
-        <a href=""   style="text-decoration: none; color: gray">Edit</a>
+        <!-- <a href=""   style="text-decoration: none; color: gray">Edit</a> -->
     </div>
     <div class="d-flex ">
         <div class="w-50 m-2">
