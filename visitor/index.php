@@ -4,7 +4,7 @@
 <body>
 <?php include 'navbar.php'?>
 
-<div id="terms" style="display: none" class="container w-75 mb-5 mt-5 text-secondary">
+<div id="terms"  class="container w-75 mb-5 mt-5 text-secondary">
         <h2 class="text-center " style="font-weight: bolder">Divine Memorial Garden</h2>
         <hr>
         <h5 class="text-center">Terms and Conditions</h5>
@@ -77,12 +77,12 @@
                 I have read and accept the Terms and Conditions
             </label>
         </div>
-            <button id="acceptButton" disabled class="btn w-50 text-center btn-success mt-3" onclick="submitForm()">Accept and Proceed</button>
+            <button id="acceptButton" disabled class="btn w-50 text-center btn-success mt-3" ">Accept and Proceed</button>
         </div>
     </div>
 
-<div class="container text-secondary w-100  p-5 ">
-    <h4 style="font-weight: bold;" class="mb-3">Getting Started</h4>
+<div id="getting_started" class="container text-secondary w-100  p-5 " style="display: none">
+    <h3 style="font-weight: bold;" class="mb-3">Getting Started</h3>
     <div class="w-100 d-flex flex-row">
     
         <div class="w-50 p-2">
@@ -143,7 +143,7 @@
     </div>
 
     <div class="w-100 d-flex justify-content-end mt-5">
-        <button class="btn me-2 w-25  text-success border-success">Skip</button>
+        <a href="homepage" class="btn me-2 w-25  text-success border-success">Skip</a>
         <button class="btn w-25 btn-success" onclick="submitForm()">Save</button>
     </div>
 </div>
@@ -151,60 +151,93 @@
     <?php include ('footer.php')?>
     <script>
     function submitForm() {
-        // Retrieve all input elements within the form
-        const inputFields = document.querySelectorAll('input');
+    const inputFields = document.querySelectorAll('input');
+    let isValid = true;
+    let formData = {}; // Object to store field values
+    let visitor_id = <?php echo json_encode($id); ?>; // Assuming $id is available in PHP
 
-        // Validation flag
-        let isValid = true;
+    inputFields.forEach(input => {
+        const id = input.id;
+        const value = input.value.trim();
 
-        // Loop through each input field
-        inputFields.forEach(input => {
-            const id = input.id;
-            const value = input.value.trim(); // Trim to remove any leading/trailing spaces
-
-            // Check if the field is empty
-            if (value === '') {
-                // Apply red border to highlight empty required fields
-                input.style.border = '1px solid red';
-                isValid = false;
-            } else {
-                // Remove red border if field is not empty
-                input.style.border = '1px solid #ced4da'; // Reset border color
-            }
-
-            // Additional validation based on field ID
-            switch (id) {
-                case 'id':
-                case 'fname':
-                case 'lname':
-                    // Check if field contains any digits
-                    if (/\d/.test(value)) { // Regular expression to test for digits
-                        alert(`${id.toUpperCase()} cannot contain numbers.`);
-                        input.style.border = '1px solid red'; // Apply red border
-                        isValid = false;
-                    }
-                    break;
-                case 'contact':
-                    // Check if contact number is exactly 11 digits
-                    if (!(/^\d{11}$/.test(value))) { // Regular expression for 11 digits
-                        alert('Contact number must be 11 digits.');
-                        input.style.border = '1px solid red'; // Apply red border
-                        isValid = false;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        });
-
-        // Proceed with form submission if all fields are valid
-        if (isValid) {
-            console.log("Form submitted successfully!");
-            // You can include additional logic here to handle form submission
+        if (value === '') {
+            input.style.border = '1px solid red';
+            isValid = false;
         } else {
-            console.log("Form submission failed. Please correct errors.");
+            input.style.border = '1px solid #ced4da';
         }
+
+        switch (id) {
+            case 'id':
+            case 'fname':
+            case 'lname':
+                if (/\d/.test(value)) {
+                    alert(`${id.toUpperCase()} cannot contain numbers.`);
+                    input.style.border = '1px solid red';
+                    isValid = false;
+                }
+                break;
+            case 'contact':
+                if (!(/^\d{11}$/.test(value))) {
+                    input.style.border = '1px solid red';
+                    isValid = false;
+                }
+                break;
+            default:
+                break;
+        }
+
+        // Store field value in formData object
+        formData[id] = value;
+    });
+
+    if (isValid) {
+        alertify.set('notifier', 'position', 'bottom-left');
+        alertify.success('Successfully Submitted')
+        console.log("Form Data:", formData); // Log all field values
+        window.location.href = 'finish';
+        // Include visitor_id in formData object
+        formData['visitor_id'] = visitor_id;
+
+        // Send formData object to PHP script using fetch API
+        fetch('../php/visitor_info.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Server Response:', data);
+            // Handle response from server if needed
+        })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        //     alert("Error occurred during form submission. Please try again.");
+        // });
+    } else {
+        console.log("Form submission failed. Please correct errors.");
+        alertify.set('notifier', 'position', 'bottom-left');
+        alertify.error('Invalid Inputs');
     }
+}
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Find the acceptButton element
+    var acceptButton = document.getElementById('acceptButton');
+    
+    // Find the getting_started element
+    var gettingStartedDiv = document.getElementById('getting_started');
+    
+    // Add a click event listener to the acceptButton
+    acceptButton.addEventListener('click', function() {
+        // When acceptButton is clicked, change the display style of getting_started
+        gettingStartedDiv.style.display = 'block';
+        document.getElementById('terms').style.display = 'none';
+    });
+});
 </script>
 
 </body>

@@ -18,41 +18,42 @@ if (isset($_POST['otp'])) {
 
         // Check if a matching OTP was found in the database
         if ($result->num_rows > 0) {
-            // Mark OTP as used
-            $updateStmt = $conn->prepare("UPDATE users SET user_otp_status = 1 WHERE user_otp = ?");
+            // Mark OTP as used and update user profile
+            $updateStmt = $conn->prepare("UPDATE users SET user_otp_status = 1, user_profile = ? WHERE user_otp = ?");
             if ($updateStmt) {
-                $updateStmt->bind_param("s", $receivedOTP);
+                $dummyProfile = 'profile_dummy.jpg'; // Dummy profile image
+                $updateStmt->bind_param("ss", $dummyProfile, $receivedOTP);
                 $updateStmt->execute();
                 $updateStmt->close();
+
+                // If OTP is valid, return 'valid'
+                echo 'valid';
             } else {
                 // If updating failed, return an error response
                 http_response_code(500); // Internal Server Error
                 echo 'Error: Database update preparation failed.';
-                exit();
             }
-
-            // If OTP is valid, return 'valid'
-            echo 'valid';
         } else {
             // If OTP is invalid, return 'invalid'
             echo 'invalid';
         }
 
-        // Close result set and prepared statement
+        // Close result set
         $result->close();
-        $stmt->close();
     } else {
         // If preparation failed, return an error response
         http_response_code(500); // Internal Server Error
         echo 'Error: Database query preparation failed.';
     }
 
-    // Close database connection
-    $conn->close();
-
+    // Close prepared statement
+    $stmt->close();
 } else {
     // If 'otp' parameter is not received, return an error response
     http_response_code(400); // Bad Request
     echo 'Error: OTP parameter is missing.';
 }
+
+// Close database connection
+$conn->close();
 ?>
