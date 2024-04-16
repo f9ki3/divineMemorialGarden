@@ -1,18 +1,18 @@
-$(document).ready(function(){
+$(document).ready(function() {
     $('#username, #password').on('keyup', function(event) {
         if (event.key === 'Enter') {
             $('#login_btn').click();
-            
         }
     });
 
-    $("#login_form").submit(function(event){
+    $("#login_form").submit(function(event) {
         event.preventDefault();
         var $username = $("#username").val();
         var $password = $("#password").val();
 
         $('.error').hide();
         $('#login_btn').hide();
+        $('#loading').show();
 
         $.ajax({
             type: "POST",
@@ -21,44 +21,28 @@ $(document).ready(function(){
                 uname: $username,
                 pass: $password
             },
-            success: function(response){
-                if(response === "1") {
-                    $('#loading').show();
-                    setTimeout(function() {
-                        $('#loading').hide();
-                        $('#login_btn').show();
-                        window.location.href = '/divineMemorialGarden/admin/dashboard';
-                    }, 3000);
-                }else if(response === "2") {
-                    $('#loading').show();
-                    setTimeout(function() {
-                        $('#loading').hide();
-                        $('#login_btn').show();
-                        window.location.href = '/divineMemorialGarden/client/';
-                    }, 3000);
-                }else if(response === "3") {
-                    $('#loading').show();
-                    setTimeout(function() {
-                        $('#loading').hide();
-                        $('#login_btn').show();
-                        window.location.href = '/divineMemorialGarden/visitor/';
-                    }, 3000);
-                }else if(response === "4") {
-                    $('#loading').show();
-                    setTimeout(function() {
-                        $('#loading').hide();
-                        $('#login_btn').show();
-                        window.location.href = '/divineMemorialGarden/otp';
-                    }, 3000);
+            success: function(response) {
+                $('#loading').hide();
+                $('#login_btn').show();
+
+                if (response === "1") {
+                    window.location.href = '/divineMemorialGarden/admin/dashboard';
+                } else if (response === "2") {
+                    window.location.href = '/divineMemorialGarden/client/';
+                } else if (response === "3") {
+                    window.location.href = '/divineMemorialGarden/visitor/';
+                } else if (response === "4") {
+                    window.location.href = '/divineMemorialGarden/otp?email=' + encodeURIComponent($username);
                 } else {
-                    $('#loading').show();
-                    setTimeout(function() {
-                        $('#loading').hide();
-                        $('.error').show();
-                        $('#login_btn').show();
-                    }, 3000); // Show loading for 3 seconds before hiding
+                    $('.error').show();
                 }
-            }
+            },
+            error: function() {
+                $('#loading').hide();
+                $('#login_btn').show();
+                $('.error').show();
+            },
+            timeout: 10000 // Adjust timeout (in milliseconds) as needed
         });
     });
 });

@@ -40,7 +40,7 @@
         <h1 class="fw-bolder text-light">Divine Memorial</h1>
         <form id="login_form">
             <div class="mb-3">
-                <label for="username" class="form-label text-light">Username</label>
+                <label for="username" class="form-label text-light">Username or Email</label>
                 <input type="text" id="username" class="form-control" placeholder="Enter your username">
             </div>
             <div class="mb-3">

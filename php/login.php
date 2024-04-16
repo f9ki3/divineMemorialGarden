@@ -12,7 +12,7 @@ if (isset($_POST['uname'], $_POST['pass'])) {
     $password = hash('sha256', $_POST['pass']); // Hash the password
 
     // Prepare a SQL statement to check if the username and password exist
-    $sql = "SELECT * FROM users WHERE (user_name = ? OR user_email = ?) AND user_password = ? AND user_status = ? AND user_otp_status = ?";
+    $sql = "SELECT * FROM users WHERE (user_name = ? OR user_email = ?) AND user_password = ? AND user_status = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
@@ -21,9 +21,8 @@ if (isset($_POST['uname'], $_POST['pass'])) {
     }
 
     // Bind parameters
-    $otp_status = 1; // Assuming user_otp_status is an integer
     $status = 0; // Assuming user_status is an integer (changed to 1 for active users)
-    $stmt->bind_param("sssii", $username, $username, $password, $status, $otp_status);
+    $stmt->bind_param("sssi", $username, $username, $password, $status);
 
     // Execute the statement
     $stmt->execute();
@@ -48,21 +47,22 @@ if (isset($_POST['uname'], $_POST['pass'])) {
         $_SESSION['user_type'] = $row['user_type'];
         $_SESSION['loggedin'] = true;
 
-        // Check user type and OTP status
+        // Check user type
         if ($row['user_type'] == 0) {
             // Respond with '1' to indicate successful login for user type 0
             echo '1';
         } elseif ($row['user_type'] == 1) {
             // Respond with '2' to indicate successful login for user type 1
             echo '2';
-        } elseif ($row['user_type'] == 2 && $row['user_otp_status'] == 1) {
-            // Respond with '3' to indicate successful login for user type 2 with OTP
-            echo '3';
-        } elseif ($row['user_type'] == 2 && $row['user_otp_status'] == 0) {
-            // Respond with '4' to indicate successful login for user type 2 without OTP
-            echo '4';
+        } elseif ($row['user_type'] == 2) {
+            // Respond based on OTP status (assuming OTP status is a separate verification step)
+            if ($row['user_otp_status'] == 1) {
+                echo '3'; // Successful login for user type 2 with OTP verified
+            } else {
+                echo '4'; // Successful login for user type 2, but OTP not verified
+            }
         } else {
-            // Respond with '0' for unknown user type or OTP status
+            // Respond with '0' for unknown user type
             echo '0';
         }
     } else {
