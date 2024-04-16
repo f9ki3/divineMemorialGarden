@@ -164,11 +164,11 @@
             </div>
             <div class="step mb-3">
                 <span class="step-num">2. </span>
-                <span class="step-text">Select Map in the menu or click the picture on the right side</span>
+                <span class="step-text">Register and login your account</span>
             </div>
             <div class="step mb-3">
                 <span class="step-num">3. </span>
-                <span class="step-text">Select the Lawn where you want to search</span>
+                <span class="step-text">Proceed on mapping </span>
             </div>
             <div class="step mb-3">
                 <span class="step-num">4. </span>
@@ -180,7 +180,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6">
-            <a href="area">
+            <a href="login">
               <div style="height: 300px; width: auto">
                   <img src="uploads/map_highligh.png" class="rounded w-100 h-100 rounded-4" alt="map">
               </div>

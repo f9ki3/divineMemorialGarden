@@ -8,10 +8,11 @@ include ("../config/config.php");
 if(isset($_POST['uname'], $_POST['pass'])) {
     // Get the posted username and password
     $username = $_POST['uname'];
-    $password = $_POST['pass'];
+    $hashedPassword = hash('sha256', $_POST['pass']);
+    $password = $hashedPassword;
 
     // Prepare a SQL statement to check if the username and password exist
-    $sql = "SELECT * FROM users WHERE user_name = ? AND user_password = ? AND user_status = ?";
+    $sql = "SELECT * FROM users WHERE user_name = ? AND user_password = ? AND user_status = ? AND user_otp_status = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
@@ -19,9 +20,10 @@ if(isset($_POST['uname'], $_POST['pass'])) {
         die('Error: ' . htmlspecialchars($conn->error));
     }
 
+    $otp_status = 1;
     // Bind parameters
     $status = 0; // Assuming status is an integer
-    $stmt->bind_param("ssi", $username, $password, $status);
+    $stmt->bind_param("ssii", $username, $password, $status, $otp_status);
 
     // Execute the statement
     $stmt->execute();
