@@ -7,8 +7,8 @@
             <div class="d-flex mt-2 d-flex justify-content-between">
                 <li><a href="homepage" class="text-light mx-3" style="text-decoration: none;">Home</a></li>
                 <li><a href="area" class="text-light mx-3" style="text-decoration: none;">Mapping</a></li>
-                <li><a href="transactions" class="text-light mx-3" style="text-decoration: none;">Sale Bulletin</a></li>
-                <li><a href="accounts" class="text-light mx-3" style="text-decoration: none;">Messages</a></li>
+                <li><a href="sell_bulletin" class="text-light mx-3" style="text-decoration: none;">Sale Bulletin</a></li>
+                <li><a href="message" class="text-light mx-3" style="text-decoration: none;">Messages</a></li>
             </div>
             <div class="btn-group">
             <button type="button" class="btn border-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
