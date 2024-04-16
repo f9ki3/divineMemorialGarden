@@ -9,7 +9,7 @@
                 <li><a href="lot_information" class="text-light mx-3" style="text-decoration: none;">Lot Information</a></li>
                 <li><a href="area" class="text-light mx-3" style="text-decoration: none;">Mapping</a></li>
                 <li><a href="sell_bulletin" class="text-light mx-3" style="text-decoration: none;">Sale Bulletin</a></li>
-                <li><a href="messages" class="text-light mx-3" style="text-decoration: none;">Messages</a></li>
+                <li><a href="message" class="text-light mx-3" style="text-decoration: none;">Message</a></li>
             </div>
             <div class="btn-group">
             <button type="button" class="btn border-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
