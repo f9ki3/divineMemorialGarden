@@ -106,29 +106,92 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         </div>
     </div>
     <?php endforeach; ?>
-    
+    <?php
+// Assuming $id is properly defined and contains a valid property ID
+
+// Execute the SQL query
+$sql = "SELECT deceased_name, dob, dod, grave_status FROM deceased_person WHERE property_id = $id";
+$result = mysqli_query($conn, $sql); // Assuming $conn is your database connection
+
+if (!$result || mysqli_num_rows($result) == 0) {
+    // If no record found or error in query execution
+    echo '
     <div class="d-flex justify-content-between">
         <h5>Upper Tier</h5>
-        <a href=""   style="text-decoration: none; color: gray" >Edit</a>
+        <a style="text-decoration: none; color: gray" onclick="edit_upper()">Edit</a>
     </div>
-    <div class="d-flex ">
+    <div class="d-flex">
         <div class="w-50 m-2">
-            <label for="address">Deceased Name</label>
-            <input type="text" id="address" class="form-control" value="Juan Dela Cruz" disabled>
+            <label for="upper_name">Deceased Name</label>
+            <input type="text" id="upper_name" class="form-control" value="John Doe" disabled>
         </div>
         <div class="w-50 m-2">
-            <label for="address"> Status</label>
-            <input type="text" id="address" class="form-control" value="John Doe" disabled>
+            <label for="deceased_status">Deceased Status</label>
+            <select class="form-select" aria-label="Default select example" name="classification" id="deceased_status" disabled>
+                <option value="Premium">Remains</option>
+                <option value="Regular">Body</option>
+            </select>
         </div>
     </div>
-    <div class="d-flex ">
+    
+    <div class="d-flex">
         <div class="w-50 m-2">
-            <label for="address">Date of Birth</label>
-            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" disabled>
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" class="form-control" disabled>
         </div>
         <div class="w-50 m-2">
-            <label for="address">Date of Death</label>
-            <input type="date" id="address" class="form-control" value="John Doe" disabled>
+            <label for="dod">Date of Death</label>
+            <input type="date" id="dod" class="form-control" disabled>
+        </div>
+    </div>
+    ';
+} else {
+    // Fetch the row from the query result
+    $row = mysqli_fetch_assoc($result);
+
+    echo '
+    <div class="d-flex justify-content-between">
+        <h5>Upper Tier</h5>
+        <a style="text-decoration: none; color: gray" onclick="edit_upper()">Edit</a>
+    </div>
+    <div class="d-flex">
+        <div class="w-50 m-2">
+            <label for="upper_name">Deceased Name</label>
+            <input type="text" id="upper_name" class="form-control" value="' . htmlspecialchars($row['deceased_name']) . '" disabled>
+        </div>
+        <div class="w-50 m-2">
+            <label for="deceased_status">Deceased Status</label>
+            <select class="form-select" aria-label="Default select example" name="classification" id="deceased_status" disabled>
+                <option value="Premium"' . ($row['grave_status'] === 'Premium' ? ' selected' : '') . '>Remains</option>
+                <option value="Regular"' . ($row['grave_status'] === 'Regular' ? ' selected' : '') . '>Body</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="d-flex">
+        <div class="w-50 m-2">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" class="form-control" value="' . htmlspecialchars($row['dob']) . '" disabled>
+        </div>
+        <div class="w-50 m-2">
+            <label for="dod">Date of Death</label>
+            <input type="date" id="dod" class="form-control" value="' . htmlspecialchars($row['dod']) . '" disabled>
+        </div>
+    </div>
+    ';
+}
+
+?>
+
+
+
+    <div style="display: none" id="edit_upper_div">
+        <div class="w-50 m-2">
+            
+        </div>
+        <div class="w-50 m-2 d-flex justify-content-end">
+            <button class="btn btn-danger w-25 me-2" onclick="cancel()">Cancel</button>
+            <button class="btn btn-success w-25" onclick="submit_lot()">Save</button>
         </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -138,7 +201,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <div class="d-flex ">
         <div class="w-50 m-2">
             <label for="address">Deceased Name</label>
-            <input type="text" id="address" class="form-control" value="Juan Dela Cruz" disabled>
+            <input type="text" id="address" class="form-control" value="John Doe" disabled>
         </div>
         <div class="w-50 m-2">
             <label for="address"> Status</label>
@@ -276,6 +339,17 @@ function edit_lot() {
     document.getElementById('edit_lot_div').style.display = 'flex';
 }
 
+function edit_upper() {
+    // Enable input fields
+    document.getElementById('upper_name').disabled = false;
+    document.getElementById('deceased_status').disabled = false;
+    document.getElementById('dod').disabled = false;
+    document.getElementById('dob').disabled = false;
+
+    // Display the edit_lot_div
+    document.getElementById('edit_upper_div').style.display = 'flex';
+}
+
 function submit_lot() {
     // Disable input fields
     document.getElementById('ownerName').disabled = true;
@@ -324,6 +398,13 @@ function submit_lot() {
 }
 
 function cancel() {
+    document.getElementById('upper_name').disabled = true;
+    document.getElementById('deceased_status').disabled = true;
+    document.getElementById('dod').disabled = true;
+    document.getElementById('dob').disabled = true;
+
+    // Display the edit_lot_div
+    document.getElementById('edit_upper_div').style.display = 'none';
     // Hide the edit_map_img_div
     const editMapImgDiv = document.getElementById('edit_map_img_div');
     editMapImgDiv.style.display = 'none';
