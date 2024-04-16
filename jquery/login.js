@@ -36,6 +36,20 @@ $(document).ready(function(){
                         $('#login_btn').show();
                         window.location.href = '/divineMemorialGarden/client/';
                     }, 3000);
+                }else if(response === "3") {
+                    $('#loading').show();
+                    setTimeout(function() {
+                        $('#loading').hide();
+                        $('#login_btn').show();
+                        window.location.href = '/divineMemorialGarden/visitor/';
+                    }, 3000);
+                }else if(response === "4") {
+                    $('#loading').show();
+                    setTimeout(function() {
+                        $('#loading').hide();
+                        $('#login_btn').show();
+                        window.location.href = '/divineMemorialGarden/otp';
+                    }, 3000);
                 } else {
                     $('#loading').show();
                     setTimeout(function() {
