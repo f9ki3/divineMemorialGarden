@@ -5,7 +5,7 @@
 <?php include 'navbar.php'?>
 
 <div id="getting_started" class="container text-secondary w-100  p-5 " >
-    <h3 style="font-weight: bold;" class="mb-3">My Lot Information</h3>
+    <h3 style="font-weight: bold;" class="mb-3">Recently Lot Sale Posted</h3>
     <div class="w-100 d-flex flex-row">
     
         <div class="w-50 p-2">
@@ -66,8 +66,8 @@
     </div>
 
     <div class="w-100 d-flex justify-content-end mt-5">
-        <a href="homepage" class="btn me-2 w-25  text-success border-success">View Map</a>
-        <button class="btn w-25 btn-success" onclick="submitForm()">Request to Sell</button>
+        <!-- <a href="homepage" class="btn me-2 w-25  text-success border-success">View Map</a> -->
+        <button class="btn w-25 btn-success" onclick="submitForm()">Next</button>
     </div>
 </div>
 
