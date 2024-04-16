@@ -12,12 +12,25 @@ if (isset($_POST['otp'])) {
     
     // Check if preparation was successful
     if ($stmt) {
-        $stmt->bind_param("i", $receivedOTP);
+        $stmt->bind_param("s", $receivedOTP);
         $stmt->execute();
         $result = $stmt->get_result();
 
         // Check if a matching OTP was found in the database
         if ($result->num_rows > 0) {
+            // Mark OTP as used
+            $updateStmt = $conn->prepare("UPDATE users SET user_otp_status = 1 WHERE user_otp = ?");
+            if ($updateStmt) {
+                $updateStmt->bind_param("s", $receivedOTP);
+                $updateStmt->execute();
+                $updateStmt->close();
+            } else {
+                // If updating failed, return an error response
+                http_response_code(500); // Internal Server Error
+                echo 'Error: Database update preparation failed.';
+                exit();
+            }
+
             // If OTP is valid, return 'valid'
             echo 'valid';
         } else {

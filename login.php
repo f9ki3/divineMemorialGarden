@@ -59,8 +59,8 @@
             <div class="alert mt-3 text-center d-flex justify-content-between" >
                 <a href="homepage" style="text-decoration: none; color: white">Home</a>
                 <a href="register" style="text-decoration: none; color: white">Register</a>
-                <a href="contact" style="text-decoration: none; color: white">Contacts</a>
-                <a href="about_us" style="text-decoration: none; color: white">About Us</a>
+                <a href="contacts" style="text-decoration: none; color: white">Contacts</a>
+                <a href="abouts" style="text-decoration: none; color: white">About Us</a>
             </div>
         </form>
     </div>
