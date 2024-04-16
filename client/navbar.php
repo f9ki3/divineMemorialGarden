@@ -6,7 +6,7 @@
         <div class="d-flex">
             <div class="d-flex mt-2 d-flex justify-content-between">
                 <li><a href="homepage" class="text-light mx-3" style="text-decoration: none;">Home</a></li>
-                <li><a href="area" class="text-light mx-3" style="text-decoration: none;">Lot Information</a></li>
+                <li><a href="lot_information" class="text-light mx-3" style="text-decoration: none;">Lot Information</a></li>
                 <li><a href="area" class="text-light mx-3" style="text-decoration: none;">Mapping</a></li>
                 <li><a href="transactions" class="text-light mx-3" style="text-decoration: none;">Sale Bulletin</a></li>
                 <li><a href="accounts" class="text-light mx-3" style="text-decoration: none;">Messages</a></li>
