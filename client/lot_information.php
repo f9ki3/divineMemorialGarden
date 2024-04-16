@@ -9,7 +9,7 @@
     <div class="w-100 d-flex flex-row">
     
         <div class="w-50 p-2">
-            <label for="inputPassword5" class="form-label">First Name</label>
+            <label for="inputPassword5" class="form-label">Lot Ownership</label>
             <input type="text" id="fname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter your first name">
             
         </div>
