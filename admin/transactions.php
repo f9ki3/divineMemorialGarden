@@ -10,7 +10,7 @@
                 <div>
                     <a href="area_info?lawn_name=Lawn+1" class="btn btn-sm btn-success me-2">Refresh</a>
                     <a href="lawn 1" class="btn btn-sm btn-success me-2">View Map</a>
-                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOwner">+ Add Owner</button>
+                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOwner">+ Transfer Ownership</button>
                 </div>
             </div>
     <div class="border p-3 rounded mb-3" style="background: white; height: auto">

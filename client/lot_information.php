@@ -10,29 +10,26 @@
     
         <div class="w-50 p-2">
             <label for="inputPassword5" class="form-label">Lot Ownership</label>
-            <input type="text" id="fname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter your first name">
+            <input type="text" id="fname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Juan Dela Cruz">
             
         </div>
         <div class="w-50 p-2">
-            <label for="lname" class="form-label">Last Name</label>
-            <input type="text" id="lname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter your last name">
+            <label for="lname" class="form-label">Lot Status</label>
+            <input type="text" id="lname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Status">
             
         </div>
-
     </div>
     <div class="w-100 d-flex flex-row">
     
         <div class="w-50 p-2">
-            <label for="contact" class="form-label">Contact Number</label>
-            <input type="text" id="contact" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter Contact Number">
+            <label for="contact" class="form-label">Block and Lot</label>
+            <input type="text" id="contact" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Block and Lot">
             
         </div>
         <div class="w-50 p-2">
-            <label for="address" class="form-label">Home Address</label>
-            <input type="text" id="address" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Enter your home address, block and lot, subdivision">
-            
+            <label for="address" class="form-label">Classification</label>
+            <input type="text" id="address" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Classification">
         </div>
-
     </div>
     <div class="w-100 d-flex flex-row">
     
