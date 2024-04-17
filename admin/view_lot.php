@@ -297,6 +297,8 @@ function submit_upper() {
             // Handle success response from server
             console.log(response);
             // You can optionally perform further actions upon success
+            alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
+            alertify.success('Uploaded Success'); // Display success notification
         },
         error: function(xhr, status, error) {
             // Handle error response from server
@@ -430,6 +432,11 @@ function submit_lot() {
 }
 
 function cancel() {
+    document.getElementById('upper_name').disabled = true;
+    document.getElementById('deceased_status').disabled = true;
+    document.getElementById('dod').disabled = true;
+    document.getElementById('dob').disabled = true;
+    
     document.getElementById('upper_name').disabled = true;
     document.getElementById('deceased_status').disabled = true;
     document.getElementById('dod').disabled = true;
