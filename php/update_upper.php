@@ -17,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare SQL statements with placeholders
-    $checkQuery = "SELECT * FROM deceased_person WHERE id = ? AND deceased_type = 'upper'";
+    $checkQuery = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
     $updateQuery = "UPDATE deceased_person SET 
                     deceased_name = ?,
                     date = NOW(),
                     grave_status = ?,
                     dod = ?,
                     dob = ?
-                    WHERE id = ? AND deceased_type = 'upper'";
+                    WHERE property_id = ? AND deceased_type = 'upper'";
     $insertQuery = "INSERT INTO deceased_person (property_id, date, deceased_type, deceased_name, grave_status, dod, dob)
                     VALUES (?, NOW(), 'upper', ?, ?, ?, ?)";
 

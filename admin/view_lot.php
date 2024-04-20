@@ -295,6 +295,7 @@ function submit_upper() {
         data: data,
         success: function(response) {
             // Handle success response from server
+            console.log(data);
             console.log(response);
             // You can optionally perform further actions upon success
             alertify.set('notifier','position', 'bottom-left'); // Set position of notifications

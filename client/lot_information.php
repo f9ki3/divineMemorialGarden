@@ -83,7 +83,6 @@
                 <p>Map Information</p>
                 <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
             </div>
-            
         </div>
         <div class="col-12 col-md-6 p-2">
             <div class="rounded border-success border p-3 ">
