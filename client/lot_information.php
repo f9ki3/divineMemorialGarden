@@ -6,7 +6,7 @@
 
 <div id="getting_started" class="container text-secondary w-100  p-5 " >
     <h3 style="font-weight: bold;" class="mb-3">My Lot Information</h3>
-    <div class="w-100 d-flex flex-row">
+    <!-- <div class="w-100 d-flex flex-row">
     
         <div class="w-50 p-2">
             <label for="inputPassword5" class="form-label">Lot Ownership</label>
@@ -54,17 +54,47 @@
         </div>
         <div class="w-50 p-2">
             <label for="zipcode" class="form-label">Zip Code</label>
-            <input type="text" id="zipcode" class="form-control" aria-describedby="passwordHelpBlock" placeholder="ex. 3019">
+            <input type="text" id="zipcode" class="form-control" aria-describedby="passwordHelpBlock" placeholder="ex. 3019"> -->
             <!-- <div id="passwordHelpBlock" class="form-text">
             Your password must be 8-20 characters long.
             </div> -->
-        </div>
+        <!-- </div>
 
     </div>
 
     <div class="w-100 d-flex justify-content-end mt-5">
         <a href="homepage" class="btn me-2 w-25  text-success border-success">View Map</a>
         <button class="btn w-25 btn-success" onclick="submitForm()">Request to Sell</button>
+    </div> -->
+    <div class="row">
+        <div class="col-12 col-md-6 p-2">
+            <div class="rounded border pt-5 pb-5 bg-success border p-3 text-light">
+                <div class="w-100 d-flex flex-row justify-content-between">
+                    <p class="m-0">Account Name</p>
+                    <p class="m-0">Block 5 Lot A</p>
+                </div>
+                <h1 class="fw-bolder m-0 mb-4"><?php echo $fname,' ', $lname?></h1>
+                <div class="w-100 d-flex flex-row justify-content-between">
+                    <button class="btn border border-light text-light" style="width: 49%">View Map</button>
+                    <button class="btn btn-light" style="width: 49%">Request to Sell</button>
+                </div>
+            </div>
+            <div class="rounded mt-3 border-success border p-3 ">
+                <p>Map Information</p>
+                <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
+            </div>
+            
+        </div>
+        <div class="col-12 col-md-6 p-2">
+            <div class="rounded border-success border p-3 ">
+                <p>Upper Tier Information</p>
+                <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
+            </div>
+            <div class="mt-3 rounded border-success border p-3 ">
+                <p>Lower Tier Information</p>
+                <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
+            </div>
+        </div>
     </div>
 </div>
 
