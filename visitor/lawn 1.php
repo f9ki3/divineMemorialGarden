@@ -10,7 +10,7 @@
         <div class="d-flex flex-row w-100 justify-content-end">
             <input type="text" id="searchInput" class="w-50 form-control mt-2 me-2" placeholder="Search block and lot">
             <button onclick="highlightBlock()" class="btn btn-success mt-2">Search</button>
-            <a href="area_info" class="btn btn-primary mt-2 ms-2 btn-success">Exit</a>
+            <a href="area" class="btn btn-primary mt-2 ms-2 btn-success">Exit</a>
         </div>
         
     </div>
