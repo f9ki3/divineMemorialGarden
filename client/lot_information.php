@@ -79,10 +79,36 @@
                     <button class="btn btn-success" style="width: 49%">Request to Sell</button>
                 </div>
             </div>
-            <div class="rounded mt-3  p-3 ">
-                <p>Map Information</p>
-                <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
-            </div>
+            <?php
+                include '../config/config.php';
+                // Assuming $id is safely provided, use prepared statement to avoid SQL injection
+                $id = intval($user_property_id); // Sanitize $id to ensure it's an integer
+
+                $sql = "SELECT * FROM property WHERE id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                // Assuming you fetch a single row based on the $id
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $map= $row['map_img'];
+
+                } else {
+                   
+                }
+
+                ?>
+
+                <div class="rounded mt-3">
+                    <p>Map Information</p>
+                    <div  style="width: 100%; height: 200px">
+                        <img style="object-fit: cover; height: 100%; width: 100%" src="../uploads/<?php echo htmlspecialchars($map); ?>" alt="">
+                    </div>
+                </div>
+
         </div>
         <div class="col-12 col-md-6 p-2">
             <div class="rounded  p-3 ">

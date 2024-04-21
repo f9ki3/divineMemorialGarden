@@ -28,9 +28,9 @@ $(document).ready(function() {
                 if (response === "1") {
                     window.location.href = '/divineMemorialGarden/admin/dashboard';
                 } else if (response === "2") {
-                    window.location.href = '/divineMemorialGarden/client/homepage';
+                    window.location.href = '/divineMemorialGarden/client';
                 } else if (response === "3") {
-                    window.location.href = '/divineMemorialGarden/visitor/';
+                    window.location.href = '/divineMemorialGarden/visitor';
                 } else if (response === "4") {
                     window.location.href = '/divineMemorialGarden/otp?email=' + encodeURIComponent($username);
                 } else {

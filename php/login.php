@@ -45,6 +45,7 @@ if (isset($_POST['uname'], $_POST['pass'])) {
         $_SESSION['user_profile'] = $row['user_profile'];
         $_SESSION['user_name'] = $username;
         $_SESSION['user_type'] = $row['user_type'];
+        $_SESSION['user_property_id'] = $row['user_property_id'];
         $_SESSION['loggedin'] = true;
 
         // Check user type

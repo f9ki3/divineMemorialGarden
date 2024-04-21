@@ -80,9 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mail->send();
             echo 'Email has been sent successfully';
             $type = 2;
+            $date = date('Y-m-d H:i:s');
+            $profile = 'profile_dummy.jpg';
             // Insert user data into database
-            $stmt = $conn->prepare("INSERT INTO users (user_email, user_password, user_otp, user_type) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sssi", $email, $hashedPassword, $otp, $type);
+            $stmt = $conn->prepare("INSERT INTO users (user_date_added, user_email, user_profile, user_password, user_otp, user_type) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssi",$date, $email, $profile, $hashedPassword, $otp, $type);
             $stmt->execute();
             $stmt->close();
         } catch (Exception $e) {
