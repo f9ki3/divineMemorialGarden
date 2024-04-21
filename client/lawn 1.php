@@ -56,6 +56,6 @@
 
 <?php include 'footer.php'?>
 <script src="../jquery/zoom.js"></script>
-<script src="../jquery/search_map.js"></script>
+<script src="../jquery/search_deceased_map.js"></script>
 </body>
 </html>
