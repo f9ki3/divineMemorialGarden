@@ -162,8 +162,8 @@ if (!$result || mysqli_num_rows($result) == 0) {
         <div class="w-50 m-2">
             <label for="deceased_status">Deceased Status</label>
             <select class="form-select" aria-label="Default select example" name="classification" id="deceased_status" disabled>
-                <option value="Premium"' . ($row['grave_status'] == 0 ? ' selected' : '') . '>Remains</option>
-                <option value="Regular"' . ($row['grave_status'] == 1 ? ' selected' : '') . '>Body</option>
+                <option value="Remains"' . ($row['grave_status'] == 'Remains' ? ' selected' : '') . '>Remains</option>
+                <option value="Body"' . ($row['grave_status'] == 'Body' ? ' selected' : '') . '>Body</option>
             </select>
         </div>
     </div>
@@ -192,28 +192,89 @@ if (!$result || mysqli_num_rows($result) == 0) {
             <button class="btn btn-success w-25" onclick="submit_upper()">Save</button>
         </div>
     </div>
+    <?php
+// Assuming $id is properly defined and contains a valid property ID
+
+// Execute the SQL query
+$sql = "SELECT deceased_name, dob, dod, grave_status FROM deceased_person WHERE property_id = $id AND deceased_type = 'lower'";
+$result = mysqli_query($conn, $sql); // Assuming $conn is your database connection
+
+if (!$result || mysqli_num_rows($result) == 0) {
+    // If no record found or error in query execution
+    echo '
     <div class="d-flex justify-content-between">
         <h5>Lower Tier</h5>
-        <a href=""   style="text-decoration: none; color: gray">Edit</a>
+        <a style="text-decoration: none; color: gray" onclick="edit_lower()">Edit</a>
     </div>
-    <div class="d-flex ">
+    <div class="d-flex">
         <div class="w-50 m-2">
-            <label for="address">Deceased Name</label>
-            <input type="text" id="address" class="form-control" value="John Doe" disabled>
+            <label for="lower_name">Deceased Name</label>
+            <input type="text" id="lower_name" class="form-control" value="John Doe" disabled>
         </div>
         <div class="w-50 m-2">
-            <label for="address"> Status</label>
-            <input type="text" id="address" class="form-control" value="John Doe" disabled>
+            <label for="lower_deceased_status">Deceased Status</label>
+            <select class="form-select" aria-label="Default select example" name="classification" id="lower_deceased_status" disabled>
+                <option value="Premium">Remains</option>
+                <option value="Regular">Body</option>
+            </select>
         </div>
     </div>
-    <div class="d-flex ">
+    
+    <div class="d-flex">
         <div class="w-50 m-2">
-            <label for="address">Date of Birth</label>
-            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" disabled>
+            <label for="lower_dob">Date of Birth</label>
+            <input type="date" id="lower_dob" class="form-control" disabled>
         </div>
         <div class="w-50 m-2">
-            <label for="address">Date of Death</label>
-            <input type="date" id="address" class="form-control" value="John Doe" disabled>
+            <label for="lower_dod">Date of Death</label>
+            <input type="date" id="lower_dod" class="form-control" disabled>
+        </div>
+    </div>
+    ';
+} else {
+    // Fetch the row from the query result
+    $row = mysqli_fetch_assoc($result);
+
+    echo '
+    <div class="d-flex justify-content-between">
+        <h5>Lower Tier</h5>
+        <a style="text-decoration: none; color: gray" onclick="edit_lower()">Edit</a>
+    </div>
+    <div class="d-flex">
+        <div class="w-50 m-2">
+            <label for="lower_name">Deceased Name</label>
+            <input type="text" id="lower_name" class="form-control" value="' . htmlspecialchars($row['deceased_name']) . '" disabled>
+        </div>
+        <div class="w-50 m-2">
+            <label for="lower_deceased_status">Deceased Status</label>
+            <select class="form-select" aria-label="Default select example" name="classification" id="lower_deceased_status" disabled>
+                <option value="Remains"' . ($row['grave_status'] == 'Remains' ? ' selected' : '') . '>Remains</option>
+                <option value="Body"' . ($row['grave_status'] == 'Body' ? ' selected' : '') . '>Body</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="d-flex">
+        <div class="w-50 m-2">
+            <label for="lower_dob">Date of Birth</label>
+            <input type="date" id="lower_dob" class="form-control" value="' . htmlspecialchars($row['dob']) . '" disabled>
+        </div>
+        <div class="w-50 m-2">
+            <label for="lower_dod">Date of Death</label>
+            <input type="date" id="lower_dod" class="form-control" value="' . htmlspecialchars($row['dod']) . '" disabled>
+        </div>
+    </div>
+    ';
+}
+
+?>
+    <div style="display: none" id="edit_lower_div">
+        <div class="w-50 m-2">
+            
+        </div>
+        <div class="w-50 m-2 d-flex justify-content-end">
+            <button class="btn btn-danger w-25 me-2" onclick="cancel()">Cancel</button>
+            <button class="btn btn-success w-25" onclick="submit_lower()">Save</button>
         </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -299,7 +360,55 @@ function submit_upper() {
             console.log(response);
             // You can optionally perform further actions upon success
             alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
-            alertify.success('Uploaded Success'); // Display success notification
+            alertify.success('Updated Success'); // Display success notification
+            document.getElementById('upper_name').disabled = true;
+            document.getElementById('deceased_status').disabled = true;
+            document.getElementById('dod').disabled = true;
+            document.getElementById('dob').disabled = true;
+            document.getElementById('edit_upper_div').style.display = 'none';
+        },
+        error: function(xhr, status, error) {
+            // Handle error response from server
+            console.error('Error sending data:', error);
+            // You can display an error message to the user or take other actions
+        }
+    });
+}
+
+function submit_lower() {
+    // Collect values from input fields
+    var upperName = $('#lower_name').val();
+    var deceasedStatus = $('#lower_deceased_status').val();
+    var dod = $('#lower_dod').val();
+    var dob = $('#lower_dob').val();
+    var propertyId = <?php echo json_encode($id); ?>; // Echo $id safely for JavaScript
+    
+    // Prepare data object to be sent via AJAX
+    var data = {
+        upper_name: upperName,
+        deceased_status: deceasedStatus,
+        dod: dod,
+        dob: dob,
+        property_id: propertyId
+    };
+
+    // Send AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: '../php/update_lower.php',
+        data: data,
+        success: function(response) {
+            // Handle success response from server
+            console.log(data);
+            console.log(response);
+            // You can optionally perform further actions upon success
+            alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
+            alertify.success('Updated Success'); // Display success notification
+            document.getElementById('lower_name').disabled = true;
+            document.getElementById('lower_deceased_status').disabled = true;
+            document.getElementById('lower_dob').disabled = true;
+            document.getElementById('lower_dod').disabled = true;
+            document.getElementById('edit_lower_div').style.display = 'none';
         },
         error: function(xhr, status, error) {
             // Handle error response from server
@@ -385,6 +494,17 @@ function edit_upper() {
     document.getElementById('edit_upper_div').style.display = 'flex';
 }
 
+function edit_lower() {
+    // Enable input fields
+    document.getElementById('lower_name').disabled = false;
+    document.getElementById('lower_deceased_status').disabled = false;
+    document.getElementById('lower_dob').disabled = false;
+    document.getElementById('lower_dod').disabled = false;
+
+    // Display the edit_lot_div
+    document.getElementById('edit_lower_div').style.display = 'flex';
+}
+
 function submit_lot() {
     // Disable input fields
     document.getElementById('ownerName').disabled = true;
@@ -418,7 +538,7 @@ function submit_lot() {
                 // Request was successful
                 console.log(xhr.responseText);
                 alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
-                alertify.success('Update Success'); // Display success notification
+                alertify.success('Updated Success'); // Display success notification
 
                 // Optionally, process response from edit_lot.php
             } else {
@@ -433,10 +553,16 @@ function submit_lot() {
 }
 
 function cancel() {
-    document.getElementById('upper_name').disabled = true;
-    document.getElementById('deceased_status').disabled = true;
-    document.getElementById('dod').disabled = true;
-    document.getElementById('dob').disabled = true;
+    document.getElementById('lower_name').disabled = true;
+    document.getElementById('lower_deceased_status').disabled = true;
+    document.getElementById('lower_dob').disabled = true; 
+    document.getElementById('lower_dod').disabled = true; 
+    document.getElementById('edit_lower_div').style.display = 'none';
+
+    document.getElementById('ownerName').disabled = true;
+    document.getElementById('lotStatus').disabled = true;
+    document.getElementById('classification').disabled = true; 
+    document.getElementById('edit_lot_div').style.display = 'none';
     
     document.getElementById('upper_name').disabled = true;
     document.getElementById('deceased_status').disabled = true;

@@ -68,28 +68,28 @@
     </div> -->
     <div class="row">
         <div class="col-12 col-md-6 p-2">
-            <div class="rounded border pt-5 pb-5 bg-success border p-3 text-light">
+            <div class="rounded  border text-dark border-success pt-5 pb-5 border p-3 bg-light" >
                 <div class="w-100 d-flex flex-row justify-content-between">
                     <p class="m-0">Account Name</p>
                     <p class="m-0">Block 5 Lot A</p>
                 </div>
                 <h1 class="fw-bolder m-0 mb-4"><?php echo $fname,' ', $lname?></h1>
                 <div class="w-100 d-flex flex-row justify-content-between">
-                    <button class="btn border border-light text-light" style="width: 49%">View Map</button>
-                    <button class="btn btn-light" style="width: 49%">Request to Sell</button>
+                    <button class="btn border border-success text-success" style="width: 49%">View Map</button>
+                    <button class="btn btn-success" style="width: 49%">Request to Sell</button>
                 </div>
             </div>
-            <div class="rounded mt-3 border-success border p-3 ">
+            <div class="rounded mt-3  p-3 ">
                 <p>Map Information</p>
                 <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
             </div>
         </div>
         <div class="col-12 col-md-6 p-2">
-            <div class="rounded border-success border p-3 ">
+            <div class="rounded  p-3 ">
                 <p>Upper Tier Information</p>
                 <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
             </div>
-            <div class="mt-3 rounded border-success border p-3 ">
+            <div class="mt-3 rounded p-3 ">
                 <p>Lower Tier Information</p>
                 <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
             </div>

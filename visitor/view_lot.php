@@ -37,7 +37,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 <div class="container mt-2 mb-5">
     <div class="d-flex justify-content-between">
-        <div class="pt-3"><h3 class="fw-bold">View Deceased Information</h3></div>
+        <div class="pt-3"><h3 class="fw-bold">View Lawn</h3></div>
         <div><a href="lawn 1" class="btn btn-primary mt-2 ms-2 btn-success" >Back</a><a href="area" class="btn btn-primary mt-2 ms-2 btn-success" >Back to Area</a></div>
     </div>
     <?php foreach ($property_data as $property): ?>
@@ -50,18 +50,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <td><?php echo $property['classification']; ?></td>
     </tr> -->
     <hr>
-    
-    
-
-    <div style="display: none" id="edit_lot_div">
-        <div class="w-50 m-2">
-            
-        </div>
-        <div class="w-50 m-2 d-flex justify-content-end">
-            <button class="btn btn-danger w-25 me-2" onclick="cancel()">Cancel</button>
-            <button class="btn btn-success w-25" onclick="submit_lot()">Save</button>
-        </div>
-    </div>
     <?php endforeach; ?>
     <?php
 // Assuming $id is properly defined and contains a valid property ID
@@ -75,7 +63,6 @@ if (!$result || mysqli_num_rows($result) == 0) {
     echo '
     <div class="d-flex justify-content-between">
         <h5>Upper Tier</h5>
-       
     </div>
     <div class="d-flex">
         <div class="w-50 m-2">
@@ -109,7 +96,6 @@ if (!$result || mysqli_num_rows($result) == 0) {
     echo '
     <div class="d-flex justify-content-between">
         <h5>Upper Tier</h5>
-        <a style="text-decoration: none; color: gray" onclick="edit_upper()">Edit</a>
     </div>
     <div class="d-flex">
         <div class="w-50 m-2">
@@ -119,8 +105,8 @@ if (!$result || mysqli_num_rows($result) == 0) {
         <div class="w-50 m-2">
             <label for="deceased_status">Deceased Status</label>
             <select class="form-select" aria-label="Default select example" name="classification" id="deceased_status" disabled>
-                <option value="Premium"' . ($row['grave_status'] == 0 ? ' selected' : '') . '>Remains</option>
-                <option value="Regular"' . ($row['grave_status'] == 1 ? ' selected' : '') . '>Body</option>
+                <option value="Remains"' . ($row['grave_status'] == 'Remains' ? ' selected' : '') . '>Remains</option>
+                <option value="Body"' . ($row['grave_status'] == 'Body' ? ' selected' : '') . '>Body</option>
             </select>
         </div>
     </div>
@@ -149,52 +135,94 @@ if (!$result || mysqli_num_rows($result) == 0) {
             <button class="btn btn-success w-25" onclick="submit_upper()">Save</button>
         </div>
     </div>
+    <?php
+// Assuming $id is properly defined and contains a valid property ID
+
+// Execute the SQL query
+$sql = "SELECT deceased_name, dob, dod, grave_status FROM deceased_person WHERE property_id = $id AND deceased_type = 'lower'";
+$result = mysqli_query($conn, $sql); // Assuming $conn is your database connection
+
+if (!$result || mysqli_num_rows($result) == 0) {
+    // If no record found or error in query execution
+    echo '
     <div class="d-flex justify-content-between">
         <h5>Lower Tier</h5>
-        <!-- <a href=""   style="text-decoration: none; color: gray">Edit</a> -->
+       
     </div>
-    <div class="d-flex ">
+    <div class="d-flex">
         <div class="w-50 m-2">
-            <label for="address">Deceased Name</label>
-            <input type="text" id="address" class="form-control" value="John Doe" disabled>
+            <label for="lower_name">Deceased Name</label>
+            <input type="text" id="lower_name" class="form-control" value="John Doe" disabled>
         </div>
         <div class="w-50 m-2">
-            <label for="address"> Status</label>
-            <input type="text" id="address" class="form-control" value="John Doe" disabled>
+            <label for="lower_deceased_status">Deceased Status</label>
+            <select class="form-select" aria-label="Default select example" name="classification" id="lower_deceased_status" disabled>
+                <option value="Premium">Remains</option>
+                <option value="Regular">Body</option>
+            </select>
         </div>
     </div>
-    <div class="d-flex ">
+    
+    <div class="d-flex">
         <div class="w-50 m-2">
-            <label for="address">Date of Birth</label>
-            <input type="date" id="address" class="form-control" value="Juan Dela Cruz" disabled>
+            <label for="lower_dob">Date of Birth</label>
+            <input type="date" id="lower_dob" class="form-control" disabled>
         </div>
         <div class="w-50 m-2">
-            <label for="address">Date of Death</label>
-            <input type="date" id="address" class="form-control" value="John Doe" disabled>
+            <label for="lower_dod">Date of Death</label>
+            <input type="date" id="lower_dod" class="form-control" disabled>
+        </div>
+    </div>
+    ';
+} else {
+    // Fetch the row from the query result
+    $row = mysqli_fetch_assoc($result);
+
+    echo '
+    <div class="d-flex justify-content-between">
+        <h5>Lower Tier</h5>
+        
+    </div>
+    <div class="d-flex">
+        <div class="w-50 m-2">
+            <label for="lower_name">Deceased Name</label>
+            <input type="text" id="lower_name" class="form-control" value="' . htmlspecialchars($row['deceased_name']) . '" disabled>
+        </div>
+        <div class="w-50 m-2">
+            <label for="lower_deceased_status">Deceased Status</label>
+            <select class="form-select" aria-label="Default select example" name="classification" id="lower_deceased_status" disabled>
+                <option value="Remains"' . ($row['grave_status'] == 'Remains' ? ' selected' : '') . '>Remains</option>
+                <option value="Body"' . ($row['grave_status'] == 'Body' ? ' selected' : '') . '>Body</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="d-flex">
+        <div class="w-50 m-2">
+            <label for="lower_dob">Date of Birth</label>
+            <input type="date" id="lower_dob" class="form-control" value="' . htmlspecialchars($row['dob']) . '" disabled>
+        </div>
+        <div class="w-50 m-2">
+            <label for="lower_dod">Date of Death</label>
+            <input type="date" id="lower_dod" class="form-control" value="' . htmlspecialchars($row['dod']) . '" disabled>
+        </div>
+    </div>
+    ';
+}
+
+?>
+    <div style="display: none" id="edit_lower_div">
+        <div class="w-50 m-2">
+            
+        </div>
+        <div class="w-50 m-2 d-flex justify-content-end">
+            <button class="btn btn-danger w-25 me-2" onclick="cancel()">Cancel</button>
+            <button class="btn btn-success w-25" onclick="submit_lower()">Save</button>
         </div>
     </div>
     <div class="d-flex justify-content-between">
         <h5>Map Location</h5>
-        <!-- <a   style="text-decoration: none; color: gray">Delete</a> -->
     </div>
-    <div class="d-flex">
-    <div class="w-50 m-2">
-        <label for="address">Block &amp; Lot</label>
-        <input type="text" id="address" class="form-control" value="Block <?php echo htmlspecialchars($property['block_number']); ?> Lot <?php echo htmlspecialchars($property['lot_number']); ?>" disabled>
-    </div>
-    <div class="w-50 m-2">
-        <label for="classification">Classification</label>
-        <?php
-            // Assuming $classification holds the classification value ('Premium' or 'Regular')
-            $classification = isset($property['classification']) ? $property['classification'] : 'Premium'; // Default to 'Premium' if not set
-        ?>
-        <select class="form-select" aria-label="Default select example" name="classification" id="classification" disabled>
-            <option value="Premium" <?php echo ($classification === 'Premium') ? 'selected' : ''; ?>>Premium</option>
-            <option value="Regular" <?php echo ($classification === 'Regular') ? 'selected' : ''; ?>>Regular</option>
-        </select>
-    </div>
-
-</div>
     <div id="uploadContainer" style="height: 500px;" class=" border rounded d-flex flex-column justify-content-center align-items-center">
         <?php 
         // Prepare and execute SQL query to retrieve map_img based on $id
@@ -243,7 +271,6 @@ if (!$result || mysqli_num_rows($result) == 0) {
     </div>
 </div>
 
-
 </div>
 
 <script>
@@ -271,8 +298,59 @@ function submit_upper() {
         data: data,
         success: function(response) {
             // Handle success response from server
+            console.log(data);
             console.log(response);
             // You can optionally perform further actions upon success
+            alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
+            alertify.success('Updated Success'); // Display success notification
+            document.getElementById('upper_name').disabled = true;
+            document.getElementById('deceased_status').disabled = true;
+            document.getElementById('dod').disabled = true;
+            document.getElementById('dob').disabled = true;
+            document.getElementById('edit_upper_div').style.display = 'none';
+        },
+        error: function(xhr, status, error) {
+            // Handle error response from server
+            console.error('Error sending data:', error);
+            // You can display an error message to the user or take other actions
+        }
+    });
+}
+
+function submit_lower() {
+    // Collect values from input fields
+    var upperName = $('#lower_name').val();
+    var deceasedStatus = $('#lower_deceased_status').val();
+    var dod = $('#lower_dod').val();
+    var dob = $('#lower_dob').val();
+    var propertyId = <?php echo json_encode($id); ?>; // Echo $id safely for JavaScript
+    
+    // Prepare data object to be sent via AJAX
+    var data = {
+        upper_name: upperName,
+        deceased_status: deceasedStatus,
+        dod: dod,
+        dob: dob,
+        property_id: propertyId
+    };
+
+    // Send AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: '../php/update_lower.php',
+        data: data,
+        success: function(response) {
+            // Handle success response from server
+            console.log(data);
+            console.log(response);
+            // You can optionally perform further actions upon success
+            alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
+            alertify.success('Updated Success'); // Display success notification
+            document.getElementById('lower_name').disabled = true;
+            document.getElementById('lower_deceased_status').disabled = true;
+            document.getElementById('lower_dob').disabled = true;
+            document.getElementById('lower_dod').disabled = true;
+            document.getElementById('edit_lower_div').style.display = 'none';
         },
         error: function(xhr, status, error) {
             // Handle error response from server
@@ -358,6 +436,17 @@ function edit_upper() {
     document.getElementById('edit_upper_div').style.display = 'flex';
 }
 
+function edit_lower() {
+    // Enable input fields
+    document.getElementById('lower_name').disabled = false;
+    document.getElementById('lower_deceased_status').disabled = false;
+    document.getElementById('lower_dob').disabled = false;
+    document.getElementById('lower_dod').disabled = false;
+
+    // Display the edit_lot_div
+    document.getElementById('edit_lower_div').style.display = 'flex';
+}
+
 function submit_lot() {
     // Disable input fields
     document.getElementById('ownerName').disabled = true;
@@ -391,7 +480,7 @@ function submit_lot() {
                 // Request was successful
                 console.log(xhr.responseText);
                 alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
-                alertify.success('Update Success'); // Display success notification
+                alertify.success('Updated Success'); // Display success notification
 
                 // Optionally, process response from edit_lot.php
             } else {
@@ -406,6 +495,17 @@ function submit_lot() {
 }
 
 function cancel() {
+    document.getElementById('lower_name').disabled = true;
+    document.getElementById('lower_deceased_status').disabled = true;
+    document.getElementById('lower_dob').disabled = true; 
+    document.getElementById('lower_dod').disabled = true; 
+    document.getElementById('edit_lower_div').style.display = 'none';
+
+    document.getElementById('ownerName').disabled = true;
+    document.getElementById('lotStatus').disabled = true;
+    document.getElementById('classification').disabled = true; 
+    document.getElementById('edit_lot_div').style.display = 'none';
+    
     document.getElementById('upper_name').disabled = true;
     document.getElementById('deceased_status').disabled = true;
     document.getElementById('dod').disabled = true;
