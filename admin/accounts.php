@@ -141,148 +141,130 @@
 <?php include 'footer.php'; ?>
 <script src="../jquery/area_info.js"></script>
 <script>
-    // Function to enable/disable inputs and button based on selection
-    document.getElementById('searchInput').addEventListener('input', function() {
-        var selectedValue = this.value.trim();
-        var usernameInput = document.getElementById('usernameInput');
-        var passwordInput = document.getElementById('passwordInput');
-        var generateButton = document.getElementById('generate'); 
-        var showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const usernameInput = document.getElementById('usernameInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const generateButton = document.getElementById('generate');
+    const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+    const createButton = document.getElementById('createButton');
+    const closeBtn = document.getElementById('close');
 
-        // Check if value is selected from datalist
-        if (selectedValue !== '') {
-            usernameInput.disabled = false;
-            passwordInput.disabled = false;
-            generateButton.disabled = false;
-            showPasswordCheckbox.disabled = false;
-        } else {
-            usernameInput.disabled = true;
-            passwordInput.disabled = true;
-            generateButton.disabled = true;
-            showPasswordCheckbox.disabled = true;
+    // Function to enable/disable inputs and button based on selection
+    searchInput.addEventListener('input', () => {
+        const selectedValue = searchInput.value.trim();
+        usernameInput.disabled = selectedValue === '';
+        passwordInput.disabled = selectedValue === '';
+        generateButton.disabled = selectedValue === '';
+        showPasswordCheckbox.disabled = selectedValue === '';
+
+        if (selectedValue === '') {
+            usernameInput.value = '';
+            passwordInput.value = '';
+            createButton.disabled = true;
         }
     });
 
     // Function to clear usernameInput
-    document.getElementById('close').addEventListener('click', function() {
-        var searchInput = document.getElementById('searchInput');
-        // Clear the value of usernameInput
+    closeBtn.addEventListener('click', () => {
         searchInput.value = '';
-        usernameInput.disabled = true;
-        passwordInput.disabled = true;
+        usernameInput.value = '';
+        passwordInput.value = '';
         generateButton.disabled = true;
         showPasswordCheckbox.disabled = true;
+        createButton.disabled = true;
+        
     });
 
     // Function to generate random password
     function generatePassword() {
-        var passwordInput = document.getElementById('passwordInput');
-        var password = '';
+        let password = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        const passwordLength = 12; // Length of the generated password
 
-        // Generate 8-character random password
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < 8; i++) {
+        for (let i = 0; i < passwordLength; i++) {
             password += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
 
-        // Set the generated password as the value of passwordInput
+        // Update the password input field
         passwordInput.value = password;
+
+        // Enable the create button if it was previously disabled
+        createButton.disabled = false;
+
+        // Return the generated password (optional)
+        return password;
     }
+
 
     // Function to toggle password visibility
     function togglePasswordVisibility() {
-        var passwordInput = document.getElementById('passwordInput');
-        var showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
-
-        // Check the state of the checkbox
-        if (showPasswordCheckbox.checked) {
-            // Show the password
-            passwordInput.type = 'text';
-        } else {
-            // Hide the password
-            passwordInput.type = 'password';
-        }
+        passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
     }
 
-    // Wait for the DOM to fully load before running the script
-    document.addEventListener('DOMContentLoaded', () => {
-    const passwordInput = document.getElementById('passwordInput');
-    const createButton = document.getElementById('createButton');
-    const usernameInput = document.getElementById('usernameInput'); // Store the input element, not its value
-    
-    // Add an input event listener to the password input field
+    // Add event listeners
     passwordInput.addEventListener('input', () => {
-        // Enable the button if the password input field is not empty
-        if (passwordInput.value.trim() !== '') {
-            createButton.removeAttribute('disabled');
-        } else {
-            createButton.setAttribute('disabled', 'true');
-        }
+        createButton.disabled = passwordInput.value.trim() === '';
     });
 
-    // Add click event listener to the createButton
+    generateButton.addEventListener('click', generatePassword);
+
+    showPasswordCheckbox.addEventListener('change', togglePasswordVisibility);
+
     createButton.addEventListener('click', () => {
-        const username = usernameInput.value;
-        const password = passwordInput.value;
-        const searchInput = document.getElementById('searchInput').value;
-        // Split the searchInput string by "-"
-        const parts = searchInput.split('-');
-        // Get the first value (first element of the parts array)
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        const parts = searchInput.value.split('-');
         const id = parts[0];
 
-        // Check if username or password are empty
-        if (username.trim() === '' || password.trim() === '') {
+        if (!username || !password) {
             alert('Please provide both username and password.');
             return;
         }
 
-        // Check if password meets the minimum length requirement
-        if (password.length < 6) {
-            alert('Password must be at least 6 characters long.');
+        if (username.length < 6 || !/\d/.test(username)) {
+            alert('Username must be at least 6 characters long and contain at least one number.');
             return;
         }
 
-        // Check if password contains at least one number and one alphabetic character
-        const hasNumber = /\d/.test(password); // Check for at least one digit (0-9)
-        const hasLetter = /[a-zA-Z]/.test(password); // Check for at least one letter (a-zA-Z)
-
-        if (!hasNumber || !hasLetter) {
-            alert('Password must contain at least one number and one alphabetic character.');
+        if (password.length < 6 || !/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
+            alert('Password must be at least 6 characters long and contain at least one number and one letter.');
             return;
         }
-
-        // If all validations pass, proceed to send data via AJAX
+        
         const data = {
             id: id,
             username: username,
             password: password
         };
 
-        // Send AJAX request to PHP script
+        
+        alertify.set('notifier', 'position', 'bottom-left');
+        alertify.success('Created Account Successfully');
+        document.getElementById('close').click();
+
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '../php/create_owner.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.responseText); // Output response from PHP script (for testing)
-                // Handle response here if needed
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    $('#create').modal('hide');
+                } else {
+                    console.error('Request failed with status:', xhr.status);
+                }
             }
         };
-        
-        // Convert data object to URL-encoded string
-        const encodedData = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&');
 
-        // Send the request
+        const encodedData = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&');
         xhr.send(encodedData);
     });
 });
-
-
-
-
-    
 </script>
+
+<?php include 'footer.php'?>
 </div>
 </body>
 </html>
