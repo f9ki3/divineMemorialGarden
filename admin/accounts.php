@@ -95,7 +95,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Account</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button id="close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
                 <!-- Sample Data -->
@@ -122,7 +122,11 @@
                 <p class="p-0 m-0">Username</p>
                 <input type="text" id="usernameInput" placeholder="Enter owner username" class="form-control mb-2" disabled>
                 <p class="p-0 m-0">Password</p>
-                <input type="password" id="passwordInput" placeholder="Enter owner password" class="form-control mb-2" disabled>
+                <div class="input-group mb-2">
+                    <input type="password" id="passwordInput" placeholder="Enter owner password" class="form-control" disabled>
+                </div>
+                    <label for="showPasswordCheckbox" class="form-check-label me-2 mb-2">Show Password</label>
+                    <input type="checkbox" id="showPasswordCheckbox" disabled onchange="togglePasswordVisibility()">
                 <button id="generate" class="btn btn-light w-100 border" onclick="generatePassword()" disabled>Generate Password</button>
             </div>
       <div class="modal-footer">
@@ -155,9 +159,45 @@
         }
     });
 
-    // Function to generate password (dummy function)
+    // Function to clear usernameInput
+    document.getElementById('close').addEventListener('click', function() {
+        var searchInput = document.getElementById('searchInput');
+        // Clear the value of usernameInput
+        searchInput.value = '';
+        usernameInput.disabled = true;
+        passwordInput.disabled = true;
+        generateButton.disabled = true;
+    });
+
+    // Function to generate random password
     function generatePassword() {
-        alert('Password generated!');
+        var passwordInput = document.getElementById('passwordInput');
+        var password = '';
+
+        // Generate 8-character random password
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < 8; i++) {
+            password += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+
+        // Set the generated password as the value of passwordInput
+        passwordInput.value = password;
+    }
+
+    // Function to toggle password visibility
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById('passwordInput');
+        var showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+
+        // Check the state of the checkbox
+        if (showPasswordCheckbox.checked) {
+            // Show the password
+            passwordInput.type = 'text';
+        } else {
+            // Hide the password
+            passwordInput.type = 'password';
+        }
     }
 </script>
 </div>

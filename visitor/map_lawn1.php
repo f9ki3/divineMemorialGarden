@@ -8,75 +8,35 @@
             <div class="child-1_1">
             <div class="block block-1">
                 <div id="map" class="block-0 block-1_1">
-                <?php
-                // Prepare SQL query to fetch data for IDs from 1 to 5
-                $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, lot_status 
-                        FROM property 
-                        WHERE id BETWEEN 1 AND 5";
-
-                // Execute the SQL query
-                $result = $conn->query($sql);
-
-                // Check if the query execution was successful
-                if ($result === false) {
-                    die("Error executing query: " . $conn->error);
-                }
-
-                // Check if there are any rows returned
-                if ($result->num_rows > 0) {
-                    // Loop through the result set
-                    while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
-                } else {
-                    // No results found
-                    echo "No results found for IDs 1 to 5";
-                }
-                ?>
-
-
+                    <?php
+                            // Prepare SQL query to fetch data for IDs from 1 to 5
+                            $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, lot_status 
+                                    FROM property 
+                                    WHERE id BETWEEN 1 AND 5";
+                            // Execute the SQL query
+                            $result = $conn->query($sql);
+                            // Check if there are any rows returned
+                            if ($result && $result->num_rows > 0) {
+                                // Loop through the result set
+                                while ($row = $result->fetch_assoc()) {
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
+                            } else {
+                                // No results found
+                                echo "No results found for IDs 1 to 5";
+                            }
+                        ?>
                 </div>
                 <div id="map" class="block-0 block-1_2">
                     <?php
@@ -90,50 +50,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -154,50 +83,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -216,50 +114,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -280,50 +147,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -342,50 +178,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -406,50 +211,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -468,50 +242,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -532,50 +275,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -594,50 +306,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -658,50 +339,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -720,50 +370,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -788,50 +407,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -852,50 +440,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -914,50 +471,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -978,50 +504,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1040,50 +535,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1104,50 +568,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1166,50 +599,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1230,50 +632,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1292,50 +663,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1356,50 +696,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1418,50 +727,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1482,50 +760,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1544,50 +791,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1612,50 +828,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1674,50 +859,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1738,50 +892,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1800,50 +923,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1864,50 +956,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1926,50 +987,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -1990,50 +1020,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2052,50 +1051,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2116,50 +1084,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2178,50 +1115,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2242,50 +1148,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2304,50 +1179,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2368,50 +1212,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2430,50 +1243,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2498,50 +1280,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2563,50 +1314,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2625,50 +1345,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2690,50 +1379,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2752,50 +1410,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2816,50 +1443,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2878,50 +1474,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -2942,50 +1507,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3004,50 +1538,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3068,50 +1571,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3130,50 +1602,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3194,50 +1635,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3256,50 +1666,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3319,50 +1698,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3381,50 +1729,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3450,50 +1767,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3512,50 +1798,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3576,50 +1831,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3638,50 +1862,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3702,50 +1895,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3764,50 +1926,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3829,50 +1960,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3891,50 +1991,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -3956,50 +2025,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4018,50 +2056,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4083,50 +2090,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4145,50 +2121,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4211,50 +2156,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4273,50 +2187,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4337,50 +2220,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4399,50 +2251,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4467,50 +2288,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4531,50 +2321,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4593,50 +2352,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4657,50 +2385,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4719,50 +2416,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4783,50 +2449,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4845,50 +2480,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4909,50 +2513,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -4971,50 +2544,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5036,50 +2578,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5104,50 +2615,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5166,50 +2646,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5230,50 +2679,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5292,50 +2710,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5356,50 +2743,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5418,50 +2774,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5483,50 +2808,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5545,50 +2839,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5609,50 +2872,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5709,50 +2941,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5773,50 +2974,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5835,50 +3005,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5899,50 +3038,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -5961,50 +3069,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6026,50 +3103,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6088,50 +3134,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6152,50 +3167,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6214,50 +3198,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6278,50 +3231,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6340,50 +3262,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6406,50 +3297,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6468,50 +3328,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
@@ -6532,50 +3361,19 @@
                             if ($result && $result->num_rows > 0) {
                                 // Loop through the result set
                                 while ($row = $result->fetch_assoc()) {
-                        // Determine background color based on lot_status
-                        $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
-
-                        // Escape HTML attribute values
-                        $id = htmlspecialchars($row["id"]);
-                        $lotNumber = htmlspecialchars($row["lot_number"]);
-                        $blockNumber = htmlspecialchars($row["block_number"]);
-
-                        // Prepare and execute a query to get deceased person's name (upper)
-                        $dsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
-                        $deceased_stmt = $conn->prepare($dsql);
-                        $deceased_stmt->bind_param("i", $id);
-                        $deceased_stmt->execute();
-                        $deceased_result = $deceased_stmt->get_result();
-                        $deceased_name = '';
-
-                        if ($deceased_result->num_rows > 0) {
-                            $deceased_row = $deceased_result->fetch_assoc();
-                            $deceased_name = htmlspecialchars($deceased_row["deceased_name"]);
-                        }
-
-                        $deceased_stmt->close();
-
-                        // Prepare and execute a query to get deceased person's name (lower)
-                        $dlsql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
-                        $lowerdeceased_stmt = $conn->prepare($dlsql);
-                        $lowerdeceased_stmt->bind_param("i", $id);
-                        $lowerdeceased_stmt->execute();
-                        $lowerdeceased_result = $lowerdeceased_stmt->get_result();
-                        $lowerdeceased_name = '';
-
-                        if ($lowerdeceased_result->num_rows > 0) {
-                            $lowerdeceased_row = $lowerdeceased_result->fetch_assoc();
-                            $lowerdeceased_name = htmlspecialchars($lowerdeceased_row["deceased_name"]);
-                        }
-
-                        $lowerdeceased_stmt->close();
-
-                        // Output HTML for each row
-                        echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
-                        echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $deceased_name . $lowerdeceased_name. '">';
-                        echo $lotNumber;
-                        echo '</div></a>';
-                    }
+                                    // Determine background color based on lot_status
+                                    $backgroundColor = ($row["lot_status"] == 0) ? 'green' : 'red';
+                                    // Escape HTML attribute values
+                                    $id = htmlspecialchars($row["id"]);
+                                    $lotNumber = htmlspecialchars($row["lot_number"]);
+                                    $blockNumber = htmlspecialchars($row["block_number"]);
+                                    $lotOwner = htmlspecialchars($row["lot_owner"]);    
+                                    // Output HTML for each row
+                                    echo '<a href="view_lot.php?id=' . $id . '" style="text-decoration: none; color: white; background-color: ' . $backgroundColor . ';" data-id="' . $id . '">';
+                                    echo '<div class="item btn_select_lot item-' . $id . '" value="' . $blockNumber . $lotNumber . $lotOwner . '">';
+                                    echo $lotNumber;
+                                    echo '</div></a>';
+                                }
                             } else {
                                 // No results found
                                 echo "No results found for IDs 1 to 5";
