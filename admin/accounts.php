@@ -104,7 +104,7 @@
                     <?php 
                     include '../config/config.php';
                     // SQL query to fetch user first name and last name
-                    $sql = "SELECT lot_owner FROM property";
+                    $sql = "SELECT * FROM property";
                     $result = $conn->query($sql);
 
                     // Output options based on query result
@@ -112,8 +112,9 @@
                         // Loop through each row of data
                         while ($row = $result->fetch_assoc()) {
                             $lot_owner = $row["lot_owner"];
+                            $id = $row["id"];
                             // Output option element with user's full name
-                            echo '<option value="' . htmlspecialchars($lot_owner) . '">';
+                            echo '<option value="' . htmlspecialchars($id) . '-'. htmlspecialchars($lot_owner) . '">';
                         }
                     }
                     ?>
@@ -145,17 +146,20 @@
         var selectedValue = this.value.trim();
         var usernameInput = document.getElementById('usernameInput');
         var passwordInput = document.getElementById('passwordInput');
-        var generateButton = document.getElementById('generate');
+        var generateButton = document.getElementById('generate'); 
+        var showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
 
         // Check if value is selected from datalist
         if (selectedValue !== '') {
             usernameInput.disabled = false;
             passwordInput.disabled = false;
             generateButton.disabled = false;
+            showPasswordCheckbox.disabled = false;
         } else {
             usernameInput.disabled = true;
             passwordInput.disabled = true;
             generateButton.disabled = true;
+            showPasswordCheckbox.disabled = true;
         }
     });
 
@@ -167,6 +171,7 @@
         usernameInput.disabled = true;
         passwordInput.disabled = true;
         generateButton.disabled = true;
+        showPasswordCheckbox.disabled = true;
     });
 
     // Function to generate random password
@@ -199,6 +204,84 @@
             passwordInput.type = 'password';
         }
     }
+
+    // Wait for the DOM to fully load before running the script
+    document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('passwordInput');
+    const createButton = document.getElementById('createButton');
+    const usernameInput = document.getElementById('usernameInput'); // Store the input element, not its value
+    
+    // Add an input event listener to the password input field
+    passwordInput.addEventListener('input', () => {
+        // Enable the button if the password input field is not empty
+        if (passwordInput.value.trim() !== '') {
+            createButton.removeAttribute('disabled');
+        } else {
+            createButton.setAttribute('disabled', 'true');
+        }
+    });
+
+    // Add click event listener to the createButton
+    createButton.addEventListener('click', () => {
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+        const searchInput = document.getElementById('searchInput').value;
+        // Split the searchInput string by "-"
+        const parts = searchInput.split('-');
+        // Get the first value (first element of the parts array)
+        const id = parts[0];
+
+        // Check if username or password are empty
+        if (username.trim() === '' || password.trim() === '') {
+            alert('Please provide both username and password.');
+            return;
+        }
+
+        // Check if password meets the minimum length requirement
+        if (password.length < 6) {
+            alert('Password must be at least 6 characters long.');
+            return;
+        }
+
+        // Check if password contains at least one number and one alphabetic character
+        const hasNumber = /\d/.test(password); // Check for at least one digit (0-9)
+        const hasLetter = /[a-zA-Z]/.test(password); // Check for at least one letter (a-zA-Z)
+
+        if (!hasNumber || !hasLetter) {
+            alert('Password must contain at least one number and one alphabetic character.');
+            return;
+        }
+
+        // If all validations pass, proceed to send data via AJAX
+        const data = {
+            id: id,
+            username: username,
+            password: password
+        };
+
+        // Send AJAX request to PHP script
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '../php/create_owner.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText); // Output response from PHP script (for testing)
+                // Handle response here if needed
+            }
+        };
+        
+        // Convert data object to URL-encoded string
+        const encodedData = Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&');
+
+        // Send the request
+        xhr.send(encodedData);
+    });
+});
+
+
+
+
+    
 </script>
 </div>
 </body>
