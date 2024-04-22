@@ -17,7 +17,7 @@
                 <h1 class="fw-bolder m-0 mb-4"><?php echo $fname,' ', $lname?></h1>
                 <div class="w-100 d-flex flex-row justify-content-between">
                     <button class="btn border border-success text-success" style="width: 49%">View Map</button>
-                    <button class="btn btn-success" style="width: 49%">Request to Sell</button>
+                    <button class="btn btn-success" style="width: 49%" data-bs-toggle="modal" data-bs-target="#request">Request to Sell</button>
                 </div>
             </div>
             <?php
@@ -73,7 +73,7 @@
                     $deceased_name = $row['deceased_name'];
                     $grave_status = $row['grave_status'];
                     $dob = $row['dob'];
-                    $dod = $row['date_of_death']; // Assuming 'date_of_death' field name
+                    $dod = $row['dod']; // Assuming 'dod' field name
 
                     // Use the fetched values as needed
                     // Example: echo $deceased_name;
@@ -161,7 +161,7 @@
                     $deceased_name = $row['deceased_name'];
                     $grave_status = $row['grave_status'];
                     $dob = $row['dob'];
-                    $dod = $row['date_of_death']; // Assuming 'date_of_death' field name
+                    $dod = $row['dod']; // Assuming 'dod' field name
 
                     // Use the fetched values as needed
                     // Example: echo $deceased_name;
@@ -236,6 +236,38 @@
         </div>
         
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade mt-5" id="request" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Request to Sell</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex">
+        <p>Range</p>
+        <div class="d-flex">
+            <div class="form-group mr-2 d-flex">
+                <label for="min" class="mt-3 me-2">Min</label>
+                <input type="text" id="min" class="form-control w-75 text-center" placeholder="0">
+            </div>
+            <p class="me-3 mt-3 me-2">-</p>
+            <div class="form-group mr-2 d-flex">
+                <label for="min" class="mt-3 me-2">Max</label>
+                <input type="text" id="min" class="form-control w-75 text-center" placeholder="0">
+            </div>
+            
+        </div>
+    </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success">Confirm</button>
+      </div>
+    </div>
+  </div>
 </div>
 
     <?php include ('footer.php')?>
