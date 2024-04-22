@@ -45,7 +45,7 @@
 
                 <div class="rounded mt-3">
                     <p>Map Location</p>
-                    <div  style="width: 100%; height: 200px">
+                    <div  style="width: 100%; height: 200px; height: 250px">
                         <img style="object-fit: cover; height: 100%; width: 100%" src="../uploads/<?php echo htmlspecialchars($map); ?>" alt="">
                     </div>
                 </div>
@@ -246,19 +246,22 @@
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Request to Sell</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body d-flex">
-        <p>Range</p>
-        <div class="d-flex">
-            <div class="form-group mr-2 d-flex">
-                <label for="min" class="mt-3 me-2">Min</label>
-                <input type="text" id="min" class="form-control w-75 text-center" placeholder="0">
-            </div>
-            <p class="me-3 mt-3 me-2">-</p>
-            <div class="form-group mr-2 d-flex">
-                <label for="min" class="mt-3 me-2">Max</label>
-                <input type="text" id="min" class="form-control w-75 text-center" placeholder="0">
-            </div>
-            
+      <div class="modal-body">
+        <div class="form-group" style="width: 100%">
+            <label for="price">Selling Price</label>
+            <input id="price" type="text" class="form-control text-center" placeholder="0">
+        </div>
+        <div class="form-group" style="width: 100%">
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" class="form-control text-center" placeholder="Enter your contact number">
+        </div>
+        <div class="form-group" style="width: 100%">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" class="form-control text-center" placeholder="Enter your email address">
+        </div>
+        <div class="form-group" style="width: 100%">
+            <label for="note">Note / Message</label>
+            <textarea name="" id="note" cols="30" rows="1" class="form-control text-center" placeholder="Write note / message here"></textarea>
         </div>
     </div>
 
