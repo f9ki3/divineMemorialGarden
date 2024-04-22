@@ -6,66 +6,7 @@
 
 <div id="getting_started" class="container text-secondary w-100  p-5 " >
     <h3 style="font-weight: bold;" class="mb-3">My Lot Information</h3>
-    <!-- <div class="w-100 d-flex flex-row">
     
-        <div class="w-50 p-2">
-            <label for="inputPassword5" class="form-label">Lot Ownership</label>
-            <input type="text" id="fname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Juan Dela Cruz">
-            
-        </div>
-        <div class="w-50 p-2">
-            <label for="lname" class="form-label">Lot Status</label>
-            <input type="text" id="lname" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Status">
-            
-        </div>
-    </div>
-    <div class="w-100 d-flex flex-row">
-    
-        <div class="w-50 p-2">
-            <label for="contact" class="form-label">Block and Lot</label>
-            <input type="text" id="contact" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Block and Lot">
-            
-        </div>
-        <div class="w-50 p-2">
-            <label for="address" class="form-label">Classification</label>
-            <input type="text" id="address" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Classification">
-        </div>
-    </div>
-    <div class="w-100 d-flex flex-row">
-    
-        <div class="w-50 p-2">
-            <label for="barangay" class="form-label">Barangay</label>
-            <input type="text" id="barangay" class="form-control" aria-describedby="passwordHelpBlock" placeholder="ex. Loma De Gato">
-            
-        </div>
-        <div class="w-50 p-2">
-            <label for="municipal" class="form-label">Municipal / City</label>
-            <input type="text" id="municipal" class="form-control" aria-describedby="passwordHelpBlock" placeholder="ex. Marilao">
-            
-        </div>
-
-    </div>
-    <div class="w-100 d-flex flex-row">
-    
-        <div class="w-50 p-2">
-            <label for="province" class="form-label">Province</label>
-            <input type="text" id="province" class="form-control" aria-describedby="passwordHelpBlock" placeholder="ex. Bulacan">
-            
-        </div>
-        <div class="w-50 p-2">
-            <label for="zipcode" class="form-label">Zip Code</label>
-            <input type="text" id="zipcode" class="form-control" aria-describedby="passwordHelpBlock" placeholder="ex. 3019"> -->
-            <!-- <div id="passwordHelpBlock" class="form-text">
-            Your password must be 8-20 characters long.
-            </div> -->
-        <!-- </div>
-
-    </div>
-
-    <div class="w-100 d-flex justify-content-end mt-5">
-        <a href="homepage" class="btn me-2 w-25  text-success border-success">View Map</a>
-        <button class="btn w-25 btn-success" onclick="submitForm()">Request to Sell</button>
-    </div> -->
     <div class="row">
         <div class="col-12 col-md-6 p-2">
             <div class="rounded  border text-dark border-success pt-5 pb-5 border p-3 bg-light" >
@@ -103,23 +44,197 @@
                 ?>
 
                 <div class="rounded mt-3">
-                    <p>Map Information</p>
+                    <p>Map Location</p>
                     <div  style="width: 100%; height: 200px">
                         <img style="object-fit: cover; height: 100%; width: 100%" src="../uploads/<?php echo htmlspecialchars($map); ?>" alt="">
                     </div>
                 </div>
 
         </div>
+
         <div class="col-12 col-md-6 p-2">
-            <div class="rounded  p-3 ">
-                <p>Upper Tier Information</p>
-                <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
+        <div class="p-3 border border-success rounded">
+            <?php
+            // Assuming $user_property_id is safely provided
+            $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
+
+            $sql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'upper'";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    // Fetch the first row only (assuming one row per $id)
+                    $row = $result->fetch_assoc();
+                    $deceased_name = $row['deceased_name'];
+                    $grave_status = $row['grave_status'];
+                    $dob = $row['dob'];
+                    $dod = $row['date_of_death']; // Assuming 'date_of_death' field name
+
+                    // Use the fetched values as needed
+                    // Example: echo $deceased_name;
+
+                } else {
+                    // No rows found based on the provided $id
+                    // Handle the case where no matching records are found
+                    $deceased_name = "N/A";
+                    $grave_status = "N/A";
+                    $dob = "N/A";
+                    $dod = "N/A";
+                }
+
+            } else {
+                echo "Error in preparing SQL statement: " . $conn->error;
+            }
+
+            ?>
+
+            <!-- HTML Output -->
+            <p class="fw-bold">Upper Tier Information</p>
+
+            <?php if ($result->num_rows > 0) : ?>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Deceased Name</p>
+                        <p><?php echo $deceased_name ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Grave Status</p>
+                        <p><?php echo $grave_status ?></p>
+                    </div>
+                </div>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Date of Birth</p>
+                        <p><?php echo $dob ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Date of Death</p>
+                        <p><?php echo $dod ?></p>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Deceased Name</p>
+                        <p><?php echo $deceased_name ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Grave Status</p>
+                        <p><?php echo $grave_status ?></p>
+                    </div>
+                </div>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Date of Birth</p>
+                        <p><?php echo $dob ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Date of Death</p>
+                        <p><?php echo $dod ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             </div>
-            <div class="mt-3 rounded p-3 ">
-                <p>Lower Tier Information</p>
-                <h3 class="fw-bolder text-dark"><?php echo $fname,' ', $lname?></h3>
+            <div class="p-3 mt-3 border border-success rounded">
+            <?php
+            // Assuming $user_property_id is safely provided
+            $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
+
+            $sql = "SELECT * FROM deceased_person WHERE property_id = ? AND deceased_type = 'lower'";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    // Fetch the first row only (assuming one row per $id)
+                    $row = $result->fetch_assoc();
+                    $deceased_name = $row['deceased_name'];
+                    $grave_status = $row['grave_status'];
+                    $dob = $row['dob'];
+                    $dod = $row['date_of_death']; // Assuming 'date_of_death' field name
+
+                    // Use the fetched values as needed
+                    // Example: echo $deceased_name;
+
+                } else {
+                    // No rows found based on the provided $id
+                    // Handle the case where no matching records are found
+                    $deceased_name = "N/A";
+                    $grave_status = "N/A";
+                    $dob = "N/A";
+                    $dod = "N/A";
+                }
+
+                $stmt->close(); // Close prepared statement
+            } else {
+                echo "Error in preparing SQL statement: " . $conn->error;
+            }
+
+            $conn->close(); // Close database connection
+            ?>
+
+            <!-- HTML Output -->
+            <p class="fw-bold">Lower Tier Information</p>
+
+            <?php if ($result->num_rows > 0) : ?>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Deceased Name</p>
+                        <p><?php echo $deceased_name ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Grave Status</p>
+                        <p><?php echo $grave_status ?></p>
+                    </div>
+                </div>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Date of Birth</p>
+                        <p><?php echo $dob ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Date of Death</p>
+                        <p><?php echo $dod ?></p>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Deceased Name</p>
+                        <p><?php echo $deceased_name ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Grave Status</p>
+                        <p><?php echo $grave_status ?></p>
+                    </div>
+                </div>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Date of Birth</p>
+                        <p><?php echo $dob ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Date of Death</p>
+                        <p><?php echo $dod ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             </div>
+            
+            
         </div>
+        
     </div>
 </div>
 
