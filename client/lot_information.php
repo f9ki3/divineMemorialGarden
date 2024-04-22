@@ -53,7 +53,7 @@
         </div>
 
         <div class="col-12 col-md-6 p-2">
-        <div class="p-3 border border-success rounded">
+        <div class="p-3 border rounded">
             <?php
             // Assuming $user_property_id is safely provided
             $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
@@ -141,7 +141,7 @@
             <?php endif; ?>
 
             </div>
-            <div class="p-3 mt-3 border border-success rounded">
+            <div class="p-3 mt-3 border rounded">
             <?php
             // Assuming $user_property_id is safely provided
             $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
