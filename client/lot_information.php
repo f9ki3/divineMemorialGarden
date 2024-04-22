@@ -73,7 +73,7 @@
                     $deceased_name = $row['deceased_name'];
                     $grave_status = $row['grave_status'];
                     $dob = $row['dob'];
-                    $dod = $row['date_of_death']; // Assuming 'date_of_death' field name
+                    $dod = $row['dod']; // Assuming 'date_of_death' field name
 
                     // Use the fetched values as needed
                     // Example: echo $deceased_name;
@@ -161,7 +161,7 @@
                     $deceased_name = $row['deceased_name'];
                     $grave_status = $row['grave_status'];
                     $dob = $row['dob'];
-                    $dod = $row['date_of_death']; // Assuming 'date_of_death' field name
+                    $dod = $row['dod']; // Assuming 'date_of_death' field name
 
                     // Use the fetched values as needed
                     // Example: echo $deceased_name;
