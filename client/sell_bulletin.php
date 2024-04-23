@@ -13,7 +13,7 @@
     
     $query = "SELECT * FROM property
                 JOIN sell_bulletin ON property.id = sell_bulletin.bulletin_user_id
-                WHERE lot_status = 1";
+                WHERE lot_status = 1 AND bulletin_user_id != $property_id";
     
     $result = mysqli_query($conn, $query);
 
@@ -21,23 +21,23 @@
         while($row = mysqli_fetch_assoc($result)) {
             echo '
             <div class="col-12 col-md-4 p-2">
-            <div class="border rounded p-3">
-                <div>
-                    <h4 class="fw-bold text-success">PHP '.$row['bulletin_price'].'</h4>
-                    <hr>
-                    <h5 class="m-0 p-0">Owner: '.$row['lot_owner'].'</h5>
-                    <p class="m-0 p-0">Lot: Block '.$row['block_number'].' Lot '.$row['lot_number'].'</p>
-                    <p class="m-0 p-0">Contact: '.$row['bulletin_contact'].'</p>
-                    <p class="m-0 p-0">Email: '.$row['bulletin_email'].'</p>
-                    <hr>
-                </div>
-                <div>
-                    <button class="btn border border-success text-success">View map</button>
-                    <button class="btn btn-success">Inquire</button>
-                </div>
-            </div>    
-        </div>
-            ';
+                <div class="border rounded p-3">
+                    <div>
+                        <h4 class="fw-bold text-success">₱ ' . number_format($row['bulletin_price'], 2) . '</h4>
+                        <hr>
+                        <h5 class="m-0 p-0">Owner: ' . $row['lot_owner'] . '</h5>
+                        <p class="m-0 p-0">Lot: Block ' . $row['block_number'] . ' Lot ' . $row['lot_number'] . '</p>
+                        <p class="m-0 p-0">Contact: ' . $row['bulletin_contact'] . '</p>
+                        <p class="m-0 p-0">Email: ' . $row['bulletin_email'] . '</p>
+                        <hr>
+                    </div>
+                    <div>
+                        <button class="btn border border-success text-success">View map</button>
+                        <button class="btn btn-success">Inquire</button>
+                    </div>
+                </div>    
+            </div>
+        ';        
         }
     } else {
         echo "No results found.";

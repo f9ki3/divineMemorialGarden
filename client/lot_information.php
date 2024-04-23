@@ -477,25 +477,20 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(data => {
       console.log(data); // Log response from PHP script
-      // Additional logic or UI updates after successful insertion
-      alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
-      alertify.success('Requested Success'); // Display success notification
-      // Delay the redirection by 3 seconds
-        setTimeout(function() {
-            // Redirect to 'lot_information.php' after 3 seconds
-            window.location.href = 'lot_information.php';
-        }, 3000); // 3000 milliseconds = 3 seconds
-
+      // Display success notification
+      alertify.set('notifier','position', 'bottom-left');
+      alertify.success('Requested Success');
+      // Redirect to 'lot_information.php' after 3 seconds
+      setTimeout(function() {
+        window.location.href = 'lot_information.php';
+      }, 3000);
     })
     .catch(error => {
       console.error('Error:', error); // Log any fetch errors
     });
 
     clearFormFields();
-
-    const modalElement = document.querySelector('#request');
-    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
+    hideModal();
   });
 
   function isValidEmail(email) {
@@ -524,13 +519,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function clearFormFields() {
-    document.querySelector('#price').value = '';
-    document.querySelector('#contact').value = '';
-    document.querySelector('#email').value = '';
-    document.querySelector('#note').value = '';
-    document.querySelector('#coo').value = '';
+    const inputs = ['#price', '#contact', '#email', '#note', '#coo'];
+    inputs.forEach(input => {
+      document.querySelector(input).value = '';
+    });
+  }
+
+  function hideModal() {
+    const modalElement = document.querySelector('#request');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
   }
 });
 </script>
+
 
 </html>
