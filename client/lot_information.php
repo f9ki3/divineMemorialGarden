@@ -17,14 +17,34 @@
                 <h1 class="fw-bolder m-0 mb-4"><?php echo $fname,' ', $lname?></h1>
                 <div class="w-100 d-flex flex-row justify-content-between">
                     <button class="btn border border-success text-success" style="width: 49%">View Map</button>
-                    <button class="btn btn-success" style="width: 49%" data-bs-toggle="modal" data-bs-target="#request">Request to Sell</button>
+                    <button class="btn btn-success" style="width: 49%" data-bs-toggle="modal" data-bs-target="#request" 
+                    <?php 
+                    include '../config/config.php';
+                    $sql = "SELECT lot_status FROM property WHERE id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $property_id); // Assuming $id is an integer
+                    $stmt->execute();
+                    $stmt->bind_result($lot_status);
+
+                    // Fetch the result
+                    $stmt->fetch();
+
+                    // Check the value of lot_status
+                    if ($lot_status == 0) {
+                        // lot_status is 0, so echo an empty string (do nothing)
+                        echo 'enabled';
+                    } else {
+                        // lot_status is not 0, so echo 'disabled'
+                        echo 'disabled';
+                    }
+                    ?>
+                    >Request to Sell</button>
                 </div>
             </div>
             <?php
-                include '../config/config.php';
                 // Assuming $id is safely provided, use prepared statement to avoid SQL injection
                 $id = intval($user_property_id); // Sanitize $id to ensure it's an integer
-
+                include '../config/config.php';
                 $sql = "SELECT * FROM property WHERE id = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("i", $id);
@@ -53,7 +73,109 @@
         </div>
 
         <div class="col-12 col-md-6 p-2">
-        <div class="p-3 border rounded">
+        <div class="p-3 border mb-3 rounded">
+        <?php
+            // Assuming $user_property_id is safely provided
+            $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
+
+            $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, lot_status, map_img
+                    FROM property
+                    WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    // Fetch the first row only (assuming one row per $id)
+                    $row = $result->fetch_assoc();
+                    $id = $row['id'];
+                    $date = $row['date'];
+                    $area = $row['area'];
+                    $block_number = $row['block_number'];
+                    $lot_number = $row['lot_number'];
+                    $classification = $row['classification'];
+                    $lot_owner = $row['lot_owner'];
+                    $lot_status = $row['lot_status'];
+                    $map_img = $row['map_img'];
+
+                    // Use the fetched values as needed
+                    // Example: echo $id, $date, $area, $lot_owner;
+
+                } else {
+                    // No rows found based on the provided $id
+                    // Handle the case where no matching records are found
+                    $id = "N/A";
+                    $date = "N/A";
+                    $area = "N/A";
+                    $block_number = "N/A";
+                    $lot_number = "N/A";
+                    $classification = "N/A";
+                    $lot_owner = "N/A";
+                    $lot_status = "N/A";
+                    $map_img = "N/A";
+                }
+            } else {
+                echo "Error in preparing SQL statement: " . $conn->error;
+            }
+
+            // Close the prepared statement
+            $stmt->close();
+            ?>
+
+
+            <!-- HTML Output -->
+            <p class="fw-bold">Lot Information</p>
+
+            <?php if ($result->num_rows > 0) : ?>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Deceased Name</p>
+                        <p><?php echo $lot_owner ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Grave Status</p>
+                        <p><?php echo $classification ?></p>
+                    </div>
+                </div>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Location</p>
+                        <p><?php  echo 'Block', $block_number, 'Lot', $lot_number?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Lot Status</p>
+                        <p><?php echo $lot_status ?></p>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Deceased Name</p>
+                        <p><?php echo $deceased_name ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Grave Status</p>
+                        <p><?php echo $grave_status ?></p>
+                    </div>
+                </div>
+                <div class='d-flex justify-content-between'>
+                    <div class='w-75'>
+                        <p class="p-0 m-0">Date of Birth</p>
+                        <p><?php echo $dob ?></p>
+                    </div>
+                    <div class='w-25'>
+                        <p class="p-0 m-0">Date of Death</p>
+                        <p><?php echo $dod ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            </div>
+            <div class="p-3 border rounded">
             <?php
             // Assuming $user_property_id is safely provided
             $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
@@ -352,6 +474,12 @@ document.addEventListener('DOMContentLoaded', function() {
       // Additional logic or UI updates after successful insertion
       alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
       alertify.success('Requested Success'); // Display success notification
+      // Delay the redirection by 3 seconds
+        setTimeout(function() {
+            // Redirect to 'lot_information.php' after 3 seconds
+            window.location.href = 'lot_information.php';
+        }, 3000); // 3000 milliseconds = 3 seconds
+
     })
     .catch(error => {
       console.error('Error:', error); // Log any fetch errors
