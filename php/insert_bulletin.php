@@ -5,7 +5,7 @@ include '../config/config.php';
 // Check if the POST data exists
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve POST data from JavaScript
-    $userId = $_POST['id'] ?? '';
+    $userId = $_POST['propertyId'] ?? '';
     $propertyId = $_POST['propertyId'] ?? '';
     $price = $_POST['price'] ?? '';
     $contact = $_POST['contact'] ?? '';

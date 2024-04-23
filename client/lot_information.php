@@ -148,7 +148,13 @@
                     </div>
                     <div class='w-25'>
                         <p class="p-0 m-0">Lot Status</p>
-                        <p><?php echo $lot_status ?></p>
+                        <?php 
+                        if($lot_status == 0){
+                            echo '<span class="badge text-bg-light border border-success text-success">Sold</span>';
+                        }else{
+                            echo '<span class="badge text-bg-light border border-danger text-danger">For Sale</span>';
+                        }
+                        ?>
                     </div>
                 </div>
             <?php else : ?>
