@@ -349,6 +349,8 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
       console.log(data); // Log response from PHP script
       // Additional logic or UI updates after successful insertion
+      alertify.set('notifier','position', 'bottom-left'); // Set position of notifications
+      alertify.success('Requested Success'); // Display success notification
     })
     .catch(error => {
       console.error('Error:', error); // Log any fetch errors
