@@ -329,7 +329,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const formData = new FormData();
-    formData.append('id', '<?php echo $id ?>'); // Include the PHP variable $id
+    formData.append('id', '<?php echo $id?>');
+    formData.append('propertyId', '<?php echo $property_id ?>'); // Include the PHP variable $id
     formData.append('price', priceValue);
     formData.append('contact', contactValue);
     formData.append('email', emailValue);
