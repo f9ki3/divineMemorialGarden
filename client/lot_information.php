@@ -247,24 +247,27 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="form-group" style="width: 100%">
+        <div class="form-group mb-3" style="width: 100%">
             <label for="price">Selling Price</label>
-            <input id="price" type="text" class="form-control text-center" placeholder="0">
+            <input id="price" type="text" class="form-control " placeholder="0">
         </div>
-        <div class="form-group" style="width: 100%">
+        <div class="form-group mb-3" style="width: 100%">
             <label for="contact">Contact</label>
-            <input id="contact" type="text" class="form-control text-center" placeholder="Enter your contact number">
+            <input id="contact" type="text" class="form-control " placeholder="Enter your contact number">
         </div>
-        <div class="form-group" style="width: 100%">
+        <div class="form-group mb-3" style="width: 100%">
             <label for="email">E-mail</label>
-            <input id="email" type="email" class="form-control text-center" placeholder="Enter your email address">
+            <input id="email" type="email" class="form-control " placeholder="Enter your email address">
         </div>
-        <div class="form-group" style="width: 100%">
+        <div class="form-group mb-3" style="width: 100%">
             <label for="note">Note / Message</label>
-            <textarea name="" id="note" cols="30" rows="1" class="form-control text-center" placeholder="Write note / message here"></textarea>
+            <textarea name="" id="note" cols="30" rows="1" class="form-control " placeholder="Write note / message here"></textarea>
+        </div>
+        <div class="form-group mb-3" style="width: 100%">
+            <label for="coo">Certificate of Ownership</label>
+            <input id="coo" class="" type="file" id="uploadText">
         </div>
     </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-success">Confirm</button>
@@ -276,4 +279,121 @@
     <?php include ('footer.php')?>
 
 </body>
+
+<!-- Add a script tag at the end of your HTML body to include the JavaScript code -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const confirmButton = document.querySelector('#request .modal-footer .btn-success');
+
+  confirmButton.addEventListener('click', function() {
+    const priceInput = document.querySelector('#price');
+    const contactInput = document.querySelector('#contact');
+    const emailInput = document.querySelector('#email');
+    const noteInput = document.querySelector('#note');
+    const cooInput = document.querySelector('#coo');
+
+    const priceValue = priceInput.value.trim();
+    const contactValue = contactInput.value.trim();
+    const emailValue = emailInput.value.trim();
+    const noteValue = noteInput.value.trim();
+    const cooFile = cooInput.files[0];
+
+    clearErrors();
+
+    if (!/^\d+$/.test(priceValue)) {
+      showError(priceInput, 'Please enter a valid number for Price.');
+      return;
+    }
+
+    if (!/^\d{11}$/.test(contactValue)) {
+      showError(contactInput, 'Please enter an 11-digit number for Contact.');
+      return;
+    }
+
+    if (!isValidEmail(emailValue)) {
+      showError(emailInput, 'Please enter a valid email address.');
+      return;
+    }
+
+    if (noteValue.length > 200) {
+      showError(noteInput, 'Note exceeds maximum length of 200 characters.');
+      return;
+    }
+
+    if (cooFile) {
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+      if (!allowedTypes.includes(cooFile.type)) {
+        showError(cooInput, 'Please upload a PNG, JPG, or JPEG file for COO.');
+        return;
+      }
+    }
+
+    const formData = new FormData();
+    formData.append('id', '<?php echo $id ?>'); // Include the PHP variable $id
+    formData.append('price', priceValue);
+    formData.append('contact', contactValue);
+    formData.append('email', emailValue);
+    formData.append('note', noteValue);
+    formData.append('coo', cooFile);
+
+    fetch('../php/insert_bulletin.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      return response.text();
+    })
+    .then(data => {
+      console.log(data); // Log response from PHP script
+      // Additional logic or UI updates after successful insertion
+    })
+    .catch(error => {
+      console.error('Error:', error); // Log any fetch errors
+    });
+
+    clearFormFields();
+
+    const modalElement = document.querySelector('#request');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
+  });
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function showError(inputElement, errorMessage) {
+    inputElement.classList.add('is-invalid');
+    const errorElement = document.createElement('div');
+    errorElement.className = 'invalid-feedback';
+    errorElement.textContent = errorMessage;
+    inputElement.parentNode.appendChild(errorElement);
+    inputElement.focus();
+  }
+
+  function clearErrors() {
+    const invalidInputs = document.querySelectorAll('.is-invalid');
+    invalidInputs.forEach(input => {
+      input.classList.remove('is-invalid');
+      const errorElement = input.parentNode.querySelector('.invalid-feedback');
+      if (errorElement) {
+        errorElement.remove();
+      }
+    });
+  }
+
+  function clearFormFields() {
+    document.querySelector('#price').value = '';
+    document.querySelector('#contact').value = '';
+    document.querySelector('#email').value = '';
+    document.querySelector('#note').value = '';
+    document.querySelector('#coo').value = '';
+  }
+});
+</script>
+
 </html>
