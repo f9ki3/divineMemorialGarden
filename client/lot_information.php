@@ -66,7 +66,18 @@
                 <div class="rounded mt-3">
                     <p>Map Location</p>
                     <div  style="width: 100%; height: 200px; height: 250px">
-                        <img style="object-fit: cover; height: 100%; width: 100%" src="../uploads/<?php echo htmlspecialchars($map); ?>" alt="">
+                        <?php
+                        // Assuming $map is a variable that holds the image filename/path
+
+                            if (!empty($map)) {
+                                echo '<img style="object-fit: cover; height: 100%; width: 100%" src="../uploads/' . htmlspecialchars($map) . '" alt="">';
+                            }else{
+                                echo'
+                                <img style="object-fit: cover; height: 100%; width: 100%"  alt="No Image Yet">
+                                ';
+                            }
+                        ?>
+
                     </div>
                 </div>
 
@@ -150,7 +161,7 @@
                         <p class="p-0 m-0">Lot Status</p>
                         <?php 
                         if($lot_status == 0){
-                            echo '<span class="badge text-bg-light border border-success text-success">Sold</span>';
+                            echo '<span class="badge text-bg-light border border-success text-success">Owned</span>';
                         }else{
                             echo '<span class="badge text-bg-light border border-danger text-danger">For Sale</span>';
                         }

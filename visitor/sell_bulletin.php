@@ -13,7 +13,7 @@
     
     $query = "SELECT * FROM property
                 JOIN sell_bulletin ON property.id = sell_bulletin.bulletin_user_id
-                WHERE lot_status = 1 AND bulletin_user_id != $property_id";
+                WHERE lot_status = 1";
     
     $result = mysqli_query($conn, $query);
 

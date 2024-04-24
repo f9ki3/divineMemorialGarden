@@ -1,0 +1,17 @@
+ADMIN
+user: dave
+pass: dave
+
+CLIENTS:
+user: stephany
+pass: dave
+
+user: michael
+pass: dave
+
+user: art
+pass: dave
+
+user: arnold
+pass: dave
+
