@@ -7,6 +7,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION[
     // User is logged in, display the landing page content
     $username = $_SESSION['user_name'];
     $id = $_SESSION['id'];
+    $property_id = $_SESSION['user_property_id'];
     $fname = $_SESSION['user_fname'];
     $lname = $_SESSION['user_lname'];
     $email = $_SESSION['user_email'];
