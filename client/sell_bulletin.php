@@ -49,7 +49,7 @@
 
     </div>
 
-    <div class="col-12 col-md-9">
+    <div class="col-12 col-md-10">
         
             <h3 style="font-weight: bold;" class="mb-3">Recently Lot Sale Posted</h3>
             <hr>
