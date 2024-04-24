@@ -4,74 +4,43 @@
 <div>
 <?php include 'navbar.php'; ?>
 <div class="container w-100 p-3">
-    <button class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#create">Create Account</button>                
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="addOwner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Lot Owner</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="date" id="date" class="form-control" placeholder="">
-                                <label for="date">Date</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <select id="classification" class="form-control" style="width: 100%;">
-                                    <option value="Regular">Regular</option>
-                                    <option value="Premium">Premium</option>
-                                    <option value="Exterior">Exterior</option>
-                                </select>
-                                <label for="classification">Classification</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" id="block_number" class="form-control" placeholder="">
-                                <label for="block_number">Block Number</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" id="lot_number" class="form-control" placeholder="">
-                                <label for="lot_number">Lot Number</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-floating">
-                    <input type="text" id="owner_name" class="form-control" placeholder="">
-                    <label for="owner_name">Owner Name</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="btnAdd" type="button" class="btn btn-success">Save changes</button>
-            </div>
+    <div class="d-flex justify-content-between">
+        <div> 
+            <button class="btn btn-success btn-sm">Clients</button>
+            <button class="btn border-success text-success btn-sm">Visitors</button>
+            <button class="btn border-success text-success btn-sm">Admin</button> 
+        </div>     
+        
+        <div>
+            <button class="btn border-success text-success btn-sm" data-bs-toggle="modal" data-bs-target="#create">+ Create</button>
         </div>
     </div>
+    <div class="mt-3">
+        <table id="client" class="stripe " style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width: 5%">Date Added</th>
+                    <th style="width: 20%">Profile</th>
+                    <th style="width: 10%">First Name</th>
+                    <th style="width: 10%">Last Name</th>
+                    <th style="width: 10%">Email</th>
+                    <th style="width: 10%">Contact</th>
+                    <th style="width: 10%">Username</th>
+                    <th style="width: 20%">Action</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal mt-5 fade" id="create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Account</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Client Account</h1>
         <button id="close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
@@ -237,6 +206,81 @@ document.addEventListener('DOMContentLoaded', () => {
         xhr.send(encodedData);
     });
 });
+
+$(document).ready(function() {
+    var table = $('#client').DataTable({
+        "ajax": {
+            "url": "../php/fetch_account_client_data.php",
+            "dataSrc": ""
+        },
+        "columns": [
+            { 
+                "data": "user_date_added", 
+                "width": "15%",  // Set width for user_date_added column
+                "render": function(data) {
+                    return data ? data : "-";  // If data is empty, display "-"
+                }
+            },
+            { 
+                "data": null,
+                "render": function(data, type, row) {
+                    var profileImage = row.user_profile ? '<img style="width: 50px; height: 50px; border-radius: 100%" src="../uploads/' + row.user_profile + '">' : '-';
+                    return profileImage;
+                },
+                "width": "12%"  // Set width for profile image column
+            },
+            { 
+                "data": "user_fname", 
+                "width": "10%",  // Set width for user_fname column
+                "render": function(data) {
+                    return data ? data : "-";
+                }
+            },
+            { 
+                "data": "user_lname", 
+                "width": "10%",  // Set width for user_lname column
+                "render": function(data) {
+                    return data ? data : "-";
+                }
+            },
+            { 
+                "data": "user_email", 
+                "width": "15%",  // Set width for user_email column
+                "render": function(data) {
+                    return data ? data : "-";
+                }
+            },
+            { 
+                "data": "user_contact", 
+                "width": "10%",  // Set width for user_contact column
+                "render": function(data) {
+                    return data ? data : "-";
+                }
+            },
+            { 
+                "data": "user_name", 
+                "width": "10%",  // Set width for user_name column
+                "render": function(data) {
+                    return data ? data : "-";
+                }
+            },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    return '<div class="action-buttons">' +
+                           '<button class="btn-accept btn btn-success btn-sm me-2" data-userid="' + row.id + '">Accept</button>' +
+                           '<button class="btn-delete btn btn-danger btn-sm" data-userid="' + row.id + '">Cancel</button>' +
+                           '</div>';
+                },
+                "width": "15%"  // Set width for action buttons column
+            }
+        ]
+    }); 
+});
+
+
+
+
 </script>
 
 <?php include 'footer.php'?>
