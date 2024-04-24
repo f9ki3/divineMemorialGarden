@@ -20,7 +20,7 @@
                     <button class="btn btn-success" style="width: 49%" data-bs-toggle="modal" data-bs-target="#request" 
                     <?php 
                     include '../config/config.php';
-                    $sql = "SELECT lot_status FROM property WHERE id = ?";
+                    $sql = "SELECT request_status FROM property WHERE id = ?";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("i", $property_id); // Assuming $id is an integer
                     $stmt->execute();
@@ -89,7 +89,7 @@
             // Assuming $user_property_id is safely provided
             $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
 
-            $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, lot_status, map_img
+            $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, request_status, map_img
                     FROM property
                     WHERE id = ?";
             $stmt = $conn->prepare($sql);
@@ -110,7 +110,7 @@
                     $lot_number = $row['lot_number'];
                     $classification = $row['classification'];
                     $lot_owner = $row['lot_owner'];
-                    $lot_status = $row['lot_status'];
+                    $lot_status = $row['request_status'];
                     $map_img = $row['map_img'];
 
                     // Use the fetched values as needed

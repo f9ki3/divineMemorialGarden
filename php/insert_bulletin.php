@@ -5,7 +5,7 @@ include '../config/config.php';
 // Check if the POST data exists
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve POST data from JavaScript
-    $userId = $_POST['propertyId'] ?? '';
+    $userId = $_POST['userId'] ?? '';
     $propertyId = $_POST['propertyId'] ?? '';
     $price = $_POST['price'] ?? '';
     $contact = $_POST['contact'] ?? '';
@@ -13,10 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $note = $_POST['note'] ?? '';
 
     // Validate and process file upload (COO)
-    $cooFile = $_FILES['coo'] ?? null;
-
-    // Validate uploaded file
-    if ($cooFile && $cooFile['error'] === UPLOAD_ERR_OK) {
+    if (isset($_FILES['coo']) && $_FILES['coo']['error'] === UPLOAD_ERR_OK) {
+        $cooFile = $_FILES['coo'];
         $cooFileName = $cooFile['name'];
         $cooTempName = $cooFile['tmp_name'];
         $cooFileType = $cooFile['type'];
@@ -52,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (move_uploaded_file($cooTempName, $destination)) {
                 // Update property lot_status after successful upload
                 if (!empty($propertyId)) {
-                    $sqlUpdate = "UPDATE `property` SET `lot_status` = '1' WHERE `id` = ?";
+                    $sqlUpdate = "UPDATE `property` SET `lot_status` = 0, request_status = 1 WHERE `id` = ?";
                     $stmtUpdate = $conn->prepare($sqlUpdate);
                     $stmtUpdate->bind_param("i", $propertyId);
                     $stmtUpdate->execute();

@@ -3,96 +3,100 @@
 <body>
 <div>
 <?php include 'navbar.php'; ?>
-<div class="container w-100 p-3">
+
+<div class="container mt-3">
+    <div>
+        <button class="btn btn-success btn-sm">Sale Bulletin</button>
+        <button class="btn border-success text-success btn-sm">Burial Services</button>
+        <button class="btn border-success text-success btn-sm">Transfer Ownership</button>
+    </div>
+<div>
+
+<div class="mt-3">
+<table id="bulletinTable" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th style="width: 5%">ID</th>
+            <th style="width: 15%">Date</th>
+            <th style="width: 10%">Price</th>
+            <th style="width: 15%">Contact</th>
+            <th style="width: 10%">Email</th>
+            <th style="width: 20%">Note</th>
+            <th style="width: 15%">Action</th>
+        </tr>
+    </thead>
+</table>
+</div>
+</div>
+
+</div>
     
-            <div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
-            <h4 class="fw-bolder ">Transactions</h4>
-                <div>
-                    <a href="area_info?lawn_name=Lawn+1" class="btn btn-sm btn-success me-2">Refresh</a>
-                    <a href="lawn 1" class="btn btn-sm btn-success me-2">View Map</a>
-                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addOwner">+ Transfer Ownership</button>
-                </div>
-            </div>
-    <div class="border p-3 rounded mb-3" style="background: white; height: auto">
-        <div>
-            <table id="property_table" class="display">
-            <thead>
-                <tr>
-                    <th width="20%">Area</th>
-                    <th width="20%">Block Number</th>
-                    <th width="20%">Lot Number</th>
-                    <th width="20%">Classification</th>
-                    <th width="20%">Lot Owner</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="addOwner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Lot Owner</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="date" id="date" class="form-control" placeholder="">
-                                <label for="date">Date</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <select id="classification" class="form-control" style="width: 100%;">
-                                    <option value="Regular">Regular</option>
-                                    <option value="Premium">Premium</option>
-                                    <option value="Exterior">Exterior</option>
-                                </select>
-                                <label for="classification">Classification</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" id="block_number" class="form-control" placeholder="">
-                                <label for="block_number">Block Number</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" id="lot_number" class="form-control" placeholder="">
-                                <label for="lot_number">Lot Number</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-floating">
-                    <input type="text" id="owner_name" class="form-control" placeholder="">
-                    <label for="owner_name">Owner Name</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="btnAdd" type="button" class="btn btn-success">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+            
 
 <?php include 'footer.php'; ?>
-<script src="../jquery/area_info.js"></script>
+<!-- DataTables JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready(function() {
+    var table = $('#bulletinTable').DataTable({
+        "ajax": {
+            "url": "../php/fetch_bulletin_data.php",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "bulletin_date" },
+            { "data": "bulletin_price" },
+            { "data": "bulletin_contact" },
+            { "data": "bulletin_email" },
+            { "data": "bulletin_note" },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    return '<div class="action-buttons">' +
+                           '<button class="btn-accept" data-userid="' + row.bulletin_user_id + '">Accept</button>' +
+                           '<button class="btn-delete" data-userid="' + row.bulletin_user_id + '">Cancel</button>' +
+                           '</div>';
+                }
+            }
+        ]
+    });
+
+    // Handle accept button click
+    $('#bulletinTable tbody').on('click', '.btn-accept', function () {
+        var userId = $(this).data('userid');
+        // Confirm acceptance
+        if (confirm('Are you sure you want to accept user ID: ' + userId + '?')) {
+            // Make AJAX request to update status
+            $.ajax({
+                url: '../php/update_status.php', // URL to your server-side script
+                method: 'POST',
+                data: { userId: userId, action: 'accept' }, // Data to send
+                success: function(response) {
+                    // Handle success response
+                    alert('User ID ' + userId + ' has been accepted.');
+                    // You can optionally reload or update the DataTable after success
+                    $('#bulletinTable').DataTable().ajax.reload();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error('Error accepting user ID ' + userId + ': ' + error);
+                    alert('Error accepting user ID ' + userId + '. Please try again.');
+                }
+            });
+        }
+    });
+
+
+    // Handle delete button click
+    $('#bulletinTable tbody').on('click', '.btn-delete', function () {
+        var userId = $(this).data('userid');
+        alert('Delete user ID: ' + userId);
+        // Perform delete action here, e.g., prompt confirmation and then delete
+    });
+});
+</script>
 
 </div>
 </body>
