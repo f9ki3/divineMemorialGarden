@@ -86,7 +86,7 @@
                         </div>    
                     </div>
                 ';        
-                } 
+                }
             } else {
                 echo '
                 <div style="height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center" class="">
@@ -98,17 +98,10 @@
                 ';
             }
         ?>
-
-            
-            
-            
-
-                
-
-            
-            
-            <div class="w-100 d-flex justify-content-end mt-5">
+        
+        <div class="w-100 d-flex justify-content-end mt-5">
                 <!-- <a href="homepage" class="btn me-2 w-25  text-success border-success">View Map</a> -->
+                <button class="btn w-25 border-success text-success me-2" onclick="submitForm()">Previous</button>
                 <button class="btn w-25 btn-success" onclick="submitForm()">Next</button>
             </div>
             
