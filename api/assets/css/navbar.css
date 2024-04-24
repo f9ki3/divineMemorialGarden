@@ -1,0 +1,22 @@
+.divine-navbar{
+    width: 20%;
+    height: 100vh;
+}
+
+li{
+    list-style: none;
+}
+
+li a{
+    width: 100%;
+}
+
+/* Customize Alertify Notification Position */
+.alertify-notifier {
+    position: fixed;
+    bottom: 20px; /* Adjust vertical position from bottom */
+    left: 20px; /* Adjust horizontal position from left */
+    width: auto; /* Adjust width as needed */
+    max-width: 300px; /* Max width of the notification */
+  }
+  

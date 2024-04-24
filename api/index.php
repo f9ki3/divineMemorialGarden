@@ -1,2 +1,4 @@
 <?php
-phpinfo();
+header ('location: homepage')
+
+?>
