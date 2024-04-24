@@ -34,4 +34,46 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.rtl.min.css"/>
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.rtl.min.css"/>
+    <style>
+    /* Custom CSS to style scrollbar */
+    .table-responsive {
+        height: 100vh; /* Set desired height */
+        overflow: hidden; /* Hide the scrollbar initially */
+        position: relative; /* Set position to use pseudo-element */
+    }
+
+    .table-responsive:hover {
+        overflow: auto; /* Display scrollbar when hovering */
+    }
+
+    /* Style scrollbar */
+    .table-responsive::-webkit-scrollbar {
+        width: 12px; /* Set the width of the scrollbar */
+        height: 12px; /* Set the height of the scrollbar */
+    }
+
+    /* Track (the area behind the scrollbar) */
+    .table-responsive::-webkit-scrollbar-track {
+        background: #f5f5f5; /* Light gray color for the track */
+    }
+
+    /* Handle (the draggable part of the scrollbar) */
+    .table-responsive::-webkit-scrollbar-thumb {
+        background: #c0c0c0; /* Light gray color for the handle */
+        border-radius: 6px; /* Roundness of the handle */
+        height: 100px; /* Set the height of the handle */
+    }
+
+    /* Handle on hover */
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #a0a0a0; /* Darker gray color on hover */
+    }
+
+    /* For Firefox */
+    .table-responsive {
+        scrollbar-width: thin;
+        scrollbar-color: #c0c0c0 #f5f5f5;
+    }
+</style>
+
 </head>
