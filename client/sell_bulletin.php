@@ -172,9 +172,9 @@ function send_message() {
 
     // Validate message content
     if (message_content.trim() === '') {
-      alertify.set('notifier','position', 'bottom-left');
-      alertify.error('Empty Message');
-      return;
+        alertify.set('notifier', 'position', 'bottom-left');
+        alertify.error('Empty Message');
+        return;
     }
 
     // Perform character count
@@ -183,37 +183,53 @@ function send_message() {
     var charactersLeft = maxCharacters - messageLength;
 
     if (charactersLeft < 0) {
-        alertify.set('notifier','position', 'bottom-left');
-        alertify.error('Message Exceed to 200 characters');
-      return;
+        alertify.set('notifier', 'position', 'bottom-left');
+        alertify.error('Message Exceeds 200 characters');
+        return;
     }
 
-    // Example of using retrieved values
-    console.log("Recipient ID: " + recieved_id);
-    console.log("Sender ID: " + sender_id);
-    console.log("Message Content: " + message_content);
-    
-    alertify.set('notifier','position', 'bottom-left');
-    alertify.success('Message Sent');
+    // Prepare data to send
+    var data = new FormData();
+    data.append('recieved_id', recieved_id);
+    data.append('sender_id', sender_id);
+    data.append('message_content', message_content);
 
-    // Here you can perform AJAX request to send the message using retrieved values
-    // For example:
-    // ajaxSendMessage(recieved_id, sender_id, message_content);
+    // Send AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../php/send_message.php', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Request was successful
+            alertify.set('notifier', 'position', 'bottom-left');
+            alertify.success('Message Sent');
+            
+            // Close the modal after processing
+            var modalElement = document.getElementById('message');
+            var modalInstance = bootstrap.Modal.getInstance(modalElement);
+            modalInstance.hide();
+        } else {
+            // Error handling
+            alertify.set('notifier', 'position', 'bottom-left');
+            alertify.error('Error sending message');
+        }
+    };
+    xhr.onerror = function() {
+        // Error handling for network errors
+        alertify.set('notifier', 'position', 'bottom-left');
+        alertify.error('Network Error');
+    };
+    xhr.send(data);
+}
 
-    // Close the modal after processing
-    var modalElement = document.getElementById('message');
-    var modalInstance = bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
-  }
-
-  // Update character count display on input change
-  document.getElementById('message_content').addEventListener('input', function() {
+// Update character count display on input change
+document.getElementById('message_content').addEventListener('input', function() {
     var messageLength = this.value.length;
     var maxCharacters = 200;
     var charactersLeft = maxCharacters - messageLength;
     var charCountElement = document.getElementById('charCount');
     charCountElement.textContent = "Characters left: " + charactersLeft;
-  });
+});
+
 </script>
 
 
