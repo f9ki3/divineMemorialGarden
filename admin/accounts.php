@@ -271,7 +271,7 @@ $(document).ready(function() {
                     "render": function(data, type, row) {
                         return '<div class="action-buttons">' +
                                '<button class="btn-accept btn btn-success btn-sm me-2" data-userid="' + row.id + '">Update</button>' +
-                               '<button class="btn-delete btn btn-danger btn-sm" data-userid="' + row.id + '">Disabled</button>' +
+                               '<button class="btn-delete btn btn-danger btn-sm" data-userid="' + row.id + '">Disable</button>' +
                                '</div>';
                     },
                     "width": "15%"  // Set width for action buttons column
