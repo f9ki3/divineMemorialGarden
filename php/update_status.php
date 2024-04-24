@@ -9,43 +9,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userId = $_POST['userId'];
         $action = $_POST['action'];
 
+        // Initialize SQL and success message
+        $sql = '';
+        $successMessage = '';
+
         // Prepare SQL statement based on action
         if ($action === 'accept') {
             $sql = "UPDATE property SET lot_status = 1 WHERE id = ?";
-        } elseif ($action === 'update') {
-            // Example: $sql = "UPDATE users SET status = 'updated' WHERE id = ?";
-            // Modify this line to handle other actions as needed
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i', $userId);
+            if ($stmt->execute()) {
+                $successMessage = 'Property status updated successfully';
+            }
+            $stmt->close();
+
             $sql = "UPDATE sell_bulletin SET bulletin_status = 1 WHERE bulletin_user_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i', $userId);
+            if ($stmt->execute()) {
+                $successMessage = 'Sell bulletin status updated successfully';
+            }
+            $stmt->close();
         } else {
-            // Invalid action
-            http_response_code(400); // Bad Request
-            echo json_encode(['error' => 'Invalid action']);
-            exit; // Stop script execution
+            // Handle other actions if needed
+            // Example: $sql = "UPDATE users SET status = 'deleted' WHERE id = ?";
         }
 
-        // Prepare and bind parameter
-        $stmt = $conn->prepare($sql);
-        if (!$stmt) {
-            // Error preparing SQL statement
-            http_response_code(500); // Internal Server Error
-            echo json_encode(['error' => 'Database error']);
-            exit; // Stop script execution
-        }
-        
-        $stmt->bind_param('i', $userId);
-
-        // Execute statement
-        if ($stmt->execute()) {
+        // Check if any update was successful
+        if (!empty($successMessage)) {
             // Respond with success message
-            echo json_encode(['success' => true, 'message' => 'User status updated successfully']);
+            echo json_encode(['success' => true, 'message' => $successMessage]);
         } else {
             // Respond with error message
-            http_response_code(500); // Internal Server Error
-            echo json_encode(['error' => 'Error updating user status']);
+            echo json_encode(['error' => 'Error updating status']);
         }
 
-        // Close statement
-        $stmt->close();
+        // Close database connection
+        $conn->close();
     } else {
         // Invalid or missing input data
         http_response_code(400); // Bad Request
@@ -56,7 +56,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405); // Method Not Allowed
     echo json_encode(['error' => 'Method not allowed']);
 }
-
-// Close database connection
-$conn->close();
 ?>

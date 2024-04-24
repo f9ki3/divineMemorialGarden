@@ -5,7 +5,7 @@ include '../config/config.php';
 // Check if the POST data exists
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve POST data from JavaScript
-    $userId = $_POST['userId'] ?? '';
+    $userId = $_POST['propertyId'] ?? '';
     $propertyId = $_POST['propertyId'] ?? '';
     $price = $_POST['price'] ?? '';
     $contact = $_POST['contact'] ?? '';
@@ -13,8 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $note = $_POST['note'] ?? '';
 
     // Validate and process file upload (COO)
-    if (isset($_FILES['coo']) && $_FILES['coo']['error'] === UPLOAD_ERR_OK) {
-        $cooFile = $_FILES['coo'];
+    $cooFile = $_FILES['coo'] ?? null;
+
+    // Validate uploaded file
+    if ($cooFile && $cooFile['error'] === UPLOAD_ERR_OK) {
         $cooFileName = $cooFile['name'];
         $cooTempName = $cooFile['tmp_name'];
         $cooFileType = $cooFile['type'];
@@ -32,44 +34,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare SQL statement to insert data into sell_bulletin table
     $sql = "INSERT INTO sell_bulletin (bulletin_date, bulletin_user_id, bulletin_price, bulletin_contact, bulletin_email, bulletin_coo, bulletin_note, bulletin_status)
-            VALUES (NOW(), ?, ?, ?, ?, ?, ?, 0)";
+    VALUES (NOW(), ?, ?, ?, ?, ?, ?, 0)";
 
     // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        // Bind parameters to the prepared statement
-        $stmt->bind_param('idssss', $userId, $price, $contact, $email, $cooFileName, $note);
+    // Bind parameters to the prepared statement
+    // Updated bind_param with correct data types and order
+    $stmt->bind_param('isssss', $userId, $price, $contact, $email, $cooFileName, $note);
 
-        // Execute the prepared statement
-        if ($stmt->execute()) {
-            // Upload COO file to server
-            $uploadPath = '../uploads/'; // Directory to store uploaded COO files
-            $destination = $uploadPath . basename($cooFileName);
+    // Execute the prepared statement
+    if ($stmt->execute()) {
+    // Upload COO file to server
+    $uploadPath = '../uploads/'; // Directory to store uploaded COO files
+    $destination = $uploadPath . basename($cooFileName);
 
-            if (move_uploaded_file($cooTempName, $destination)) {
-                // Update property lot_status after successful upload
-                if (!empty($propertyId)) {
-                    $sqlUpdate = "UPDATE `property` SET `lot_status` = 0, request_status = 1 WHERE `id` = ?";
-                    $stmtUpdate = $conn->prepare($sqlUpdate);
-                    $stmtUpdate->bind_param("i", $propertyId);
-                    $stmtUpdate->execute();
-                    $stmtUpdate->close();
-                }
-
-                echo 'Data inserted successfully.';
-            } else {
-                echo 'Error uploading COO file.';
-            }
-        } else {
-            echo 'Error inserting data: ' . $stmt->error;
+    if (move_uploaded_file($cooTempName, $destination)) {
+        // Update property lot_status after successful upload
+        if (!empty($propertyId)) {
+            $sqlUpdate = "UPDATE `property` SET `lot_status` = 0, `request_status` = 1 WHERE `id` = ?";
+            $stmtUpdate = $conn->prepare($sqlUpdate);
+            $stmtUpdate->bind_param("i", $propertyId);
+            $stmtUpdate->execute();
+            $stmtUpdate->close();
         }
 
-        // Close the prepared statement
-        $stmt->close();
+        echo 'Data inserted successfully.';
     } else {
-        echo 'Error preparing statement: ' . $conn->error;
+        echo 'Error uploading COO file.';
     }
+    } else {
+    echo 'Error inserting data: ' . $stmt->error;
+    }
+
+    // Close the prepared statement
+    $stmt->close();
+    } else {
+    echo 'Error preparing statement: ' . $conn->error;
+    }
+
 } else {
     echo 'Invalid request method.';
 }
