@@ -13,7 +13,7 @@
 <div>
 
 <div class="mt-3">
-<table id="bulletinTable" class="display" style="width:100%">
+<table id="bulletinTable" class="display " style="width:100%">
     <thead>
         <tr>
             <th style="width: 5%">ID</th>
@@ -34,9 +34,6 @@
             
 
 <?php include 'footer.php'; ?>
-<!-- DataTables JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script>
 $(document).ready(function() {
     var table = $('#bulletinTable').DataTable({
@@ -55,8 +52,8 @@ $(document).ready(function() {
                 "data": null,
                 "render": function(data, type, row) {
                     return '<div class="action-buttons">' +
-                           '<button class="btn-accept" data-userid="' + row.bulletin_user_id + '">Accept</button>' +
-                           '<button class="btn-delete" data-userid="' + row.bulletin_user_id + '">Cancel</button>' +
+                           '<button class="btn-accept btn btn-success btn-sm me-2" data-userid="' + row.bulletin_user_id + '">Accept</button>' +
+                           '<button class="btn-delete btn btn-danger btn-sm" data-userid="' + row.bulletin_user_id + '">Cancel</button>' +
                            '</div>';
                 }
             }

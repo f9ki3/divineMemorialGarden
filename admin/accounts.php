@@ -4,32 +4,9 @@
 <div>
 <?php include 'navbar.php'; ?>
 <div class="container w-100 p-3">
-    
-            <div class="border p-3 rounded mb-3" style="background: white; display: flex; flex-direction: row; justify-content: space-between;">
-            <h3 class="fw-bolder ">Accounts</h3>
-                <div>
-                    <button class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#create">Create Account</button>
-                    
-                </div>
-            </div>
-    <div class="border p-3 rounded mb-3" style="background: white; height: auto">
-        <div>
-            <table id="property_table" class="display">
-            <thead>
-                <tr>
-                    <th width="20%">Area</th>
-                    <th width="20%">Block Number</th>
-                    <th width="20%">Lot Number</th>
-                    <th width="20%">Classification</th>
-                    <th width="20%">Lot Owner</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        </div>
-    </div>
+    <button class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#create">Create Account</button>                
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="addOwner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,8 +115,6 @@
   </div>
 </div>
 
-<?php include 'footer.php'; ?>
-<script src="../jquery/area_info.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
