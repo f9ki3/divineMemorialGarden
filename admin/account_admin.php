@@ -5,10 +5,10 @@
 <?php include 'navbar.php'; ?>
 <div class="container w-100 p-3">
     <div class="d-flex justify-content-between">
-        <div> 
-            <a class="btn btn-success btn-sm">Clients</a>
-            <a href="account_visitors" class="btn border-success text-success btn-sm">Visitors</a>
-            <a href="account_admin" class="btn border-success text-success btn-sm">Admin</a> 
+        <div>
+            <a href="accounts" class="btn border-success text-success btn-sm">Clients</a>
+            <a href="account_visitors" class="btn border-success text-success btn-sm">Visitors</a>  
+            <a class="btn btn-success btn-sm">Admin</a>
         </div>     
         
         <div>
@@ -212,7 +212,7 @@ $(document).ready(function() {
     function initializeDataTable() {
         var table = $('#client').DataTable({
             "ajax": {
-                "url": "../php/fetch_account_client_data.php",
+                "url": "../php/fetch_account_admin.php",
                 "dataSrc": ""
             },
             "columns": [
