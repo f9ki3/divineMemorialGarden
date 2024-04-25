@@ -33,6 +33,10 @@ $(document).ready(function() {
                     window.location.href = '/divineMemorialGarden/visitor';
                 } else if (response === "4") {
                     window.location.href = '/divineMemorialGarden/otp?email=' + encodeURIComponent($username);
+                } else if (response === "6") {
+                    window.location.href = '/divineMemorialGarden/client/homepage';
+                }else if (response === "7") {
+                    window.location.href = '/divineMemorialGarden/visitor/homepage';
                 } else {
                     $('.error').show();
                 }

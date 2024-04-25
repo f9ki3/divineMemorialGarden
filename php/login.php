@@ -53,12 +53,19 @@ if (isset($_POST['uname'], $_POST['pass'])) {
             // Respond with '1' to indicate successful login for user type 0
             echo '1';
         } elseif ($row['user_type'] == 1) {
-            // Respond with '2' to indicate successful login for user type 1
-            echo '2';
+            if ($row['user_started'] == 1) {
+                echo '6'; // Successful login for user type 2 with OTP verified
+            } else {
+                echo '2'; // Successful login for user type 2, but OTP not verified
+            }
         } elseif ($row['user_type'] == 2) {
             // Respond based on OTP status (assuming OTP status is a separate verification step)
             if ($row['user_otp_status'] == 1) {
-                echo '3'; // Successful login for user type 2 with OTP verified
+                if ($row['user_started'] == 1) {
+                    echo '7'; // Successful login for user type 2 with OTP verified
+                } else {
+                    echo '3'; // Successful login for user type 2, but OTP not verified
+                }
             } else {
                 echo '4'; // Successful login for user type 2, but OTP not verified
             }

@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 try {
                     // Prepare and execute the SQL query using prepared statements
-                    $stmt = $conn->prepare("UPDATE users SET user_name = ?, user_profile = ? WHERE id = ?");
+                    $stmt = $conn->prepare("UPDATE users SET user_name = ?, user_profile = ?, user_started = 1 WHERE id = ?");
                     $stmt->bind_param("ssi", $user_name, $newFileName, $visitor_id);
                     $stmt->execute();
 
