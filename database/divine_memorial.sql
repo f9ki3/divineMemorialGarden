@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 05:28 PM
+-- Generation Time: Apr 25, 2024 at 02:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -77,9 +77,88 @@ CREATE TABLE `messages` (
   `message_date` datetime NOT NULL,
   `sender_id` int(11) NOT NULL,
   `reciever_id` int(11) NOT NULL,
-  `message` varchar(255) NOT NULL,
+  `message_content` varchar(255) NOT NULL,
   `message_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `message_date`, `sender_id`, `reciever_id`, `message_content`, `message_status`) VALUES
+(16, '2024-04-25 08:47:51', 2, 101, 'sample message', 0),
+(17, '2024-04-25 08:49:52', 2, 101, 'asassa', 0),
+(18, '2024-04-25 08:56:08', 2, 100, 'Hello', 0),
+(19, '2024-04-25 09:23:55', 2, 104, 'Hello', 0),
+(20, '2024-04-25 09:24:21', 2, 107, 'pre', 0),
+(21, '2024-04-25 10:00:37', 2, 104, 'yow', 0),
+(22, '2024-04-25 10:00:57', 2, 102, 'Hello tol', 0),
+(23, '2024-04-25 10:03:06', 2, 100, 'Yow utang mo mag bayad kana', 0),
+(24, '2024-04-25 10:03:20', 2, 107, 'ginagawa mo', 0),
+(25, '2024-04-25 10:03:43', 2, 107, 'hahaha', 0),
+(26, '2024-04-25 10:03:50', 2, 101, 'pre', 0),
+(27, '2024-04-25 10:04:00', 2, 101, 'mag paramdam kana', 0),
+(28, '2024-04-25 10:04:10', 2, 104, 'ano kaya yun', 0),
+(29, '2024-04-25 10:04:16', 2, 100, 'tol', 0),
+(30, '2024-04-25 10:04:26', 2, 100, 'shot na', 0),
+(31, '2024-04-25 11:22:42', 100, 2, 'mareh', 0),
+(32, '2024-04-25 11:33:31', 100, 2, 'Pre', 0),
+(33, '2024-04-25 11:35:16', 100, 2, 'mareh', 0),
+(34, '2024-04-25 12:32:55', 100, 2, 'hello', 0),
+(35, '2024-04-25 12:42:57', 100, 2, 'yow', 0),
+(36, '2024-04-25 12:43:25', 2, 100, 'bakit', 0),
+(37, '2024-04-25 12:49:11', 100, 2, 'may tatanong lang ako', 0),
+(38, '2024-04-25 12:49:34', 2, 100, 'Okay sigeh ano ba yon?', 0),
+(39, '2024-04-25 13:19:40', 2, 100, 'Haha so ganito na nga alam mo bang pinoposas ang mga bata hahahahahahahahahaha', 0),
+(41, '2024-04-25 13:49:52', 2, 100, 'hello', 0),
+(42, '2024-04-25 13:52:55', 2, 0, 'assas', 0),
+(43, '2024-04-25 13:54:27', 2, 100, 'asassas', 0),
+(44, '2024-04-25 13:58:51', 2, 100, 'okay', 0),
+(45, '2024-04-25 14:07:31', 2, 100, 'dcghfhgfhj', 0),
+(46, '2024-04-25 14:12:06', 100, 0, 'OKay start na', 0),
+(47, '2024-04-25 14:12:32', 100, 2, 'Okay', 0),
+(48, '2024-04-25 14:13:10', 100, 2, 'Game', 0),
+(49, '2024-04-25 14:14:06', 100, 2, 'delay', 0),
+(50, '2024-04-25 14:16:37', 2, 100, 'puro bugs na', 0),
+(51, '2024-04-25 14:17:03', 100, 2, 'haha ou nga eh', 0),
+(52, '2024-04-25 14:17:16', 100, 2, 'ano ba mmaganda gawin', 0),
+(53, '2024-04-25 14:18:10', 2, 100, 'ey ano na', 0),
+(54, '2024-04-25 14:20:23', 2, 100, 'party na', 0),
+(55, '2024-04-25 14:23:45', 2, 100, 'asssas', 0),
+(56, '2024-04-25 14:23:54', 2, 0, 'aa', 0),
+(57, '2024-04-25 14:24:08', 2, 100, 'sad', 0),
+(59, '2024-04-25 14:31:20', 2, 0, 'samasak askajsaskl asklaksklkasa aslkaslkalskaa askalkslak akslakslka askalskl alkslaksl ka lasklkasl', 0),
+(60, '2024-04-25 14:31:38', 2, 100, 'sammplesasa asasasasd sda asd wsdasasd as', 0),
+(61, '2024-04-25 14:32:09', 2, 100, 'yow tara na game', 0),
+(62, '2024-04-25 14:32:19', 2, 100, 'G kapa pa', 0),
+(63, '2024-04-25 14:32:28', 2, 101, 'Pre Kumusta', 0),
+(64, '2024-04-25 14:32:47', 2, 104, 'Tol laban na', 0),
+(65, '2024-04-25 14:32:58', 2, 102, 'Pasok ka bukas?', 0),
+(66, '2024-04-25 14:33:26', 2, 102, 'Hello Tol ano ganap natin pasok kaba OJT?', 0),
+(67, '2024-04-25 14:33:36', 2, 102, 'Okay Sigeh', 0),
+(68, '2024-04-25 14:33:50', 100, 2, 'Mareh laban na daw', 0),
+(69, '2024-04-25 14:34:26', 2, 100, 'G ba open kana account', 0),
+(70, '2024-04-25 14:34:43', 100, 2, 'cgehcegh', 0),
+(71, '2024-04-25 14:38:38', 2, 101, 'Pre g na daw', 0),
+(72, '2024-04-25 14:39:44', 101, 2, 'Hi', 0),
+(73, '2024-04-25 14:40:18', 101, 2, 'hello', 0),
+(74, '2024-04-25 14:40:25', 101, 2, 'Okay', 0),
+(75, '2024-04-25 14:40:41', 101, 2, 'This is a test', 0),
+(76, '2024-04-25 14:40:49', 2, 101, 'OKay', 0),
+(77, '2024-04-25 14:41:04', 101, 2, 'Rank game na', 0),
+(78, '2024-04-25 14:41:16', 2, 101, 'okay gamme na ba pre', 0),
+(79, '2024-04-25 14:41:26', 101, 2, 'Ou', 0),
+(80, '2024-04-25 14:59:51', 108, 107, 'Hello', 0),
+(81, '2024-04-25 15:00:18', 108, 107, 'Hello inquire lng ako sa lot posted ana 63 K', 0),
+(82, '2024-04-25 15:00:29', 108, 107, 'Cash ko po sana', 0),
+(83, '2024-04-25 15:01:01', 108, 106, 'Hello Im Caprio inquire po sanaa ako sa lupa', 0),
+(84, '2024-04-25 15:01:17', 108, 101, 'Hello po mag Inquire lng po ako sa binibentang lupa po', 0),
+(85, '2024-04-25 15:01:44', 108, 104, 'Hello Po', 0),
+(86, '2024-04-25 17:42:47', 2, 101, 'prre', 0),
+(87, '2024-04-25 17:43:02', 2, 102, 'pre', 0),
+(88, '2024-04-25 18:24:15', 111, 2, 'Hello', 0),
+(89, '2024-04-25 18:24:39', 111, 2, 'Im Interested in your lot', 0),
+(90, '2024-04-25 18:24:49', 111, 100, 'Hello May I inquire?', 0);
 
 -- --------------------------------------------------------
 
@@ -129,13 +208,13 @@ INSERT INTO `property` (`id`, `date`, `area`, `block_number`, `lot_number`, `cla
 (8, NULL, 'Lawn 1', '1', 'M', 'Regular', 'ELEN NIETO 5', 0, 'block1lotM.png', 0),
 (9, NULL, 'Lawn 1', '1', 'N', 'Regular', 'RODOLFO CONCEPCION 1', 1, 'block1lotN.png', 1),
 (10, NULL, 'Lawn 1', '1', 'O', 'Premium', 'ROSARIO MANINGAS 4', 0, 'block1lotO.png', 0),
-(11, NULL, 'Lawn 1', '2', 'A', 'Regular', 'VIRGINIA BUENDIA', 0, 'block2lotA.png', 0),
-(12, NULL, 'Lawn 1', '2', 'B', 'Regular', 'EVANGELINE CARPIOS', 0, 'block2lotB.png', 0),
+(11, NULL, 'Lawn 1', '2', 'A', 'Regular', 'VIRGINIA BUENDIA', 1, 'block2lotA.png', 1),
+(12, NULL, 'Lawn 1', '2', 'B', 'Regular', 'EVANGELINE CARPIOS', 1, 'block2lotB.png', 1),
 (13, NULL, 'Lawn 1', '2', 'C', 'Regular', 'BERNARDA SANTILLAN', 0, 'block2lotC.png', 0),
 (14, NULL, 'Lawn 1', '2', 'D', 'Regular', 'AMBROSIO DELA CRUZ 1', 1, 'block2lotD.png', 1),
-(15, NULL, 'Lawn 1', '2', 'E', 'Premium', 'NENITA DELA CRUZ 2', 0, 'block2lotE.png', 0),
-(16, NULL, 'Lawn 1', '2', 'K', 'Regular', 'LANI CABABARO', 0, 'block2lotK.png', 0),
-(17, NULL, 'Lawn 1', '2', 'L', 'Regular', 'MANUEL FRANCISCO', 0, 'block2lotL.png', 0),
+(15, NULL, 'Lawn 1', '2', 'E', 'Premium', 'NENITA DELA CRUZ 2', 0, 'block2lotE.png', 1),
+(16, NULL, 'Lawn 1', '2', 'K', 'Regular', 'LANI CABABARO', 0, 'block2lotK.png', 1),
+(17, NULL, 'Lawn 1', '2', 'L', 'Regular', 'MANUEL FRANCISCO', 0, 'block2lotL.png', 1),
 (18, NULL, 'Lawn 1', '2', 'M', 'Regular', 'BERNARDA SANTILLAN', 0, 'block2lotM.png', 0),
 (19, NULL, 'Lawn 1', '2', 'N', 'Regular', 'AMBROSIO DELA CRUZ 1', 0, 'block2lotN.png', 0),
 (20, NULL, 'Lawn 1', '2', 'O', 'Regular', 'AMBROSIO DELA CRUZ 1', 0, '', 0),
@@ -1112,7 +1191,12 @@ INSERT INTO `sell_bulletin` (`id`, `bulletin_date`, `bulletin_user_id`, `bulleti
 (19, '2024-04-24 20:25:23', 2, 20000, 2147483647, 'michael@gmail.com', 'negotiable', '661e823425bfc_map_highligh.png', 1),
 (20, '2024-04-24 20:40:51', 9, 43000, 2147483647, 'arnold@gmail.com', 'negotiable', '661e89431a0ff_map_highligh.png', 1),
 (21, '2024-04-24 20:50:05', 14, 24000, 2147483647, 'ambo@gmail.com', 'Negotiable', '412747216_10230946337499190_4281031286631952966_n.jpg', 1),
-(22, '2024-04-24 20:54:14', 5, 25000, 2147483647, 'cristina@gmail.com', 'negotiable', '434336536_695643889227080_6086058091800610116_n.jpg', 1);
+(22, '2024-04-24 20:54:14', 5, 25000, 2147483647, 'cristina@gmail.com', 'negotiable', '434336536_695643889227080_6086058091800610116_n.jpg', 1),
+(23, '2024-04-25 02:15:00', 11, 63000, 2147483647, 'virginia@gmail.com', 'negetioble', 'wall 2.jpeg', 1),
+(24, '2024-04-25 14:58:40', 12, 68000, 2147483647, 'caprio@gmail.com', 'Negotiable', 'map_highligh.png', 1),
+(25, '2024-04-25 18:15:49', 15, 80000, 2147483647, 'nenita@gmail.com', 'Negotiable please message me', '434336536_695643889227080_6086058091800610116_n.jpg', 0),
+(26, '2024-04-25 18:18:23', 16, 73000, 2147483647, 'lani@gmail.com', 'negotiable', '434336536_695643889227080_6086058091800610116_n.jpg', 0),
+(27, '2024-04-25 18:23:42', 17, 83000, 2147483647, 'manuel@gmail.com', 'Negotiable', 'map_highligh.png', 0);
 
 -- --------------------------------------------------------
 
@@ -1193,19 +1277,25 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `user_property_id`, `user_date_added`, `user_fname`, `user_lname`, `user_email`, `user_contact`, `user_address`, `user_barangay`, `user_municipal`, `user_province`, `user_zipcode`, `user_profile`, `user_name`, `user_password`, `user_type`, `user_status`, `user_otp`, `user_otp_status`, `user_started`) VALUES
 (1, 0, '2024-04-03 17:38:47', 'Dave', 'Bergania', 'dave@gmail.com', '09120912098', '-', '', '', '', 0, 'dave_profile.jpg', 'dave', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 0, 0, 0, 1, 1),
-(2, 1, '2024-04-03 17:42:24', 'Stephany', 'Gandula', 'steph@gmail.com', '09120912919', 'Karla Ville,', 'Prenza II', 'Marilao', 'Bulacan', 0, 'stephany_profile.jpg', 'stephany', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
+(2, 1, '2024-04-03 17:42:24', 'Stephany', 'Gandula', 'steph@gmail.com', '09120912919', 'Karla Ville,', 'Prenza II', 'Marilao', 'Bulacan', 0, '662a2c61ceb3b_662a2c24e7217_stephany_profile.jpg', 'stephany', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 0, 1),
 (100, 2, '2024-04-21 13:51:30', 'Michael', 'Astorga', 'floterina@gmail.com', '09120912091', 'Northville V', 'Barangay Northville V', 'Marilao', 'Bulacan', 3019, '66287f78c58ae_map_highligh.png', 'michael', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 3598, 1, 0),
 (101, 23, '2024-04-24 05:49:25', 'Art', 'Concerman', 'art@gmail.com', '09128712871', 'Northville V', 'Northville V', 'Marilao', 'Bulacan', 3019, '66288217797b8_412747216_10230946337499190_4281031286631952966_n.jpg', 'art', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
 (102, 9, '2024-04-24 05:59:49', 'Dave', 'Bergania', 'dave@gmail.com', '09120912091', 'Block 9 lot 10', 'Prenza I', 'Marilao', 'Bulacan', 3019, '6628840fbf814_66275475dba7e_Sukuna-Background.jpg', 'arnold', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(104, 5, '2024-04-24 14:45:12', 'Cristina ', 'Ong', 'cristina@gmail.com', '09762376236', 'Maningas St. Block 1 Lot 2', 'Ilang Ilang', 'San Jose Del Monte', 'Bulacan', 3019, '662900733bd8e_th (1).jpg', 'maningas123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(105, 10, '2024-04-24 14:46:05', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'maningas123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(106, 14, '2024-04-24 14:46:19', 'Ambo', 'Dela Cruz', NULL, '09120912121', 'Makarayo St.', 'Prenza 2', 'Marilao', 'Bulacan', 3019, '6628ffb83e2bc_th.jpg', 'ambo123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(107, 11, '2024-04-24 16:10:49', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'vriginia123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(108, 12, '2024-04-24 16:12:49', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'carpios123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(109, 15, '2024-04-24 16:13:41', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'nenita123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(110, 16, '2024-04-24 16:20:44', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'lani123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(111, 17, '2024-04-24 16:21:52', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'manuel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(112, 0, '2024-04-24 17:09:50', 'Mike', 'Arnolds', 'floterina@gmail.com', '09120912091', 'Beverly Ville', 'Loma De Gato', 'Marilao', 'Bulacan', 3019, '6629222d947b5_wall1.jpeg', 'mike123', '586cf2449944c6316902eb41dc44ac8b1dd298365fc412e78d21a8e8c1e9a465', 2, 0, 7005, 1, 0);
+(104, 5, '2024-04-24 14:45:12', 'Maningas', 'David', 'cristina@gmail.com', '09120912091', 'Prenza', 'Prenza', 'Marilao', 'Bulacan', 3019, '66292985c21be_wall 2.jpeg', 'maningas123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(106, 14, '2024-04-24 14:46:19', 'Ambo', 'Dela Cruz', 'ambo@gmail.com', '09120912121', 'Makarayo St.', 'Prenza 2', 'Marilao', 'Bulacan', 3019, '6628ffb83e2bc_th.jpg', 'ambo123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(107, 11, '2024-04-24 16:10:49', 'Virgina', 'Virgin', NULL, '09120912091', 'sample', 'Prenza', 'Marilao', 'Bulacan', 3019, '66294b8d6342e_wall1.jpeg', 'virginia123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(108, 12, '2024-04-24 16:12:49', 'Anthony', 'Caprio', NULL, '09120912091', 'Home Town', 'Tibagan', 'Marilao', 'Bulacan', 3019, '6629fee6700be_Black Logo.png', 'caprio123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(109, 15, '2024-04-24 16:13:41', 'Ninita', 'Arcobrem', NULL, '09120912091', 'Navotas', 'Tibagan', 'Marilao', 'Bulacan', 3019, '662a2d0b028db_nenita.jpg', 'nenita123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
+(110, 16, '2024-04-24 16:20:44', 'Lani', 'Marquez', NULL, '09120912091', 'Nilooban', 'Prenza II', 'Marilao', 'Bulacan', 3019, '662a2dbabc624_lani.jpg', 'lani123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
+(111, 17, '2024-04-24 16:21:52', 'MManuel', 'Alonzo', NULL, '09120912091', 'Binahay', 'Libagan', 'San Jose Del Monte', 'Bulacan', 3019, '662a2e850e8b9_images.jpg', 'manuel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
+(112, 0, '2024-04-24 17:09:50', 'Mike', 'Arnolds', 'floterina@gmail.com', '09120912091', 'Beverly Ville', 'Loma De Gato', 'Marilao', 'Bulacan', 3019, '6629222d947b5_wall1.jpeg', 'mike123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 2, 0, 7005, 1, 0),
+(113, 67, '2024-04-25 12:28:57', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'marites123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(114, 68, '2024-04-25 12:29:16', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'dianna123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(115, 69, '2024-04-25 12:29:34', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'niezel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(116, 70, '2024-04-25 12:29:59', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'aurea123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(117, 71, '2024-04-25 12:30:25', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'irene123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(119, 175, '2024-04-25 12:32:06', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'arlando123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
+(120, 90, '2024-04-25 12:32:22', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'vistoria123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -1298,7 +1388,7 @@ ALTER TABLE `maintenance`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `payment_type`
@@ -1316,7 +1406,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT for table `sell_bulletin`
 --
 ALTER TABLE `sell_bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `service_transaction`
@@ -1340,7 +1430,7 @@ ALTER TABLE `sort`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- Constraints for dumped tables
@@ -1351,12 +1441,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `maintenance`
   ADD CONSTRAINT `maintenance_ibfk_1` FOREIGN KEY (`maintenance_user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `messages`
---
-ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `service_transaction`
