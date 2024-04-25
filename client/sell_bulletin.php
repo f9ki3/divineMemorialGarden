@@ -188,13 +188,13 @@ function send_message() {
 
   // Log retrieved values (optional)
   console.log("Recipient ID: " + recieved_id);
-  console.log("Sender ID: " + sender_id);
+  console.log("Sender ID: " + <?php echo $id?>);
   console.log("Message Content: " + message_content);
 
   // AJAX request
   $.ajax({
     type: 'POST',
-    url: 'send_message.php',
+    url: '../php/send_message.php',
     data: {
       recieved_id: recieved_id,
       sender_id: sender_id,
