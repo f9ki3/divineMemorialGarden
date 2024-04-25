@@ -130,11 +130,13 @@ $(document).ready(function() {
 
                         // Construct message HTML
                         var messageHtml = `
+                        <div class="responsive overflow-auto">
                             <div class="w-100 d-flex flex-row mb-3 ">
                                 <div class=" w-50 p-3 rounded  ${messageAlignmentClass}">
                                     ${message.message_content}
                                 </div>
                             </div>
+                        </div>
                         `;
 
                         // Append message HTML to #message_open container
