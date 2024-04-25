@@ -7,7 +7,7 @@
 <div class="container">
 <div id="getting_started" class="row text-secondary mt-5 w-100" >
     <div class="col-12 col-md-2">
-        <h3 style="font-weight: bold;" class="mb-3">Search Filters</h3>
+        <h4 style="font-weight: bold;" class="mb-3">Search Filters</h4>
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search">
             <button class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -51,7 +51,7 @@
 
     <div class="col-12 col-md-10">
         
-            <h3 style="font-weight: bold;" class="mb-3">Recently Lot Sale Posted</h3>
+            <h4 style="font-weight: bold;" class="mb-3">Recently Lot Sale Posted</h4>
             <hr>
             <div class="w-100 row text-secondary">
             <?php
@@ -113,7 +113,6 @@ if (mysqli_num_rows($result) > 0) {
                 <button class="btn w-25 border-success text-success me-2" onclick="submitForm()">Previous</button>
                 <button class="btn w-25 btn-success" onclick="submitForm()">Next</button>
             </div>
-            
             </div>
     </div>
     
@@ -130,8 +129,8 @@ if (mysqli_num_rows($result) > 0) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input class="form-control mb-2" type="text" id="recieved_id" placeholder="Recipient ID">
-        <input class="form-control mb-2" value="<?php echo $id;?>" type="text" id="sender_id" placeholder="Sender ID">
+        <input type="hidden" class="form-control mb-2" type="text" id="recieved_id" placeholder="Recipient ID">
+        <input type="hidden" class="form-control mb-2" value="<?php echo $id;?>" type="text" id="sender_id" placeholder="Sender ID">
         <textarea class="form-control mb-2" id="message_content" cols="30" rows="5" maxlength="200" placeholder="Write your message"></textarea>
         <small id="charCount" class="form-text text-muted">Characters left: 200</small>
       </div>
@@ -171,7 +170,8 @@ function send_message() {
 
   // Validate message content
   if (message_content === '') {
-    alert('Please enter a message.');
+    alertify.set('notifier','position', 'bottom-left');
+    alertify.error('Empty Message');
     return;
   }
 
@@ -181,7 +181,8 @@ function send_message() {
   var charactersLeft = maxCharacters - messageLength;
 
   if (charactersLeft < 0) {
-    alert('Message exceeds 200 characters.');
+    alertify.set('notifier','position', 'bottom-left');
+    alertify.error('Exceed 200 Characters');
     return;
   }
 
@@ -206,11 +207,21 @@ function send_message() {
       var modalElement = document.getElementById('message');
       var modalInstance = bootstrap.Modal.getInstance(modalElement);
       modalInstance.hide();
+      alertify.set('notifier','position', 'bottom-left');
+      alertify.success('Message Sent!');
+
+      var messageContentElement = document.getElementById('message_content');
+        if (messageContentElement) {
+            messageContentElement.value = ''; // Assuming it's an input element
+            // If it's a different kind of element like a div, use innerHTML
+            // messageContentElement.innerHTML = '';
+        }
     },
     error: function(xhr, status, error) {
       // Handle error
       console.error('Error sending message:', error);
-      alert('Error sending message. Please try again.');
+      alertify.set('notifier','position', 'bottom-left');
+      alertify.error('Message not sent');
     }
   });
 }
