@@ -14,11 +14,12 @@ if (!$receiverId) {
 }
 
 // SQL query to fetch data based on receiverId
-$sql = "SELECT *
-        FROM messages
-        WHERE sender_id = $id
-          AND reciever_id = " . $conn->real_escape_string($receiverId) . "
-        ORDER BY message_date DESC";
+$sql = "SELECT id, message_date, sender_id, reciever_id, message_content, message_status
+FROM messages
+WHERE (sender_id = $id AND reciever_id = $receiverId)
+   OR (sender_id = $receiverId AND reciever_id = $id)
+ORDER BY message_date;
+";
 
 $result = $conn->query($sql);
 

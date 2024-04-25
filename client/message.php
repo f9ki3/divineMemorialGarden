@@ -26,7 +26,9 @@ overflow: hidden;
         <div class="col-12 col-md-9 h-100 d-flex flex-column justify-content-between p-3">
             
             <h3 style="font-weight: bold;" class="mb-3">User Name</h3>
-            <div id="message_open"></div>
+            <div style="height: 100vh; width: 100%;" class="table-responsive scrollbar mx-n1 px-1">
+                <div id="message_open"></div>
+            </div>
             <!-- <h3 style="font-weight: bold;" class="mb-3">${message.user_fname} ${message.user_lname}</h3> -->
 
             <div class="w-100 mb-3 d-flex justify-content-between align-items-center ">
@@ -121,15 +123,15 @@ $(document).ready(function() {
                     // Iterate over each message in the response array
                     response.forEach(function(message) {
                         // Determine if the message was sent by the current user
-                        var isSentByCurrentUser = (message.sender_id == receiverId);
+                        var isSentByCurrentUser = (message.reciever_id == receiverId);
 
                         // Determine message alignment based on sender
-                        var messageAlignmentClass = isSentByCurrentUser ? 'text-end' : 'text-start';
+                        var messageAlignmentClass = isSentByCurrentUser ? 'text-end text-start bg-success text-light' : 'bg-light border text-secondary';
 
                         // Construct message HTML
                         var messageHtml = `
-                            <div class="w-100 d-flex flex-row mb-3 ${messageAlignmentClass}">
-                                <div class="bg-success w-50 p-3 rounded text-light">
+                            <div class="w-100 d-flex flex-row mb-3 ">
+                                <div class=" w-50 p-3 rounded  ${messageAlignmentClass}">
                                     ${message.message_content}
                                 </div>
                             </div>
