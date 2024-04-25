@@ -130,8 +130,8 @@ if (mysqli_num_rows($result) > 0) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" class="form-control mb-2" type="text" id="recieved_id" placeholder="Recipient ID">
-        <input type="hidden" class="form-control mb-2" value="<?php echo $id;?>" type="text" id="sender_id" placeholder="Sender ID">
+        <input class="form-control mb-2" type="text" id="recieved_id" placeholder="Recipient ID">
+        <input class="form-control mb-2" value="<?php echo $id;?>" type="text" id="sender_id" placeholder="Sender ID">
         <textarea class="form-control mb-2" id="message_content" cols="30" rows="5" maxlength="200" placeholder="Write your message"></textarea>
         <small id="charCount" class="form-text text-muted">Characters left: 200</small>
       </div>
@@ -164,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
 function send_message() {
     var recieved_id = document.getElementById('recieved_id').value;
     var sender_id = document.getElementById('sender_id').value;
@@ -172,9 +171,8 @@ function send_message() {
 
     // Validate message content
     if (message_content.trim() === '') {
-        alertify.set('notifier', 'position', 'bottom-left');
-        alertify.error('Empty Message');
-        return;
+      alert('Please enter a message.');
+      return;
     }
 
     // Perform character count
@@ -183,52 +181,33 @@ function send_message() {
     var charactersLeft = maxCharacters - messageLength;
 
     if (charactersLeft < 0) {
-        alertify.set('notifier', 'position', 'bottom-left');
-        alertify.error('Message Exceeds 200 characters');
-        return;
+      alert('Message exceeds 200 characters.');
+      return;
     }
 
-    // Prepare data to send
-    var data = new FormData();
-    data.append('recieved_id', recieved_id);
-    data.append('sender_id', sender_id);
-    data.append('message_content', message_content);
+    // Example of using retrieved values
+    console.log("Recipient ID: " + recieved_id);
+    console.log("Sender ID: " + sender_id);
+    console.log("Message Content: " + message_content);
 
-    // Send AJAX request
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../php/send_message.php', true);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            // Request was successful
-            alertify.set('notifier', 'position', 'bottom-left');
-            alertify.success('Message Sent');
-            
-            // Close the modal after processing
-            var modalElement = document.getElementById('message');
-            var modalInstance = bootstrap.Modal.getInstance(modalElement);
-            modalInstance.hide();
-        } else {
-            // Error handling
-            alertify.set('notifier', 'position', 'bottom-left');
-            alertify.error('Error sending message');
-        }
-    };
-    xhr.onerror = function() {
-        // Error handling for network errors
-        alertify.set('notifier', 'position', 'bottom-left');
-        alertify.error('Network Error');
-    };
-    xhr.send(data);
-}
+    // Here you can perform AJAX request to send the message using retrieved values
+    // For example:
+    // ajaxSendMessage(recieved_id, sender_id, message_content);
 
-// Update character count display on input change
-document.getElementById('message_content').addEventListener('input', function() {
+    // Close the modal after processing
+    var modalElement = document.getElementById('message');
+    var modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
+  }
+
+  // Update character count display on input change
+  document.getElementById('message_content').addEventListener('input', function() {
     var messageLength = this.value.length;
     var maxCharacters = 200;
     var charactersLeft = maxCharacters - messageLength;
     var charCountElement = document.getElementById('charCount');
     charCountElement.textContent = "Characters left: " + charactersLeft;
-});
+  });
 
 </script>
 
