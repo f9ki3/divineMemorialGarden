@@ -17,7 +17,7 @@ overflow: hidden;
             <!-- Left column content (if needed) -->
             <div >
                 <button style="width: 49%" class="btn btn-sm text-success border border-success">Inbox</button>
-                <button style="width: 49%" class="btn btn-sm text-success border border-success">Sales</button>
+                <a href="message" style="width: 49%" class="btn btn-sm text-success border border-success">Support</a>
             </div>
             <div style="height: 100vh" class="table-responsive scrollbar mx-n1 px-1">
                 <div id="message_container"></div>
@@ -25,9 +25,9 @@ overflow: hidden;
         </div>
         <div class="col-12 col-md-9 h-100 d-flex flex-column justify-content-between p-3">
 
-            <h3 style="font-weight: bold;" class="mb-0" id='user'></h3>
+            <h3 style="font-weight: bold;" class="mb-0" id='user'>Divine Memorial</h3>
     <hr>
-            <div class="responsive overflow-auto" style="height: calc(100% - 60px);"><!-- Adjusted height -->
+            <div class="responsive overflow-auto" style="height: calc(100% - 60px);" id="messageContainer">
                 <div id="message_open"></div>
             </div>
             
@@ -233,12 +233,13 @@ function send_message() {
             success: function(response) {
             // Handle success response if needed
             console.log('Message sent successfully:', response);
+            
+            alertify.set('notifier','position', 'bottom-left');
+            alertify.success('Message Sent!');
             // Close the modal after processing
             var modalElement = document.getElementById('message');
             var modalInstance = bootstrap.Modal.getInstance(modalElement);
             modalInstance.hide();
-            alertify.set('notifier','position', 'bottom-left');
-            alertify.success('Message Sent!');
             handleMessageClick()
 
             var messageContentElement = document.getElementById('message_content');
@@ -263,6 +264,12 @@ function send_message() {
         var maxCharacters = 200;
         var charactersLeft = maxCharacters - messageLength;
         $('#charCount').text("Characters left: " + charactersLeft);
+        });
+    
+        // JavaScript to scroll the container down to its bottom
+        document.addEventListener("DOMContentLoaded", function() {
+            var messageContainer = document.getElementById("messageContainer");
+            messageContainer.scrollTop = messageContainer.scrollHeight;
         });
 
 
