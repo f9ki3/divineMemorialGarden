@@ -165,49 +165,64 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 function send_message() {
-    var recieved_id = document.getElementById('recieved_id').value;
-    var sender_id = document.getElementById('sender_id').value;
-    var message_content = document.getElementById('message_content').value;
+  var recieved_id = $('#recieved_id').val();
+  var sender_id = $('#sender_id').val();
+  var message_content = $('#message_content').val().trim();
 
-    // Validate message content
-    if (message_content.trim() === '') {
-      alert('Please enter a message.');
-      return;
-    }
-
-    // Perform character count
-    var messageLength = message_content.length;
-    var maxCharacters = 200;
-    var charactersLeft = maxCharacters - messageLength;
-
-    if (charactersLeft < 0) {
-      alert('Message exceeds 200 characters.');
-      return;
-    }
-
-    // Example of using retrieved values
-    console.log("Recipient ID: " + recieved_id);
-    console.log("Sender ID: " + sender_id);
-    console.log("Message Content: " + message_content);
-
-    // Here you can perform AJAX request to send the message using retrieved values
-    // For example:
-    // ajaxSendMessage(recieved_id, sender_id, message_content);
-
-    // Close the modal after processing
-    var modalElement = document.getElementById('message');
-    var modalInstance = bootstrap.Modal.getInstance(modalElement);
-    modalInstance.hide();
+  // Validate message content
+  if (message_content === '') {
+    alert('Please enter a message.');
+    return;
   }
 
-  // Update character count display on input change
-  document.getElementById('message_content').addEventListener('input', function() {
-    var messageLength = this.value.length;
-    var maxCharacters = 200;
-    var charactersLeft = maxCharacters - messageLength;
-    var charCountElement = document.getElementById('charCount');
-    charCountElement.textContent = "Characters left: " + charactersLeft;
+  // Perform character count
+  var messageLength = message_content.length;
+  var maxCharacters = 200;
+  var charactersLeft = maxCharacters - messageLength;
+
+  if (charactersLeft < 0) {
+    alert('Message exceeds 200 characters.');
+    return;
+  }
+
+  // Log retrieved values (optional)
+  console.log("Recipient ID: " + recieved_id);
+  console.log("Sender ID: " + sender_id);
+  console.log("Message Content: " + message_content);
+
+  // AJAX request
+  $.ajax({
+    type: 'POST',
+    url: 'send_message.php',
+    data: {
+      recieved_id: recieved_id,
+      sender_id: sender_id,
+      message_content: message_content
+    },
+    success: function(response) {
+      // Handle success response if needed
+      console.log('Message sent successfully:', response);
+      // Close the modal after processing
+      var modalElement = document.getElementById('message');
+      var modalInstance = bootstrap.Modal.getInstance(modalElement);
+      modalInstance.hide();
+    },
+    error: function(xhr, status, error) {
+      // Handle error
+      console.error('Error sending message:', error);
+      alert('Error sending message. Please try again.');
+    }
   });
+}
+
+// Update character count display on input change
+$('#message_content').on('input', function() {
+  var messageLength = this.value.length;
+  var maxCharacters = 200;
+  var charactersLeft = maxCharacters - messageLength;
+  $('#charCount').text("Characters left: " + charactersLeft);
+});
+
 
 </script>
 
