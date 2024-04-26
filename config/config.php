@@ -1,15 +1,15 @@
 <?php 
-// // Establish database connection
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "divine_memorial";
+// Establish database connection
+$servername = "localhost";
+$username = "u990660024_admin";
+$password = "xk1n6J~4rY";
+$dbname = "u990660024_dmis";
 
 // Establish database connection
-$servername = "sql.freedb.tech";
-$username = "freedb_f9ki3";
-$password = "f@Q7QhtY8wD6*wT";
-$dbname = "freedb_divine_memorial";
+// $servername = "sql.freedb.tech";
+// $username = "freedb_f9ki3";
+// $password = "f@Q7QhtY8wD6*wT";
+// $dbname = "freedb_divine_memorial";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
