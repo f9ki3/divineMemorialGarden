@@ -64,6 +64,47 @@
       
 
 </div>
+  <div class="container mt-5">
+    <h3 class="fw-bold">Services Offers</h3>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div style="height: 200px;">
+                  <img src="../uploads/g1.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Grave Maintenance</h5>
+                    <p class="card-text">Professional care and maintenance of gravesites, including cleaning, landscaping, and upkeep.</p>
+                    <a href="#" class="btn btn-success">Inquire Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div style="height: 200px;">
+                  <img src="../uploads/g2.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Funeral Planning Services</h5>
+                    <p class="card-text">Assistance in planning and organizing funeral services, including logistics, paperwork, and ceremony arrangements.</p>
+                    <a href="#" class="btn btn-success">Inquire Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div style="height: 200px;">
+                  <img src="../uploads/g3.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Memorial Design and Installation</h5>
+                    <p class="card-text">Customized memorial design and installation services, including headstones, plaques, and other commemorative structures.</p>
+                    <a href="#" class="btn btn-success">Inquire Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -108,49 +149,6 @@
       </div>
     </div>
   </div>
-</div>
-
-
-  <div class="container mt-5">
-    <h3 class="fw-bold">Services Offers</h3>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="../uploads/g1.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Grave Maintenance</h5>
-                    <p class="card-text">Professional care and maintenance of gravesites, including cleaning, landscaping, and upkeep.</p>
-                    <a href="#" class="btn btn-success">Inquire Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="../uploads/g2.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Funeral Planning Services</h5>
-                    <p class="card-text">Assistance in planning and organizing funeral services, including logistics, paperwork, and ceremony arrangements.</p>
-                    <a href="#" class="btn btn-success">Inquire Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="../uploads/g3.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Memorial Design and Installation</h5>
-                    <p class="card-text">Customized memorial design and installation services, including headstones, plaques, and other commemorative structures.</p>
-                    <a href="#" class="btn btn-success">Inquire Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
