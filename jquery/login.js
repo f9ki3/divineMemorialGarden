@@ -26,17 +26,17 @@ $(document).ready(function() {
                 $('#login_btn').show();
 
                 if (response === "1") {
-                    window.location.href = '/divineMemorialGarden/admin/dashboard';
+                    window.location.href = '/admin/dashboard';
                 } else if (response === "2") {
-                    window.location.href = '/divineMemorialGarden/client';
+                    window.location.href = '/client';
                 } else if (response === "3") {
-                    window.location.href = '/divineMemorialGarden/visitor';
+                    window.location.href = '/visitor';
                 } else if (response === "4") {
-                    window.location.href = '/divineMemorialGarden/otp?email=' + encodeURIComponent($username);
+                    window.location.href = '/otp?email=' + encodeURIComponent($username);
                 } else if (response === "6") {
-                    window.location.href = '/divineMemorialGarden/client/homepage';
+                    window.location.href = '/client/homepage';
                 }else if (response === "7") {
-                    window.location.href = '/divineMemorialGarden/visitor/homepage';
+                    window.location.href = '/visitor/homepage';
                 } else {
                     $('.error').show();
                 }
