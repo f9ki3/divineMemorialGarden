@@ -1,6 +1,6 @@
 <?php 
 // Establish database connection
-$servername = "localhost";
+$servername = "153.92.8.8";
 $username = "u990660024_admin";
 $password = "xk1n6J~4rY";
 $dbname = "u990660024_dmis";
