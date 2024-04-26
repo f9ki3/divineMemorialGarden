@@ -39,6 +39,7 @@ function add() {
                 // Handle success response here
                 alertify.set('notifier', 'position', 'bottom-left'); // Set position of notifications
                 alertify.success('Added Successfully'); // Display success notification
+                // Call fetchData function when the page loads
                 function forceClickButton() {
                     var closeButton = document.querySelector('#close');
                     if (closeButton) {
