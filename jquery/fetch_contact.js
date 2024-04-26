@@ -17,7 +17,7 @@ $(document).ready(function(){
                 $('#link').val(data.link);
                 
                 // Log the response to the console
-                console.log(data);
+                // console.log(data);
             },
             error: function(xhr, status, error) {
                 // Handle error

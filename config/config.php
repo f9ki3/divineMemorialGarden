@@ -6,9 +6,9 @@
 // $dbname = "u990660024_dmis";
 
 $servername = "localhost";
-$username = "u990660024_admin";
-$password = ":Mm0bdvuW";
-$dbname = "u990660024_dmis";
+$username = "root";
+$password = "";
+$dbname = "divine_memorial";
 
 // Establish database connection
 // $servername = "sql.freedb.tech";

@@ -63,7 +63,40 @@
 <div class="border rounded p-3 mt-3">
     <div class="d-flex justify-content-between align-items-center">
         <h5 class="mt-2 fw-bolder ">Services Offers Maintenance</h5>
-        <a style="text-decoration: none; color: gray" onclick="edit_lot()">+ Add</a>
+        <a style="text-decoration: none; color: gray"  data-bs-toggle="modal" data-bs-target="#add_service"">+ Add</a>
+        <!-- Modal -->
+        <div class="modal mt-5 fade" id="add_service" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Service</h1>
+                <button type="button" class="btn-close" id="close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <p class="mb-0">Service Title</p>
+                    <input id="service_title" type="text" class="form-control" placeholder="Enter service title here">
+                </div>
+                <div class="mb-2">
+                    <p class="mb-0">Service Fee Offer</p>
+                    <input id="service_fee" type="text" class="form-control" placeholder="Enter service title here">
+                </div>
+                <div class="mb-2">
+                    <p class="mb-0">Service Description</p>
+                    <textarea name="" id="service_description" placeholder="Write description here" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="mb-2">
+                    <p class="mb-2">Upload Cover Image</p>
+                    <input type="file" id="service_cover">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="add()">Save</button>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
     <hr class="m-0">
     <div class="row p-2 mt-3">
@@ -135,6 +168,7 @@ function cancel(){
     $('#edit_contact').hide()
 }
 </script>
+<script src="../jquery/add_service.js"></script>
 <script src="../jquery/update_contact.js"></script>
 <script src="../jquery/fetch_contact.js"></script>
 </body>
