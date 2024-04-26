@@ -99,42 +99,9 @@
         </div>
     </div>
     <hr class="m-0">
-    <div class="row p-2 mt-3">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="../uploads/g1.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Grave Maintenance</h5>
-                    <p class="card-text">Professional care and maintenance of gravesites, including cleaning, landscaping, and upkeep.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="../uploads/g2.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Funeral Planning Services</h5>
-                    <p class="card-text">Assistance in planning and organizing funeral services, including logistics, paperwork, and ceremony arrangements.</p>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="../uploads/g3.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Memorial Design and Installation</h5>
-                    <p class="card-text">Customized memorial design and installation services, including headstones, plaques, and other commemorative structures.</p>
-     
-                </div>
-            </div>
-        </div>
+    <div class="services-container row p-2 mt-3">
+
+        
     </div>
 </div>
 
@@ -168,6 +135,7 @@ function cancel(){
     $('#edit_contact').hide()
 }
 </script>
+<script src="../jquery/fetch_services.js"></script>
 <script src="../jquery/add_service.js"></script>
 <script src="../jquery/update_contact.js"></script>
 <script src="../jquery/fetch_contact.js"></script>
