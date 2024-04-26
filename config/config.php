@@ -1,6 +1,6 @@
 <?php 
 // Establish database connection
-$servername = "dmis.online";
+$servername = "localhost";
 $username = "u990660024_admin";
 $password = "xk1n6J~4rY";
 $dbname = "u990660024_dmis";
