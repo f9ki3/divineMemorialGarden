@@ -17,7 +17,7 @@
                      <div class="border bg-success border-success p-2 rounded" style="height: 200px;">
                      <h6 class="fw-bolder text-white p-3 ms-4">Total Deceased </h6>
                      <div class="" style="height: 100px;  position:absolute; margin-left:12rem; padding:3px; margin-top:-.5rem; background-color:white;"></div>
-                     <h1 class="fw-bolder text-center text-light mt-2" style="font-size: 50px; margin-left:12rem;  bl">1290</h1>
+                     <h1 class="fw-bolder text-center text-light mt-2" style="font-size: 50px; margin-left:12rem;">1290</h1>
                     
                      <img src="graves.png" alt="grvs" style="height: 100px; width:100px;  margin-top:-80px; margin-left:2.9rem;">
                     </div>
@@ -277,9 +277,6 @@
         </div> --> 
     </div>
 </div>
-
-
-
 
 <!-- end inventory-->
 
