@@ -5,18 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../library/php_mailer/vendor/autoload.php'; // Path to autoload.php from PHPMailer
 
 // Establish database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "divine_memorial";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check database connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include '../config/config.php';
 // Function to generate a random 4-digit OTP
 function generateOTP() {
     return sprintf('%04d', mt_rand(0, 9999)); // Generates a 4-digit random number with leading zeros if necessary
