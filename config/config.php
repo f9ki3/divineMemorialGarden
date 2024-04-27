@@ -2,7 +2,7 @@
 // Establish database connection
 // $servername = "localhost";
 // $username = "u990660024_admin";
-// $password = ":Mm0bdvuW";
+// $password = "k7zlu+zN|1";
 // $dbname = "u990660024_dmis";
 
 $servername = "localhost";
