@@ -27,6 +27,9 @@ overflow: hidden;
 
             <h3 style="font-weight: bold;" class="mb-0" id='user'>Divine Memorial</h3>
     <hr>
+    <div>
+
+    </div>
             <div class="responsive overflow-auto" style="height: calc(100% - 60px);" id="messageContainer">
                 <div id="message_open"></div>
             </div>
