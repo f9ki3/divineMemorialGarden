@@ -5,11 +5,12 @@ include '../config/config.php';
 // Assuming $conn is your database connection object
 
 // Check if the necessary POST data is received
-if (isset($_POST['sender_id'], $_POST['recieved_id'], $_POST['message_content'])) {
+if (isset($_POST['sender_id'], $_POST['recieved_id'], $_POST['message_content'], $_POST['offer'])) {
     // Retrieve POST data
     $sender_id = $_POST['sender_id'];
     $receiver_id = $_POST['recieved_id'];
     $message_content = $_POST['message_content'];
+    $offer = $_POST['offer'];
 
     // Prepare SQL statement to insert message into database using prepared statements
     $sql = "INSERT INTO `messages` ( `message_date`, `sender_id`, `reciever_id`, `message_content`, `message_status`)
@@ -31,7 +32,14 @@ if (isset($_POST['sender_id'], $_POST['recieved_id'], $_POST['message_content'])
             // Error inserting message
             echo "Failed to send message. Please try again.";
         }
+            // Prepare SQL statement to insert offer into database using prepared statements
+            $sql = "INSERT INTO `offers` (`offer_date`, `offer_amount`, `offer_user_id`, `offer_status`)
+            VALUES (NOW(), ?, ?, 0)";
 
+            // Prepare the SQL statement
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("di", $offer, $sender_id);
+            $stmt->execute();
         // Close statement
         $stmt->close();
     } else {

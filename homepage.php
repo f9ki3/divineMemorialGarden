@@ -63,6 +63,12 @@
       
 
 </div>
+<div class="container mt-5">
+    <h3 class="fw-bold">Services Offers</h3>
+    <div class="row services-container">
+        <!-- fetch data services -->
+    </div>
+</div>
 
 
 
@@ -110,46 +116,73 @@
 </div>
 
 
-  <div class="container mt-5">
-    <h3 class="fw-bold">Services Offers</h3>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="uploads/g1.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
+<div class="container">
+<div id="getting_started" class="row mt-5 " >
+    <div class="col-12 col-md-12">
+            <h3 class="fw-bold">Lot For Sale</h3>
+            <div class="w-100 row text-secondary">
+            <?php
+include 'config/config.php';
+
+$query = "SELECT * FROM property
+            JOIN sell_bulletin ON property.id = sell_bulletin.bulletin_user_id
+            JOIN users ON property.id = users.user_property_id
+            WHERE lot_status = 1";
+
+$result = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <div class="col-12 col-md-4 p-2">
+        <a class="message-trigger" href="register" style="text-decoration: none; color: gray">
+            <div class="border rounded p-3">
+                <div class="mt-3 pb-3" style="height: 200px; width: 100%">
+                  <img style="oject-fit: cover; width: 100%; height: 100%" src="uploads/<?php echo $row['map_img']?>" alt="">
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Grave Maintenance</h5>
-                    <p class="card-text">Professional care and maintenance of gravesites, including cleaning, landscaping, and upkeep.</p>
-                    <a href="#" class="btn btn-success">Inquire Now</a>
+                <div>
+                <p class="m-0 p-0">Lot: Block <?php echo $row['block_number']; ?> Lot <?php echo $row['lot_number']; ?></p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="fw-bold text-success">₱ <?php echo number_format($row['bulletin_price'], 2); ?></h4>
+                        <?php
+                        
+                            // Condition when property_id does not match $property_id
+                            echo '
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                        <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                    </svg>
+                                ';
+                        
+                        ?>
+                    </div>
+                    <hr>
+                    <button class="btn btn-success">Avail Now</button>
+                    
                 </div>
             </div>
+          </a>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="uploads/g2.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Funeral Planning Services</h5>
-                    <p class="card-text">Assistance in planning and organizing funeral services, including logistics, paperwork, and ceremony arrangements.</p>
-                    <a href="#" class="btn btn-success">Inquire Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div style="height: 200px;">
-                  <img src="uploads/g3.jpg" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Memorial Design and Installation</h5>
-                    <p class="card-text">Customized memorial design and installation services, including headstones, plaques, and other commemorative structures.</p>
-                    <a href="#" class="btn btn-success">Inquire Now</a>
-                </div>
-            </div>
-        </div>
+        <?php
+    }
+} else {
+    ?>
+    <div style="height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center" class="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="gainsboro" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+            <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25 25 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009l.496.008a64 64 0 0 1 1.51.048m1.39 1.081q.428.032.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a66 66 0 0 1 1.692.064q.491.026.966.06"/>
+        </svg>
+        <p class="text-center mt-5">No Post Yet</p>
     </div>
+    <?php
+}
+?>
+
+            </div>
+    </div>
+    
+</div>
+</div>
+
+
 </div>
 
 
@@ -180,7 +213,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6">
-            <a href="login">
+            <a href="register">
               <div style="height: 300px; width: auto">
                   <img src="uploads/map_highligh.png" class="rounded w-100 h-100 rounded-4" alt="map">
               </div>
@@ -192,10 +225,50 @@
 
 
 <?php include 'footer.php'?>
+<script>
+  $(document).ready(function(){
+    // Function to fetch data from the PHP API
+    function fetchData() {
+        $.ajax({
+            url: 'php/get_service_client.php', // URL of your PHP API
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Loop through the data and display each service
+                data.forEach(function(service) {
+                    // Format service fee with peso sign
+                    var serviceFee = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(service.service_fee);
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                    var card = `
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div style="height: 200px;">
+                                    <img src="uploads/${service.service_cover}" style="object-fit: cover; height: 100%; width: 100%" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${service.service_name}</h5>
+                                    <hr>
+                                    <p class="card-text">Service Fee: ${serviceFee}</p>
+                                    <p class="card-text">${service.service_description}</p>
+                                    <a href="register" class="btn btn-success" >Buy Service</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $('.services-container').append(card);
+                });
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    // Call fetchData function when the page loads
+    fetchData();
+});
+</script>
+
 </body>
 </html>

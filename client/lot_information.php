@@ -1,5 +1,59 @@
 <html lang="en">
-<?php include 'header.php'?>
+<?php 
+include '../config/config.php';
+include 'header.php'
+?>
+<?php
+            // Assuming $user_property_id is safely provided
+            $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
+
+            $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, request_status, map_img
+                    FROM property
+                    WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    // Fetch the first row only (assuming one row per $id)
+                    $row = $result->fetch_assoc();
+                    $id = $row['id'];
+                    $date = $row['date'];
+                    $area = $row['area'];
+                    $block_number = $row['block_number'];
+                    $lot_number = $row['lot_number'];
+                    $classification = $row['classification'];
+                    $lot_owner = $row['lot_owner'];
+                    $lot_status = $row['request_status'];
+                    $map_img = $row['map_img'];
+
+                    // Use the fetched values as needed
+                    // Example: echo $id, $date, $area, $lot_owner;
+
+                } else {
+                    // No rows found based on the provided $id
+                    // Handle the case where no matching records are found
+                    $id = "N/A";
+                    $date = "N/A";
+                    $area = "N/A";
+                    $block_number = "N/A";
+                    $lot_number = "N/A";
+                    $classification = "N/A";
+                    $lot_owner = "N/A";
+                    $lot_status = "N/A";
+                    $map_img = "N/A";
+                }
+            } else {
+                echo "Error in preparing SQL statement: " . $conn->error;
+            }
+
+            // Close the prepared statement
+            $stmt->close();
+            ?>
 
 <body>
 <?php include 'navbar.php'?>
@@ -12,14 +66,13 @@
             <div class="rounded  border text-dark border-success pt-5 pb-5 border p-3 bg-light" >
                 <div class="w-100 d-flex flex-row justify-content-between">
                     <p class="m-0">Account Name</p>
-                    <p class="m-0">Block 5 Lot A</p>
+                    <p class="m-0"><?php  echo 'Block', $block_number, 'Lot', $lot_number?></p>
                 </div>
                 <h1 class="fw-bolder m-0 mb-4"><?php echo $fname,' ', $lname?></h1>
                 <div class="w-100 d-flex flex-row justify-content-between">
                     <button class="btn border border-success text-success" style="width: 49%">View Map</button>
                     <button class="btn btn-success" style="width: 49%" data-bs-toggle="modal" data-bs-target="#request" 
                     <?php 
-                    include '../config/config.php';
                     $sql = "SELECT request_status FROM property WHERE id = ?";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("i", $property_id); // Assuming $id is an integer
@@ -85,66 +138,13 @@
 
         <div class="col-12 col-md-6 p-2">
         <div class="p-3 border mb-3 rounded">
-        <?php
-            // Assuming $user_property_id is safely provided
-            $id = intval($user_property_id); // Sanitize $user_property_id to ensure it's an integer
-
-            $sql = "SELECT id, date, area, block_number, lot_number, classification, lot_owner, request_status, map_img
-                    FROM property
-                    WHERE id = ?";
-            $stmt = $conn->prepare($sql);
-
-            if ($stmt) {
-                $stmt->bind_param("i", $id);
-                $stmt->execute();
-
-                $result = $stmt->get_result();
-
-                if ($result->num_rows > 0) {
-                    // Fetch the first row only (assuming one row per $id)
-                    $row = $result->fetch_assoc();
-                    $id = $row['id'];
-                    $date = $row['date'];
-                    $area = $row['area'];
-                    $block_number = $row['block_number'];
-                    $lot_number = $row['lot_number'];
-                    $classification = $row['classification'];
-                    $lot_owner = $row['lot_owner'];
-                    $lot_status = $row['request_status'];
-                    $map_img = $row['map_img'];
-
-                    // Use the fetched values as needed
-                    // Example: echo $id, $date, $area, $lot_owner;
-
-                } else {
-                    // No rows found based on the provided $id
-                    // Handle the case where no matching records are found
-                    $id = "N/A";
-                    $date = "N/A";
-                    $area = "N/A";
-                    $block_number = "N/A";
-                    $lot_number = "N/A";
-                    $classification = "N/A";
-                    $lot_owner = "N/A";
-                    $lot_status = "N/A";
-                    $map_img = "N/A";
-                }
-            } else {
-                echo "Error in preparing SQL statement: " . $conn->error;
-            }
-
-            // Close the prepared statement
-            $stmt->close();
-            ?>
-
-
             <!-- HTML Output -->
             <p class="fw-bold">Lot Information</p>
 
             <?php if ($result->num_rows > 0) : ?>
                 <div class='d-flex justify-content-between'>
                     <div class='w-75'>
-                        <p class="p-0 m-0">Deceased Name</p>
+                        <p class="p-0 m-0">Owner Name</p>
                         <p><?php echo $lot_owner ?></p>
                     </div>
                     <div class='w-25'>
@@ -393,20 +393,19 @@
             <input id="price" type="text" class="form-control " placeholder="0">
         </div>
         <div class="form-group mb-3" style="width: 100%">
-            <label for="contact">Contact</label>
-            <input id="contact" type="text" class="form-control " placeholder="Enter your contact number">
+            <label for="contact_seller">Contact</label>
+            <input id="contact_seller" type="text" class="form-control " placeholder="Enter your contact number">
         </div>
         <div class="form-group mb-3" style="width: 100%">
             <label for="email">E-mail</label>
             <input id="email" type="email" class="form-control " placeholder="Enter your email address">
         </div>
         <div class="form-group mb-3" style="width: 100%">
-            <label for="note">Note / Message</label>
-            <textarea name="" id="note" cols="30" rows="1" class="form-control " placeholder="Write note / message here"></textarea>
-        </div>
-        <div class="form-group mb-3" style="width: 100%">
-            <label for="coo">Certificate of Ownership</label>
-            <input id="coo" class="" type="file" id="uploadText">
+            <label for="note">Select Offer Type</label>
+            <select class="form-control" name="" id="offer" class="">
+                <option value="Negotiable">Negotiable</option>
+                <option value="Fixed Price">Fixed Price</option>
+            </select>
         </div>
     </div>
       <div class="modal-footer">
@@ -428,16 +427,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   confirmButton.addEventListener('click', function() {
     const priceInput = document.querySelector('#price');
-    const contactInput = document.querySelector('#contact');
+    const contactInput = document.querySelector('#contact_seller');
     const emailInput = document.querySelector('#email');
-    const noteInput = document.querySelector('#note');
-    const cooInput = document.querySelector('#coo');
+    const offerInput = document.querySelector('#offer');
 
     const priceValue = priceInput.value.trim();
     const contactValue = contactInput.value.trim();
     const emailValue = emailInput.value.trim();
-    const noteValue = noteInput.value.trim();
-    const cooFile = cooInput.files[0];
+    const offerValue = offerInput.value.trim();
 
     clearErrors();
 
@@ -456,27 +453,13 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    if (noteValue.length > 200) {
-      showError(noteInput, 'Note exceeds maximum length of 200 characters.');
-      return;
-    }
-
-    if (cooFile) {
-      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-      if (!allowedTypes.includes(cooFile.type)) {
-        showError(cooInput, 'Please upload a PNG, JPG, or JPEG file for COO.');
-        return;
-      }
-    }
-
     const formData = new FormData();
     formData.append('id', '<?php echo $id?>');
     formData.append('propertyId', '<?php echo $property_id ?>'); // Include the PHP variable $id
     formData.append('price', priceValue);
-    formData.append('contact', contactValue);
+    formData.append('contact_seller', contactValue);
     formData.append('email', emailValue);
-    formData.append('note', noteValue);
-    formData.append('coo', cooFile);
+    formData.append('offer', offerValue);
 
     fetch('../php/insert_bulletin.php', {
       method: 'POST',
@@ -532,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function clearFormFields() {
-    const inputs = ['#price', '#contact', '#email', '#note', '#coo'];
+    const inputs = ['#price', '#contact', '#email', 'offer'];
     inputs.forEach(input => {
       document.querySelector(input).value = '';
     });

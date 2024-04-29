@@ -60,7 +60,8 @@ include '../config/config.php';
 $query = "SELECT * FROM property
             JOIN sell_bulletin ON property.id = sell_bulletin.bulletin_user_id
             JOIN users ON property.id = users.user_property_id
-            WHERE lot_status = 1";
+            WHERE lot_status = 1
+            AND bulletin_price BETWEEN 1000 AND 60000";
 
 $result = mysqli_query($conn, $query);
 
@@ -70,6 +71,9 @@ if (mysqli_num_rows($result) > 0) {
         <div class="col-12 col-md-4 p-2">
             <div class="border rounded p-3">
                 <div>
+                    <div class="mt-3 pb-3" style="height: 200px; width: 100%">
+                      <img style="oject-fit: cover; width: 100%; height: 100%" src="../uploads/<?php echo $row['map_img']?>" alt="">
+                    </div>
                     <div class="d-flex justify-content-between">
                         <h4 class="fw-bold text-success">₱ <?php echo number_format($row['bulletin_price'], 2); ?></h4>
                         <?php
@@ -77,19 +81,36 @@ if (mysqli_num_rows($result) > 0) {
                             // Condition when property_id matches $property_id
                         } else {
                             // Condition when property_id does not match $property_id
-                            echo '<a class="message-trigger" data-user-id="' . $row['id'] . '" data-bs-toggle="modal" data-bs-target="#message">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-cursor-fill" viewBox="0 0 16 16">
-                                        <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
-                                    </svg>
-                                </a>';
+                            echo '
+                            <div class="d-flex justify-content-between">
+                                <div class="me-2">
+                                    <a href="view_lot.php?id=' . $row['user_property_id'] . '">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8z"/>
+                                        <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                                      </svg>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="message-trigger" data-user-id="' . $row['id'] . '" data-bs-toggle="modal" data-bs-target="#message">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                            <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            ';
                         }
                         ?>
                     </div>
                     <hr>
                     <h6 class="m-0 p-0">Owner: <?php echo $row['lot_owner']; ?></h6>
-                    <p class="m-0 p-0">Lot: Block <?php echo $row['block_number']; ?> Lot <?php echo $row['lot_number']; ?></p>
+                    <p class="m-0 p-0">Location: Block <?php echo $row['block_number']; ?> Lot <?php echo $row['lot_number']; ?></p>
+                    <p class="m-0 p-0">Lot Type: <?php echo $row['classification']; ?></p>
                     <p class="m-0 p-0">Contact: <?php echo $row['bulletin_contact']; ?></p>
                     <p class="m-0 p-0">Email: <?php echo $row['bulletin_email']; ?></p>
+                    <p class="m-0 p-0">Offers: <?php echo $row['bulletin_offer']; ?></p>
                 </div>
             </div>
         </div>
@@ -130,6 +151,9 @@ if (mysqli_num_rows($result) > 0) {
       </div>
       <div class="modal-body">
         <input type="hidden" class="form-control mb-2" type="text" id="recieved_id" placeholder="Recipient ID">
+        <p class='m-0 text-muted'>Suggested Offer</p>
+        <input id='offer' class="form-control mb-3" type="text" placeholder="Enter offer amnount">
+        <p class='m-0 text-muted'>Message</p>
         <input type="hidden" class="form-control mb-2" value="<?php echo $id;?>" type="text" id="sender_id" placeholder="Sender ID">
         <textarea class="form-control mb-2" id="message_content" cols="30" rows="5" maxlength="200" placeholder="Write your message"></textarea>
         <small id="charCount" class="form-text text-muted">Characters left: 200</small>
@@ -167,11 +191,19 @@ function send_message() {
   var recieved_id = $('#recieved_id').val();
   var sender_id = $('#sender_id').val();
   var message_content = $('#message_content').val().trim();
+  var offer = $('#offer').val().trim();
 
   // Validate message content
   if (message_content === '') {
     alertify.set('notifier','position', 'bottom-left');
     alertify.error('Empty Message');
+    return;
+  }
+
+  // Validate message content
+  if (offer === '') {
+    alertify.set('notifier','position', 'bottom-left');
+    alertify.error('Empty Suggested Offer');
     return;
   }
 
@@ -198,7 +230,8 @@ function send_message() {
     data: {
       recieved_id: recieved_id,
       sender_id: sender_id,
-      message_content: message_content
+      message_content: message_content,
+      offer: offer
     },
     success: function(response) {
       // Handle success response if needed
