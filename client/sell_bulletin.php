@@ -110,6 +110,7 @@ if (mysqli_num_rows($result) > 0) {
                     <p class="m-0 p-0">Lot Type: <?php echo $row['classification']; ?></p>
                     <p class="m-0 p-0">Contact: <?php echo $row['bulletin_contact']; ?></p>
                     <p class="m-0 p-0">Email: <?php echo $row['bulletin_email']; ?></p>
+                    <p class="m-0 p-0">Offers: <?php echo $row['bulletin_offer']; ?></p>
                 </div>
             </div>
         </div>
@@ -151,7 +152,7 @@ if (mysqli_num_rows($result) > 0) {
       <div class="modal-body">
         <input type="hidden" class="form-control mb-2" type="text" id="recieved_id" placeholder="Recipient ID">
         <p class='m-0 text-muted'>Suggested Offer</p>
-        <input class="form-control mb-3" type="text" placeholder>
+        <input id='offer' class="form-control mb-3" type="text" placeholder="Enter offer amnount">
         <p class='m-0 text-muted'>Message</p>
         <input type="hidden" class="form-control mb-2" value="<?php echo $id;?>" type="text" id="sender_id" placeholder="Sender ID">
         <textarea class="form-control mb-2" id="message_content" cols="30" rows="5" maxlength="200" placeholder="Write your message"></textarea>
@@ -190,11 +191,19 @@ function send_message() {
   var recieved_id = $('#recieved_id').val();
   var sender_id = $('#sender_id').val();
   var message_content = $('#message_content').val().trim();
+  var offer = $('#offer').val().trim();
 
   // Validate message content
   if (message_content === '') {
     alertify.set('notifier','position', 'bottom-left');
     alertify.error('Empty Message');
+    return;
+  }
+
+  // Validate message content
+  if (offer === '') {
+    alertify.set('notifier','position', 'bottom-left');
+    alertify.error('Empty Suggested Offer');
     return;
   }
 
@@ -221,7 +230,8 @@ function send_message() {
     data: {
       recieved_id: recieved_id,
       sender_id: sender_id,
-      message_content: message_content
+      message_content: message_content,
+      offer: offer
     },
     success: function(response) {
       // Handle success response if needed
