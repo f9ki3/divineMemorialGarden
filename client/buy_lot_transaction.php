@@ -8,13 +8,13 @@
 include '../config/config.php';
 
 // Assuming $id is already defined
-
+$rcv_id = $_GET['id'];
 // Prepare SQL statement
 $sql = "SELECT * FROM users JOIN property ON users.user_property_id = property.id WHERE users.id = ?";
 $stmt = $conn->prepare($sql);
 
 // Bind parameters and execute
-$stmt->bind_param("i", $id);
+$stmt->bind_param("i", $rcv_id);
 $stmt->execute();
 
 // Get result
@@ -35,7 +35,8 @@ if ($result->num_rows > 0) {
 
 ?>
 
-
+<input id="seller" type="hidden" value="<?php echo $rcv_id?>">
+<input id="buyer" type="hidden" value="<?php echo $id?>">
 <div class="container">
 <h3 class="fw-bold mt-2">Buy Lot Transaction</h3 >
 <hr>
@@ -169,6 +170,8 @@ if ($result->num_rows > 0) {
     });
 
     function proceed() {
+    var seller = $('#seller').val();
+    var buyer = $('#buyer').val();
     var ownerName = $('#owner_name').val();
     var classification = $('#classification').val();
     var address = $('#address').val();
@@ -215,6 +218,8 @@ if ($result->num_rows > 0) {
 
     // Create FormData object to hold the data
     var formData = new FormData();
+    formData.append('seller', seller);
+    formData.append('buyer', buyer);
     formData.append('ownerName', ownerName);
     formData.append('classification', classification);
     formData.append('address', address);

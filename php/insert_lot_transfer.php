@@ -5,6 +5,8 @@ include '../config/config.php';
 // Check if the POST data exists
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Extract data from POST request
+    $seller = $_POST['seller'];
+    $buyer = $_POST['buyer'];
     $ownerName = $_POST['ownerName'];
     $classification = $_POST['classification'];
     $address = $_POST['address'];
@@ -29,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     move_uploaded_file($_FILES['proofOfPayment']['tmp_name'], $proofOfPaymentPath);
 
     // Prepare SQL statement to insert data into lot_transfer table
-    $sql = "INSERT INTO `lot_transfer` (`date`, `owner_name`, `classification`, `address`, `location`, `contact`, `email`, `proof_of_lot_payment`, `deed_of_sales`, `authorization_letter`, `payment_method`, `proof_of_payment`) VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `lot_transfer` (`date`,`seller`,`buyer`, `owner_name`, `classification`, `address`, `location`, `contact`, `email`, `proof_of_lot_payment`, `deed_of_sales`, `authorization_letter`, `payment_method`, `proof_of_payment`) VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
 
     // Bind parameters to the prepared statement
-    $stmt->bind_param("sssssssssss", $ownerName, $classification, $address, $location, $contact, $email, $proofOfLotPaymentPath, $deedOfSalesPath, $authorizationLetterPath, $paymentMethod, $proofOfPaymentPath);
+    $stmt->bind_param("iisssssssssss", $seller, $buyer,  $classification, $address, $location, $contact, $email, $proofOfLotPaymentPath, $deedOfSalesPath, $authorizationLetterPath, $paymentMethod, $proofOfPaymentPath);
 
     // Execute the prepared statement
     if ($stmt->execute()) {
