@@ -6,9 +6,9 @@
 
 <div class="container mt-3">
     <div>
-        <a href="burial" class="btn btn-success btn-sm">Sale Bulletin</a>
+        <a href="burial" class="btn border-success text-success btn-sm">Sale Bulletin</a>
         <a href="#" class="btn border-success text-success btn-sm">Burial Services</a>
-        <a href="transfer_ownership" class="btn border-success text-success btn-sm">Transfer Ownership</a>
+        <a href="transfer_ownership" class="btn btn-success btn-sm">Transfer Ownership</a>
     </div>
 <div>
 
@@ -37,21 +37,21 @@
 $(document).ready(function() {
     var table = $('#bulletinTable').DataTable({
         "ajax": {
-            "url": "../php/fetch_bulletin_data.php",
+            "url": "../php/fetch_transaction.php",
             "dataSrc": ""
         },
         "columns": [
             { "data": "id" },
-            { "data": "bulletin_date" },
-            { "data": "bulletin_price" },
-            { "data": "bulletin_contact" },
-            { "data": "bulletin_email" },
+            { "data": "date" },
+            { "data": "owner_name" },
+            { "data": "classification" },
+            { "data": "location" },
             {
                 "data": null,
                 "render": function(data, type, row) {
                     return '<div class="action-buttons">' +
-                           '<button class="btn-accept btn btn-success btn-sm me-2" data-userid="' + row.bulletin_user_id + '">Accept</button>' +
-                           '<button class="btn-delete btn btn-danger btn-sm" data-userid="' + row.bulletin_user_id + '">Cancel</button>' +
+                           '<button class="btn-accept btn btn-success btn-sm me-2" data-userid="' + row.id + '">Transfer</button>' +
+                           '<button class="btn-delete btn btn-danger btn-sm" data-userid="' + row.id + '">Cancel</button>' +
                            '</div>';
                 }
             }
