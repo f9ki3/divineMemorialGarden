@@ -1,14 +1,14 @@
 <?php 
 // Establish database connection
-$servername = "localhost";
-$username = "u990660024_admin";
-$password = "k7zlu+zN|1";
-$dbname = "u990660024_dmis";
-
 // $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "divine_memorial";
+// $username = "u990660024_admin";
+// $password = "k7zlu+zN|1";
+// $dbname = "u990660024_dmis";
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "divine_memorial";
 
 // Establish database connection
 // $servername = "sql.freedb.tech";

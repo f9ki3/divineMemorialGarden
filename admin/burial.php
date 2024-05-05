@@ -6,9 +6,9 @@
 
 <div class="container mt-3">
     <div>
-        <button class="btn border-success text-success btn-sm">Sale Bulletin</button>
-        <button class="btn btn-success btn-sm">Burial Services</button>
-        <button class="btn border-success text-success btn-sm">Transfer Ownership</button>
+        <a href="burial" class="btn btn-success btn-sm">Sale Bulletin</a>
+        <a href="#" class="btn border-success text-success btn-sm">Burial Services</a>
+        <a href="transfer_ownership" class="btn border-success text-success btn-sm">Transfer Ownership</a>
     </div>
 <div>
 
@@ -21,7 +21,6 @@
             <th style="width: 10%">Price</th>
             <th style="width: 15%">Contact</th>
             <th style="width: 10%">Email</th>
-            <th style="width: 20%">Note</th>
             <th style="width: 15%">Action</th>
         </tr>
     </thead>
@@ -47,7 +46,6 @@ $(document).ready(function() {
             { "data": "bulletin_price" },
             { "data": "bulletin_contact" },
             { "data": "bulletin_email" },
-            { "data": "bulletin_note" },
             {
                 "data": null,
                 "render": function(data, type, row) {
