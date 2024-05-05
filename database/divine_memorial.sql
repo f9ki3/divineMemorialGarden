@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2024 at 02:22 PM
+-- Generation Time: May 06, 2024 at 01:50 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `divine_memorial`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `burial_service_transaction`
+--
+
+CREATE TABLE `burial_service_transaction` (
+  `id` int(11) NOT NULL,
+  `date_of_service` date NOT NULL,
+  `account_name` varchar(255) DEFAULT NULL,
+  `grave_status` varchar(50) DEFAULT NULL,
+  `block_lot` varchar(50) DEFAULT NULL,
+  `lot_status` varchar(50) DEFAULT NULL,
+  `decease_name` varchar(255) DEFAULT NULL,
+  `tier_type` varchar(50) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `dod` date DEFAULT NULL,
+  `date_service` date DEFAULT NULL,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `proof_of_payment` varchar(255) DEFAULT NULL,
+  `service_status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,7 +69,41 @@ INSERT INTO `deceased_person` (`id`, `property_id`, `date`, `deceased_name`, `gr
 (585, 1, '2024-04-22 08:16:35', 'Michaels', 'Body', '2024-04-18', '2024-04-30', 'upper'),
 (586, 1, '2024-04-22 08:16:42', 'Arnold', 'Remains', '0000-00-00', '2024-04-26', 'lower'),
 (587, 3, '2024-04-24 23:04:11', 'Juan Dela Cruz', 'Regular', '2016-02-09', '2024-04-23', 'upper'),
-(588, 3, '2024-04-24 23:05:09', 'April Norse Noi', 'Premium', '2003-02-13', '2024-04-14', 'lower');
+(588, 3, '2024-04-24 23:05:09', 'April Norse Noi', 'Premium', '2003-02-13', '2024-04-14', 'lower'),
+(589, 87, '2024-04-25 21:52:42', 'Sarah Magaling', 'Regular', '2023-03-28', '2024-04-23', 'upper'),
+(590, 87, '2024-04-25 21:53:43', 'Sample', 'Regular', '0000-00-00', '0000-00-00', 'lower');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lot_transfer`
+--
+
+CREATE TABLE `lot_transfer` (
+  `id` int(11) NOT NULL,
+  `date` date DEFAULT NULL,
+  `seller` int(9) NOT NULL,
+  `buyer` int(9) NOT NULL,
+  `owner_name` varchar(255) DEFAULT NULL,
+  `classification` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `contact` varchar(11) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `proof_of_lot_payment` varchar(255) DEFAULT NULL,
+  `deed_of_sales` varchar(255) DEFAULT NULL,
+  `authorization_letter` varchar(255) DEFAULT NULL,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `proof_of_payment` varchar(255) DEFAULT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lot_transfer`
+--
+
+INSERT INTO `lot_transfer` (`id`, `date`, `seller`, `buyer`, `owner_name`, `classification`, `address`, `location`, `contact`, `email`, `proof_of_lot_payment`, `deed_of_sales`, `authorization_letter`, `payment_method`, `proof_of_payment`, `status`) VALUES
+(11, '2024-05-06', 102, 2, 'asas', 'Regular', 'sasssas', 'Block 1 Lot N', '09120912091', 'asas@gmail.com', '434336536_695643889227080_6086058091800610116_n.jpg', '412747216_10230946337499190_4281031286631952966_n.jpg', 'RDPOS-February-29.docx', 'G-Cash', 'map_highligh.png', 0);
 
 -- --------------------------------------------------------
 
@@ -63,8 +120,16 @@ CREATE TABLE `maintenance` (
   `municipal` varchar(50) NOT NULL,
   `province` varchar(50) NOT NULL,
   `contact` varchar(11) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `link` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `maintenance`
+--
+
+INSERT INTO `maintenance` (`id`, `maintenance_user_id`, `company_name`, `address`, `barangay`, `municipal`, `province`, `contact`, `email`, `link`) VALUES
+(3, 0, 'Divine Memorial Garden', ' M. Villarica Rd', 'Loma De Gato', 'Marilao', 'Bulacan', '9120912091', 'divineMemorialGarden@gmail.com', 'https://web.facebook.com/DivineGardenMarilaoMemorialPark/?_rdc=1&_rdr');
 
 -- --------------------------------------------------------
 
@@ -158,7 +223,66 @@ INSERT INTO `messages` (`id`, `message_date`, `sender_id`, `reciever_id`, `messa
 (87, '2024-04-25 17:43:02', 2, 102, 'pre', 0),
 (88, '2024-04-25 18:24:15', 111, 2, 'Hello', 0),
 (89, '2024-04-25 18:24:39', 111, 2, 'Im Interested in your lot', 0),
-(90, '2024-04-25 18:24:49', 111, 100, 'Hello May I inquire?', 0);
+(90, '2024-04-25 18:24:49', 111, 100, 'Hello May I inquire?', 0),
+(91, '2024-04-25 21:48:41', 121, 101, 'Hello Nelia I want to iquire about lot  for sale', 0),
+(92, '2024-04-25 22:04:27', 122, 101, 'Hello Nelia I want to inwuire with your lot selling', 0),
+(93, '2024-04-25 22:08:42', 2, 102, 'Yow', 0),
+(94, '2024-04-25 22:09:32', 101, 2, 'yow', 0),
+(95, '2024-04-25 22:09:54', 101, 2, 'pree', 0),
+(96, '2024-04-25 22:10:26', 2, 101, 'hello', 0),
+(97, '2024-04-29 08:11:17', 2, 101, 'h', 0),
+(98, '2024-04-29 08:11:29', 2, 101, 'h', 0),
+(99, '2024-04-29 08:11:44', 2, 101, 'tol', 0),
+(100, '2024-04-29 08:26:23', 2, 101, 'pre', 0),
+(101, '2024-04-29 08:47:14', 113, 100, 'hi', 0),
+(102, '2024-04-29 16:29:40', 113, 104, 'hello dave', 0),
+(103, '2024-04-29 16:54:21', 104, 113, 'hello', 0),
+(104, '2024-04-29 16:55:43', 104, 102, 'hello', 0),
+(105, '2024-04-29 16:59:26', 104, 113, 'hello', 0),
+(106, '2024-04-29 16:59:33', 104, 113, 'HI', 0),
+(107, '2024-04-29 17:00:27', 113, 104, 'HI', 0),
+(108, '2024-04-29 17:00:50', 113, 100, 'Hello', 0),
+(109, '2024-04-29 17:01:22', 113, 2, 'hello', 0),
+(110, '2024-04-29 17:01:49', 104, 113, 'this is a test', 0),
+(111, '2024-04-29 17:23:11', 113, 2, 'sa', 0),
+(112, '2024-04-29 17:23:18', 113, 2, 'asasaasas', 0),
+(113, '2024-04-29 17:23:22', 113, 2, 'asasas', 0),
+(114, '2024-04-29 17:23:26', 113, 2, 'assa', 0),
+(115, '2024-04-29 17:23:50', 104, 2, 'hello', 0),
+(116, '2024-04-29 17:24:04', 104, 2, 'hello', 0),
+(117, '2024-04-29 17:25:09', 113, 104, 'hello', 0),
+(118, '2024-04-29 17:27:52', 113, 104, 'yow', 0),
+(119, '2024-04-29 19:50:42', 113, 104, 'pre', 0),
+(120, '2024-04-29 19:50:48', 113, 104, 'tolk', 0),
+(121, '2024-04-29 20:35:17', 2, 101, 'sasasas', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offers`
+--
+
+CREATE TABLE `offers` (
+  `id` int(11) NOT NULL,
+  `offer_date` date NOT NULL,
+  `offer_amount` double NOT NULL,
+  `offer_user_id` int(11) NOT NULL,
+  `offer_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`id`, `offer_date`, `offer_amount`, `offer_user_id`, `offer_status`) VALUES
+(6, '2024-04-29', 13000, 113, 0),
+(7, '2024-04-29', 20000, 104, 0),
+(8, '2024-04-29', 40000, 104, 0),
+(9, '2024-04-29', 19000, 113, 0),
+(10, '2024-04-29', 26000, 113, 0),
+(11, '2024-04-29', 20000, 104, 0),
+(12, '2024-04-29', 10000, 113, 0),
+(13, '2024-04-29', 0, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -264,7 +388,7 @@ INSERT INTO `property` (`id`, `date`, `area`, `block_number`, `lot_number`, `cla
 (64, NULL, 'Lawn 1', '6', 'D', 'Regular', 'PATRIA DUENAS', 0, '', 0),
 (65, NULL, 'Lawn 1', '6', 'E', 'Regular', 'ALBINA DELA CRUZ from DAMIANA PASTOLERO', 0, '', 0),
 (66, NULL, 'Lawn 1', '6', 'F', 'Regular', 'FILIPINA LIM', 0, '', 0),
-(67, NULL, 'Lawn 1', '6', 'G', 'Premium', 'MARITES FELICIANO 1', 0, '', 0),
+(67, NULL, 'Lawn 1', '6', 'G', 'Premium', 'MARITES FELICIANO 1', 1, '', 1),
 (68, NULL, 'Lawn 1', '6', 'K', 'Exterior', 'DIANNA BUGNON', 0, '', 0),
 (69, NULL, 'Lawn 1', '6', 'L', 'Exterior', 'NEZIEL VINUYA', 0, '', 0),
 (70, NULL, 'Lawn 1', '6', 'M', 'Exterior', 'AUREA V. MARCELO', 0, '', 0),
@@ -423,7 +547,7 @@ INSERT INTO `property` (`id`, `date`, `area`, `block_number`, `lot_number`, `cla
 (223, NULL, 'Lawn 1', '15', 'B', 'Regular', 'MARCELINA EUGENIO', 0, '', 0),
 (224, NULL, 'Lawn 1', '15', 'C', 'Regular', 'KATHERINE LUMIBAO', 0, '', 0),
 (225, NULL, 'Lawn 1', '15', 'D', 'Regular', 'ROGELIO RIVERA', 0, '', 0),
-(226, NULL, 'Lawn 1', '15', 'E', 'Regular', 'JUANITA MOLINA', 0, '', 0),
+(226, NULL, 'Lawn 1', '15', 'E', 'Regular', 'JUANITA MOLINA', 1, '', 1),
 (227, NULL, 'Lawn 1', '15', 'F', 'Regular', 'JERAMIE MENDOZA from Blk 14 Lot Q', 0, '', 0),
 (228, NULL, 'Lawn 1', '15', 'G', 'Regular', 'YVETTE SORRO', 0, '', 0),
 (229, NULL, 'Lawn 1', '15', 'H', 'Regular', 'MACARIA DAROLE', 0, '', 0),
@@ -1174,10 +1298,9 @@ CREATE TABLE `sell_bulletin` (
   `bulletin_date` datetime NOT NULL,
   `bulletin_user_id` int(11) NOT NULL,
   `bulletin_price` double NOT NULL,
-  `bulletin_contact` int(11) NOT NULL,
+  `bulletin_contact` int(20) NOT NULL,
   `bulletin_email` varchar(50) NOT NULL,
-  `bulletin_note` varchar(200) NOT NULL,
-  `bulletin_coo` varchar(100) NOT NULL,
+  `bulletin_offer` varchar(50) NOT NULL,
   `bulletin_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1185,18 +1308,19 @@ CREATE TABLE `sell_bulletin` (
 -- Dumping data for table `sell_bulletin`
 --
 
-INSERT INTO `sell_bulletin` (`id`, `bulletin_date`, `bulletin_user_id`, `bulletin_price`, `bulletin_contact`, `bulletin_email`, `bulletin_note`, `bulletin_coo`, `bulletin_status`) VALUES
-(17, '2024-04-24 19:45:37', 23, 30000, 2147483647, 'art@gmail.com', 'asasasas', '661e80eb878f2_map_highligh.png', 1),
-(18, '2024-04-24 20:23:55', 1, 25000, 2147483647, 'stephany@gmail.com', 'negotiable', '661e80eb878f2_map_highligh.png', 1),
-(19, '2024-04-24 20:25:23', 2, 20000, 2147483647, 'michael@gmail.com', 'negotiable', '661e823425bfc_map_highligh.png', 1),
-(20, '2024-04-24 20:40:51', 9, 43000, 2147483647, 'arnold@gmail.com', 'negotiable', '661e89431a0ff_map_highligh.png', 1),
-(21, '2024-04-24 20:50:05', 14, 24000, 2147483647, 'ambo@gmail.com', 'Negotiable', '412747216_10230946337499190_4281031286631952966_n.jpg', 1),
-(22, '2024-04-24 20:54:14', 5, 25000, 2147483647, 'cristina@gmail.com', 'negotiable', '434336536_695643889227080_6086058091800610116_n.jpg', 1),
-(23, '2024-04-25 02:15:00', 11, 63000, 2147483647, 'virginia@gmail.com', 'negetioble', 'wall 2.jpeg', 1),
-(24, '2024-04-25 14:58:40', 12, 68000, 2147483647, 'caprio@gmail.com', 'Negotiable', 'map_highligh.png', 1),
-(25, '2024-04-25 18:15:49', 15, 80000, 2147483647, 'nenita@gmail.com', 'Negotiable please message me', '434336536_695643889227080_6086058091800610116_n.jpg', 0),
-(26, '2024-04-25 18:18:23', 16, 73000, 2147483647, 'lani@gmail.com', 'negotiable', '434336536_695643889227080_6086058091800610116_n.jpg', 0),
-(27, '2024-04-25 18:23:42', 17, 83000, 2147483647, 'manuel@gmail.com', 'Negotiable', 'map_highligh.png', 0);
+INSERT INTO `sell_bulletin` (`id`, `bulletin_date`, `bulletin_user_id`, `bulletin_price`, `bulletin_contact`, `bulletin_email`, `bulletin_offer`, `bulletin_status`) VALUES
+(17, '2024-04-24 19:45:37', 23, 30000, 2147483647, 'art@gmail.com', 'Fixed Price', 1),
+(18, '2024-04-24 20:23:55', 1, 25000, 2147483647, 'stephany@gmail.com', 'Negotiable', 1),
+(19, '2024-04-24 20:25:23', 2, 20000, 2147483647, 'michael@gmail.com', 'Fixed Price', 1),
+(20, '2024-04-24 20:40:51', 9, 43000, 2147483647, 'arnold@gmail.com', 'Fixed Price', 1),
+(21, '2024-04-24 20:50:05', 14, 24000, 2147483647, 'ambo@gmail.com', 'Negotiable', 1),
+(22, '2024-04-24 20:54:14', 5, 25000, 2147483647, 'cristina@gmail.com', 'Fixed Price', 1),
+(23, '2024-04-25 02:15:00', 11, 63000, 2147483647, 'virginia@gmail.com', 'Negotiable', 1),
+(24, '2024-04-25 14:58:40', 12, 68000, 2147483647, 'caprio@gmail.com', 'Fixed Price', 1),
+(25, '2024-04-25 18:15:49', 15, 80000, 2147483647, 'nenita@gmail.com', 'Fixed Price', 0),
+(26, '2024-04-25 18:18:23', 16, 73000, 2147483647, 'lani@gmail.com', 'Negotiable', 0),
+(27, '2024-04-25 18:23:42', 17, 83000, 2147483647, 'manuel@gmail.com', 'Negotiable', 0),
+(33, '2024-04-29 09:58:10', 67, 50000, 2147483647, 'marites@gmail.com', 'Negotiable', 1);
 
 -- --------------------------------------------------------
 
@@ -1224,9 +1348,20 @@ CREATE TABLE `service_type` (
   `id` int(11) NOT NULL,
   `service_date_added` datetime NOT NULL,
   `service_name` varchar(100) NOT NULL,
+  `service_fee` double NOT NULL,
   `service_description` varchar(100) NOT NULL,
-  `service_type_status` int(1) NOT NULL
+  `service_type_status` int(1) NOT NULL,
+  `service_cover` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `service_type`
+--
+
+INSERT INTO `service_type` (`id`, `service_date_added`, `service_name`, `service_fee`, `service_description`, `service_type_status`, `service_cover`) VALUES
+(8, '2024-04-26 21:47:06', 'Senior Citizens Burial Service', 24000, 'Senior Citezen Burial Services only privilage to them and it may add more if it is weekends. You may', 1, 'g3.jpg'),
+(9, '2024-04-26 22:08:26', 'Non-Senior Citizens Burial Service', 30000, 'Non Senior Citezen Burial Service only privilage to them and it may add more if it is weekends. You ', 1, 'g2.jpg'),
+(10, '2024-04-26 22:10:06', 'Maintenance Service', 500, 'This service offer to clean lawn and maintain its cleanliness. It cost is 500 per month', 1, 'g1.jpg');
 
 -- --------------------------------------------------------
 
@@ -1238,9 +1373,15 @@ CREATE TABLE `sort` (
   `id` int(11) NOT NULL,
   `sort_user_id` int(11) NOT NULL,
   `sort_min` double NOT NULL,
-  `sort_max` double NOT NULL,
-  `sort_type` int(11) NOT NULL
+  `sort_max` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sort`
+--
+
+INSERT INTO `sort` (`id`, `sort_user_id`, `sort_min`, `sort_max`) VALUES
+(1, 2, 1, 100000);
 
 -- --------------------------------------------------------
 
@@ -1268,38 +1409,47 @@ CREATE TABLE `users` (
   `user_status` int(11) NOT NULL,
   `user_otp` int(4) NOT NULL,
   `user_otp_status` int(1) NOT NULL,
-  `user_started` int(1) NOT NULL
+  `user_started` int(1) NOT NULL,
+  `user_suggested_offers` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_property_id`, `user_date_added`, `user_fname`, `user_lname`, `user_email`, `user_contact`, `user_address`, `user_barangay`, `user_municipal`, `user_province`, `user_zipcode`, `user_profile`, `user_name`, `user_password`, `user_type`, `user_status`, `user_otp`, `user_otp_status`, `user_started`) VALUES
-(1, 0, '2024-04-03 17:38:47', 'Dave', 'Bergania', 'dave@gmail.com', '09120912098', '-', '', '', '', 0, 'dave_profile.jpg', 'dave', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 0, 0, 0, 1, 1),
-(2, 1, '2024-04-03 17:42:24', 'Stephany', 'Gandula', 'steph@gmail.com', '09120912919', 'Karla Ville,', 'Prenza II', 'Marilao', 'Bulacan', 0, '662a2c61ceb3b_662a2c24e7217_stephany_profile.jpg', 'stephany', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 0, 1),
-(100, 2, '2024-04-21 13:51:30', 'Michael', 'Astorga', 'floterina@gmail.com', '09120912091', 'Northville V', 'Barangay Northville V', 'Marilao', 'Bulacan', 3019, '66287f78c58ae_map_highligh.png', 'michael', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 3598, 1, 0),
-(101, 23, '2024-04-24 05:49:25', 'Art', 'Concerman', 'art@gmail.com', '09128712871', 'Northville V', 'Northville V', 'Marilao', 'Bulacan', 3019, '66288217797b8_412747216_10230946337499190_4281031286631952966_n.jpg', 'art', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(102, 9, '2024-04-24 05:59:49', 'Dave', 'Bergania', 'dave@gmail.com', '09120912091', 'Block 9 lot 10', 'Prenza I', 'Marilao', 'Bulacan', 3019, '6628840fbf814_66275475dba7e_Sukuna-Background.jpg', 'arnold', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(104, 5, '2024-04-24 14:45:12', 'Maningas', 'David', 'cristina@gmail.com', '09120912091', 'Prenza', 'Prenza', 'Marilao', 'Bulacan', 3019, '66292985c21be_wall 2.jpeg', 'maningas123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(106, 14, '2024-04-24 14:46:19', 'Ambo', 'Dela Cruz', 'ambo@gmail.com', '09120912121', 'Makarayo St.', 'Prenza 2', 'Marilao', 'Bulacan', 3019, '6628ffb83e2bc_th.jpg', 'ambo123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(107, 11, '2024-04-24 16:10:49', 'Virgina', 'Virgin', NULL, '09120912091', 'sample', 'Prenza', 'Marilao', 'Bulacan', 3019, '66294b8d6342e_wall1.jpeg', 'virginia123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(108, 12, '2024-04-24 16:12:49', 'Anthony', 'Caprio', NULL, '09120912091', 'Home Town', 'Tibagan', 'Marilao', 'Bulacan', 3019, '6629fee6700be_Black Logo.png', 'caprio123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(109, 15, '2024-04-24 16:13:41', 'Ninita', 'Arcobrem', NULL, '09120912091', 'Navotas', 'Tibagan', 'Marilao', 'Bulacan', 3019, '662a2d0b028db_nenita.jpg', 'nenita123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
-(110, 16, '2024-04-24 16:20:44', 'Lani', 'Marquez', NULL, '09120912091', 'Nilooban', 'Prenza II', 'Marilao', 'Bulacan', 3019, '662a2dbabc624_lani.jpg', 'lani123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
-(111, 17, '2024-04-24 16:21:52', 'MManuel', 'Alonzo', NULL, '09120912091', 'Binahay', 'Libagan', 'San Jose Del Monte', 'Bulacan', 3019, '662a2e850e8b9_images.jpg', 'manuel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1),
-(112, 0, '2024-04-24 17:09:50', 'Mike', 'Arnolds', 'floterina@gmail.com', '09120912091', 'Beverly Ville', 'Loma De Gato', 'Marilao', 'Bulacan', 3019, '6629222d947b5_wall1.jpeg', 'mike123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 2, 0, 7005, 1, 0),
-(113, 67, '2024-04-25 12:28:57', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'marites123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(114, 68, '2024-04-25 12:29:16', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'dianna123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(115, 69, '2024-04-25 12:29:34', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'niezel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(116, 70, '2024-04-25 12:29:59', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'aurea123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(117, 71, '2024-04-25 12:30:25', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'irene123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(119, 175, '2024-04-25 12:32:06', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'arlando123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0),
-(120, 90, '2024-04-25 12:32:22', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'vistoria123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0);
+INSERT INTO `users` (`id`, `user_property_id`, `user_date_added`, `user_fname`, `user_lname`, `user_email`, `user_contact`, `user_address`, `user_barangay`, `user_municipal`, `user_province`, `user_zipcode`, `user_profile`, `user_name`, `user_password`, `user_type`, `user_status`, `user_otp`, `user_otp_status`, `user_started`, `user_suggested_offers`) VALUES
+(1, 0, '2024-04-03 17:38:47', 'Dave', 'Bergania', 'dave@gmail.com', '09120912098', '-', '', '', '', 0, 'dave_profile.jpg', 'dave', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 0, 0, 0, 1, 1, 0),
+(2, 1, '2024-04-03 17:42:24', 'Stephany', 'Gandula', 'steph@gmail.com', '09120912919', 'Karla Ville,', 'Prenza II', 'Marilao', 'Bulacan', 0, '662a2c61ceb3b_662a2c24e7217_stephany_profile.jpg', 'stephany', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 0, 1, 0),
+(100, 2, '2024-04-21 13:51:30', 'Michael', 'Astorga', 'floterina@gmail.com', '09120912091', 'Northville V', 'Barangay Northville V', 'Marilao', 'Bulacan', 3019, '66287f78c58ae_map_highligh.png', 'michael', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 3598, 1, 0, 0),
+(101, 23, '2024-04-24 05:49:25', 'Art', 'Concerman', 'art@gmail.com', '09128712871', 'Northville V', 'Northville V', 'Marilao', 'Bulacan', 3019, '66288217797b8_412747216_10230946337499190_4281031286631952966_n.jpg', 'art', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(102, 9, '2024-04-24 05:59:49', 'Dave', 'Bergania', 'dave@gmail.com', '09120912091', 'Block 9 lot 10', 'Prenza I', 'Marilao', 'Bulacan', 3019, '6628840fbf814_66275475dba7e_Sukuna-Background.jpg', 'arnold', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(104, 5, '2024-04-24 14:45:12', 'Maningas', 'David', 'cristina@gmail.com', '09120912091', 'Prenza', 'Prenza', 'Marilao', 'Bulacan', 3019, '66292985c21be_wall 2.jpeg', 'maningas123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(106, 14, '2024-04-24 14:46:19', 'Ambo', 'Dela Cruz', 'ambo@gmail.com', '09120912121', 'Makarayo St.', 'Prenza 2', 'Marilao', 'Bulacan', 3019, '6628ffb83e2bc_th.jpg', 'ambo123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(107, 11, '2024-04-24 16:10:49', 'Virgina', 'Virgin', NULL, '09120912091', 'sample', 'Prenza', 'Marilao', 'Bulacan', 3019, '66294b8d6342e_wall1.jpeg', 'virginia123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(108, 12, '2024-04-24 16:12:49', 'Anthony', 'Caprio', NULL, '09120912091', 'Home Town', 'Tibagan', 'Marilao', 'Bulacan', 3019, '6629fee6700be_Black Logo.png', 'caprio123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(109, 15, '2024-04-24 16:13:41', 'Ninita', 'Arcobrem', NULL, '09120912091', 'Navotas', 'Tibagan', 'Marilao', 'Bulacan', 3019, '662a2d0b028db_nenita.jpg', 'nenita123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1, 0),
+(110, 16, '2024-04-24 16:20:44', 'Lani', 'Marquez', NULL, '09120912091', 'Nilooban', 'Prenza II', 'Marilao', 'Bulacan', 3019, '662a2dbabc624_lani.jpg', 'lani123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1, 0),
+(111, 17, '2024-04-24 16:21:52', 'MManuel', 'Alonzo', NULL, '09120912091', 'Binahay', 'Libagan', 'San Jose Del Monte', 'Bulacan', 3019, '662a2e850e8b9_images.jpg', 'manuel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1, 0),
+(112, 0, '2024-04-24 17:09:50', 'Mike', 'Arnolds', 'floterina@gmail.com', '09120912091', 'Beverly Ville', 'Loma De Gato', 'Marilao', 'Bulacan', 3019, '6629222d947b5_wall1.jpeg', 'mike123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 2, 0, 7005, 1, 0, 0),
+(113, 67, '2024-04-25 12:28:57', 'Marites', 'Maingay', NULL, '09120912091', 'maingay st', 'Loma De Gato', 'Marilao', 'Bulacan', 3019, '662eec1132036_th (1).jpg', 'marites123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1, 0),
+(114, 68, '2024-04-25 12:29:16', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'dianna123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(115, 69, '2024-04-25 12:29:34', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'niezel123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(116, 70, '2024-04-25 12:29:59', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'aurea123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(117, 71, '2024-04-25 12:30:25', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'irene123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(119, 175, '2024-04-25 12:32:06', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'arlando123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(120, 90, '2024-04-25 12:32:22', NULL, NULL, NULL, NULL, NULL, '', '', '', 0, 'profile_dummy.jpg', 'vistoria123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 0, 0),
+(121, 0, '2024-04-25 15:39:31', 'Juan', 'Dela Cruz', 'juantamad367@gmail.com', '09120912091', 'Karla Ville', 'Prenza II', 'Marilao', 'Bulacan', 3019, '662a5e003c298_439010660_1011669524086104_303722559393974462_n.jpg', 'juan123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 2, 0, 5449, 1, 1, 0),
+(122, 226, '2024-04-25 15:56:24', 'Juanita', 'Dela Cruz', NULL, '09210910912', 'Smample', 'Loama De Gateo', 'MArilao', 'Bulcan', 3019, '662a61a07efa6_434336536_695643889227080_6086058091800610116_n.jpg', 'juanita123', '61ea0803f8853523b777d414ace3130cd4d3f92de2cd7ff8695c337d79c2eeee', 1, 0, 0, 1, 1, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `burial_service_transaction`
+--
+ALTER TABLE `burial_service_transaction`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `deceased_person`
@@ -1307,6 +1457,12 @@ INSERT INTO `users` (`id`, `user_property_id`, `user_date_added`, `user_fname`, 
 ALTER TABLE `deceased_person`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_id` (`property_id`);
+
+--
+-- Indexes for table `lot_transfer`
+--
+ALTER TABLE `lot_transfer`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `maintenance`
@@ -1319,6 +1475,12 @@ ALTER TABLE `maintenance`
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `offers`
+--
+ALTER TABLE `offers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1373,22 +1535,40 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `burial_service_transaction`
+--
+ALTER TABLE `burial_service_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `deceased_person`
 --
 ALTER TABLE `deceased_person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=589;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=591;
+
+--
+-- AUTO_INCREMENT for table `lot_transfer`
+--
+ALTER TABLE `lot_transfer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+
+--
+-- AUTO_INCREMENT for table `offers`
+--
+ALTER TABLE `offers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `payment_type`
@@ -1406,7 +1586,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT for table `sell_bulletin`
 --
 ALTER TABLE `sell_bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `service_transaction`
@@ -1418,29 +1598,23 @@ ALTER TABLE `service_transaction`
 -- AUTO_INCREMENT for table `service_type`
 --
 ALTER TABLE `service_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `sort`
 --
 ALTER TABLE `sort`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `maintenance`
---
-ALTER TABLE `maintenance`
-  ADD CONSTRAINT `maintenance_ibfk_1` FOREIGN KEY (`maintenance_user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `service_transaction`
