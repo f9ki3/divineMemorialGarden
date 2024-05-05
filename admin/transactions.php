@@ -9,6 +9,7 @@
         <button class="btn btn-success btn-sm">Sale Bulletin</button>
         <button class="btn border-success text-success btn-sm">Burial Services</button>
         <button class="btn border-success text-success btn-sm">Transfer Ownership</button>
+        <button class="btn border-success text-success btn-sm">Transaction Record</button>
     </div>
 <div>
 
