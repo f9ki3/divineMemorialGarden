@@ -18,9 +18,9 @@
         <tr>
             <th style="width: 5%">ID</th>
             <th style="width: 15%">Date</th>
-            <th style="width: 10%">Price</th>
-            <th style="width: 15%">Contact</th>
-            <th style="width: 10%">Email</th>
+            <th style="width: 10%">Owner Name</th>
+            <th style="width: 15%">Classification</th>
+            <th style="width: 10%">Location</th>
             <th style="width: 15%">Action</th>
         </tr>
     </thead>
